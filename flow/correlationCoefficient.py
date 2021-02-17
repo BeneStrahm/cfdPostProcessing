@@ -70,7 +70,7 @@ def plotCorrelationCoeff(Ruu, dx, nz):
     plt.plot2D(x, y, xlabel=xlabel, ylabel=ylabel, title=title, legend=legend,
                dir_fileName=dir_fileName, style_dict=style_dict, 
                colorScheme='Monochrome', variation='color',
-               savePlt=True, showPlt=True,)
+               savePlt=True, showPlt=True)
 
 
 def main():
