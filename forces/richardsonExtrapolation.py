@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------------------------
-# Description:  Evaluate & plot time series of (global) forces
+# Description:  Apply Richardson Extrapolation to forces to eval. grid convergence
 # Author:       benedikt.strahm@ilek.uni-stuttgart.de
 # Created:      2018-01-06
 # Execution:    Import functions / collections (from cfdPostProcessing.forces import util)
@@ -9,6 +9,8 @@
 # ------------------------------------------------------------------------------
 # Sources
 # ------------------------------------------------------------------------------
+# Stern, Wilson, Coleman, Paterson - Comprehensive Approach to Verification and 
+# Validation of CFD Simulations (2001), J. Fluids Eng. 
 
 # ------------------------------------------------------------------------------
 # Libraries
