@@ -3,7 +3,7 @@
 # Description:  Asses the Turbulent Kinetic Energy Spectra (PSD)
 # Author:       benedikt.strahm@ilek.uni-stuttgart.de
 # Created:      2018-01-29
-# Execution:    Import functions / collections (from pyLEK.helpers import util)
+# Execution:    Import functions / collections (from cfdPostProcessing.flow import util)
 #               or executing from command line (py filename.py)
 # ------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------

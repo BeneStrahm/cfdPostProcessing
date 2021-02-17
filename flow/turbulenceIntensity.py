@@ -3,7 +3,7 @@
 # Description:  Asses the Turbulence Intensity
 # Author:       benedikt.strahm@ilek.uni-stuttgart.de
 # Created:      2018-12-06
-# Execution:    Import functions / collections (from pyLEK.helpers import util)
+# Execution:    Import functions / collections (from cfdPostProcessing.flow import util)
 #               or executing from command line (py filename.py)
 # ------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
