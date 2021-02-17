@@ -15,6 +15,7 @@
 # Libraries
 # ------------------------------------------------------------------------------
 import numpy as np
+import os, sys
 from scipy.optimize import curve_fit
 
 import pyLEK.plotters.plot2D as plt
@@ -132,15 +133,17 @@ def plot(PSD_u_prime_measured, fx_red):
     title = "Turbulent kinetic energy spectrum"
     legend = ["exact", "measured", "fit"]
 
+    # Change to current file location
+    os.chdir(os.path.dirname(sys.argv[0]))
     dir_fileName = "Turbulenc_kinetic_energy_spectrum_Su"
 
-    style_dict = {"savefig.format": "pdf", "savefig.format": "pdf"}
+    style_dict = {"savefig.format": "svg"}
 
     # Plotting
     plt.plot2D(x, y, xlabel=xlabel, ylabel=ylabel, title=title, legend=legend,
                xscale='log', yscale='log',
                dir_fileName=dir_fileName, style_dict=style_dict,
-               colorScheme='Monochrome', variation='color',
+               colorScheme='UniS', variation='color',
                savePlt=True, showPlt=True)
 
 

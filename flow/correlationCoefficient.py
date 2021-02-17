@@ -15,6 +15,7 @@
 # Libraries
 # ------------------------------------------------------------------------------
 import numpy as np
+import os, sys
 
 import pyLEK.plotters.plot2D as plt
 
@@ -62,14 +63,16 @@ def plotCorrelationCoeff(Ruu, dx, nz):
     title = "Correlation Coefficient"
     legend = ["Ruu at nz = " + str(nz)]
 
+    # Change to current file location
+    os.chdir(os.path.dirname(sys.argv[0]))
     dir_fileName = "Correlation_Coefficient_Ruu"
 
-    style_dict = {"savefig.format": "pdf", "savefig.format": "pdf"}
+    style_dict = {"savefig.format": "svg"}
 
     # Plotting
     plt.plot2D(x, y, xlabel=xlabel, ylabel=ylabel, title=title, legend=legend,
                dir_fileName=dir_fileName, style_dict=style_dict, 
-               colorScheme='Monochrome', variation='color',
+               colorScheme='UniS', variation='color',
                savePlt=True, showPlt=True)
 
 
