@@ -2,7 +2,7 @@
 
 ### Todo
 
-- [ ] Add sample data to flow
+- [ ] Add sample data to wind flow characteristics 
 
 ### In Progress
 
