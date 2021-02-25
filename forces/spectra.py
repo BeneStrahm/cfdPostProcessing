@@ -117,8 +117,16 @@ def importForces():
     fvy = []
     fvz = []  # Viscous
 
+ #1_conv_ref0       || 148-197 || 4900
+ #1_conv_ref1       || 168-250 || 8200
+ #1_conv_ref2       || 131-250 || 11900
+ #2_height8     
+ #2_height12        || 0-84    || 8435
+ #2_height15
+    casefile = "1_conv_ref1"
     pipefile = open(
- '/media/dani/linuxHDD/openfoam/simpleFoam/testing/17_v1Fine/postProcessing/forces/0/force.dat', 'r')
+        '/media/dani/linuxHDD/openfoam/simpleFoam/testing/{}/postProcessing/forces/168/force.dat'.format(casefile), 'r')
+
 
     lines = pipefile.readlines()
 
