@@ -166,12 +166,48 @@ def main(dObject):
     else:
         print("ERROR: Firstly convert with \"Convert Forces & Moments to HDF5\"")
 
-    
+def importForces():
+
+    forceRegex = r"([0-9.Ee\-+]+)\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)+\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)+\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)"
+
+    t = []
+    ftotx = []
+    ftoty = []
+    ftotz = []  # Porous
+    fpx = []
+    fpy = []
+    fpz = []  # Pressure
+    fvx = []
+    fvy = []
+    fvz = []  # Viscous
+
+    pipefile = open(
+ '/media/dani/linuxHDD/openfoam/simpleFoam/testing/13_v1Fine/postProcessing/forces/0/force.dat', 'r')
+
+    lines = pipefile.readlines()
+
+    for line in lines:
+        match = re.search(forceRegex, line)
+        if match:
+            t.append(float(match.group(1)))
+            ftotx.append(float(match.group(2)))
+            ftoty.append(float(match.group(3)))
+            ftotz.append(float(match.group(4)))
+            fpx.append(float(match.group(5)))
+            fpy.append(float(match.group(6)))
+            fpz.append(float(match.group(7)))
+            fvx.append(float(match.group(8)))
+            fvy.append(float(match.group(9)))
+            fvz.append(float(match.group(10)))
+
+    fpy = np.array(fpy)
+
+    return fpy  
 
 
 def main():
     # --- Input data ---#
-
+Fi = importForces() / (10 ** 6)              # Convert to MN    
     # --- Calculation --#
 
     # ---- Plotting ----#

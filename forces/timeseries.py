@@ -17,6 +17,7 @@ import numpy as np
 import heapq as hq
 import sys
 import os
+import re
 
 import pyLEK.plotters.plot2D as plt
 import pyLEK.helpers.txtEditor as txt
@@ -108,26 +109,66 @@ def plotTimeseries(Ti, Fi):
                savePlt=True, showPlt=True)
 
 
+def importForces():
+
+    forceRegex = r"([0-9.Ee\-+]+)\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)+\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)+\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)"
+
+    t = []
+    ftotx = []
+    ftoty = []
+    ftotz = []  # Porous
+    fpx = []
+    fpy = []
+    fpz = []  # Pressure
+    fvx = []
+    fvy = []
+    fvz = []  # Viscous
+
+    pipefile = open(
+ '/media/dani/linuxHDD/openfoam/simpleFoam/testing/17_v1Fine/postProcessing/forces/0/force.dat', 'r')
+
+    lines = pipefile.readlines()
+
+    for line in lines:
+        match = re.search(forceRegex, line)
+        if match:
+            t.append(float(match.group(1)))
+            ftotx.append(float(match.group(2)))
+            ftoty.append(float(match.group(3)))
+            ftotz.append(float(match.group(4)))
+            fpx.append(float(match.group(5)))
+            fpy.append(float(match.group(6)))
+            fpz.append(float(match.group(7)))
+            fvx.append(float(match.group(8)))
+            fvy.append(float(match.group(9)))
+            fvz.append(float(match.group(10)))
+
+    t = np.round(t,2)
+    fpy = np.array(fpy)
+
+    return fpy
+
+
 def main():
     # --- Input data ---#
     # List containing time series of forces
     # in the order Fi
-    Fi = / (10 ** -6)              # Convert to MN
+    Fi = importForces() / (10 ** 6)              # Convert to MN
 
     # Time stepping
-    sT = 
+    sT =
     eT =
-    nT = 
-    dT = 
+    nT =
+    dT =
     Ti = np.linspace(sT, eT, nT)
 
     # Specify Cut-Off time
-    sT = int(input("Start Time: "))
-    eT = int(input("End Time:   "))
+    # sT = int(input("Start Time: "))
+    # eT = int(input("End Time:   "))
 
     # Cut the array to desired range
-    Ti = Ti[int(sT/dT):int(eT/dT)]
-    Fi = Fi[int(sT/dT):int(eT/dT)]
+    # Ti = Ti[int(sT/dT):int(eT/dT)]
+    # Fi = Fi[int(sT/dT):int(eT/dT)]
 
     plotTimeseries(Ti, Fi)
     writeTimeseries(Fi)
@@ -135,3 +176,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    
