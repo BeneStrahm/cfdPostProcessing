@@ -1,0 +1,3 @@
+[submodule "WindTunnelPostprocessing"]
+	path = WindTunnelPostprocessing
+	url = https://github.com/BeneStrahm/WindTunnelPostprocessing
