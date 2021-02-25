@@ -17,7 +17,7 @@ from matplotlib.pyplot import yscale
 import numpy as np
 import sys
 import os
-
+import re
 import pyLEK.plotters.plot2D as plt
 
 # ------------------------------------------------------------------------------
@@ -65,7 +65,7 @@ def calculateSpectra(y, dT):
     return f, Sa
 
 
-def plotSpectra(f, Sa, comp):
+def plotSpectra(f, Sa):         #comp
     # Function fit
     # # Set up logspace
     # fx_fit = np.logspace(np.log10(fx[1]), np.log10(fx[-1]), num=1000)
@@ -82,7 +82,7 @@ def plotSpectra(f, Sa, comp):
 
     # ---- Plotting ----#
     xlabel = "f"
-    ylabel = "PSD (" + comp + ")"
+    ylabel = "PSD " #(" + comp + ")
     title = "Power Spectral Density"
 
     legend = ["measured"]
@@ -102,14 +102,54 @@ def plotSpectra(f, Sa, comp):
                style_dict=style_dict, colorScheme='UniS', variation='color',
                savePlt=True, showPlt=True)
 
+def importForces():
+
+    forceRegex = r"([0-9.Ee\-+]+)\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)+\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)+\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)"
+
+    t = []
+    ftotx = []
+    ftoty = []
+    ftotz = []  # Porous
+    fpx = []
+    fpy = []
+    fpz = []  # Pressure
+    fvx = []
+    fvy = []
+    fvz = []  # Viscous
+
+    pipefile = open(
+ '/media/dani/linuxHDD/openfoam/simpleFoam/testing/17_v1Fine/postProcessing/forces/0/force.dat', 'r')
+
+    lines = pipefile.readlines()
+
+    for line in lines:
+        match = re.search(forceRegex, line)
+        if match:
+            t.append(float(match.group(1)))
+            ftotx.append(float(match.group(2)))
+            ftoty.append(float(match.group(3)))
+            ftotz.append(float(match.group(4)))
+            fpx.append(float(match.group(5)))
+            fpy.append(float(match.group(6)))
+            fpz.append(float(match.group(7)))
+            fvx.append(float(match.group(8)))
+            fvy.append(float(match.group(9)))
+            fvz.append(float(match.group(10)))
+
+    y = np.array(fpy)
+    t = np.round(t,2)
+    
+    return y
+
 
 def main():
     # --- Input data ---#
+    y = importForces()              # Convert to MN
+    dT =    0.01
 
-    # --- Calculation --#
+    f, Sa = calculateSpectra(y,dT)
 
-    # ---- Plotting ----#
-
+    plotSpectra(f, Sa)
 
 if __name__ == '__main__':
     main()
