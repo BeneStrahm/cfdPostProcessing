@@ -17,6 +17,8 @@ import numpy as np
 
 import pyLEK.plotters.plot2D as plt
 
+from foamHelpers import readForces
+
 # ------------------------------------------------------------------------------
 # Functions
 # ------------------------------------------------------------------------------
@@ -166,48 +168,49 @@ def main(dObject):
     else:
         print("ERROR: Firstly convert with \"Convert Forces & Moments to HDF5\"")
 
-def importForces():
+# def importForces():
 
-    forceRegex = r"([0-9.Ee\-+]+)\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)+\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)+\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)"
+#     forceRegex = r"([0-9.Ee\-+]+)\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)+\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)+\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)"
 
-    t = []
-    ftotx = []
-    ftoty = []
-    ftotz = []  # Porous
-    fpx = []
-    fpy = []
-    fpz = []  # Pressure
-    fvx = []
-    fvy = []
-    fvz = []  # Viscous
+#     t = []
+#     ftotx = []
+#     ftoty = []
+#     ftotz = []  # Porous
+#     fpx = []
+#     fpy = []
+#     fpz = []  # Pressure
+#     fvx = []
+#     fvy = []
+#     fvz = []  # Viscous
 
-    pipefile = open(
- '/media/dani/linuxHDD/openfoam/simpleFoam/testing/13_v1Fine/postProcessing/forces/0/force.dat', 'r')
+#     pipefile = open(
+#  '/media/dani/linuxHDD/openfoam/simpleFoam/testing/13_v1Fine/postProcessing/forces/0/force.dat', 'r')
 
-    lines = pipefile.readlines()
+#     lines = pipefile.readlines()
 
-    for line in lines:
-        match = re.search(forceRegex, line)
-        if match:
-            t.append(float(match.group(1)))
-            ftotx.append(float(match.group(2)))
-            ftoty.append(float(match.group(3)))
-            ftotz.append(float(match.group(4)))
-            fpx.append(float(match.group(5)))
-            fpy.append(float(match.group(6)))
-            fpz.append(float(match.group(7)))
-            fvx.append(float(match.group(8)))
-            fvy.append(float(match.group(9)))
-            fvz.append(float(match.group(10)))
+#     for line in lines:
+#         match = re.search(forceRegex, line)
+#         if match:
+#             t.append(float(match.group(1)))
+#             ftotx.append(float(match.group(2)))
+#             ftoty.append(float(match.group(3)))
+#             ftotz.append(float(match.group(4)))
+#             fpx.append(float(match.group(5)))
+#             fpy.append(float(match.group(6)))
+#             fpz.append(float(match.group(7)))
+#             fvx.append(float(match.group(8)))
+#             fvy.append(float(match.group(9)))
+#             fvz.append(float(match.group(10)))
 
-    fpy = np.array(fpy)
+#     fpy = np.array(fpy)
 
-    return fpy  
+#     return fpy  
 
 
 def main():
     # --- Input data ---#
-Fi = importForces() / (10 ** 6)              # Convert to MN    
+    fname = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/17_v1Fine/postProcessing/forces/0/force.dat'
+    Fi = readForces.importForces(fname) / (10 ** 6)              # Convert to MN    
     # --- Calculation --#
 
     # ---- Plotting ----#
