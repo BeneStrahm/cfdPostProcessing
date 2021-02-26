@@ -42,9 +42,10 @@ def calculateSpectra(y, dT):
 
     # For explanation see https://www.cbcity.de/die-fft-mit-python-einfach-erklaert
     # Determine frequencies resulting from FFT
+    # https://github.com/pyNFFT/pyNFFT for non uniform samples
     # Time domain
     # -------------
-    f = abs(np.fft.fftfreq(nT, dT)[:N])                   # Frequency
+    f = abs(np.fft.fftfreq(nT, dT)[:N])                         # Frequency
     # f      = np.linspace(0, fNyq, N, endpoint=True)          # Same as above
 
     # Calculate the force spectrum
