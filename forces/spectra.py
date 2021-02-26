@@ -20,6 +20,8 @@ import os
 import re
 import pyLEK.plotters.plot2D as plt
 
+from foamHelpers import readForces
+
 # ------------------------------------------------------------------------------
 # Functions
 # ------------------------------------------------------------------------------
@@ -148,12 +150,14 @@ def importForces():
     y = np.array(fpy)
     t = np.round(t,2)
     
-    return y
+#     return y
 
 
 def main():
     # --- Input data ---#
-    y = importForces()              # Convert to MN
+    fname = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/17_v1Fine/postProcessing/forces/0/force.dat'
+    y = readForces.importForces(fname)              # Convert to MN
+    
     dT =    0.01
 
     f, Sa = calculateSpectra(y,dT)
