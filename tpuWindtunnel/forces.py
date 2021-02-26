@@ -48,6 +48,7 @@ def main():
     # @DL: Folgende Variablen ignorieren, 
     # Diese wären nur wichtig für Strukturanalyse
     nF      = 32                #           // Number of floors
+    nM      = 4                 #           // Number of modules
     b       = 16                # m         // Core wall thickness    
     D       = 0.02              # %         // Damping
     I       = 477.924           # m4        // Starting value
@@ -61,8 +62,8 @@ def main():
         wtModelProp.loadTPUModelProp()
 
         # Initialize building model properties
-        buildProp = modelProp.buildProp(H_f, B, dn, E, I, mue, D, uH_f)
-                
+        buildProp = modelProp.buildProp(H_f, B, nF, nM, dn, E, I, D, uH_f)
+        
         # Load aerodynamic forces in model scale
         wtModelAeroForces = aeroForces.wtModelAeroForces()
         wtModelAeroForces.loadTPUModelForces(wtModelProp, buildProp)
