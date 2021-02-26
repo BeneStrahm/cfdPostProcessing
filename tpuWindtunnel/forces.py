@@ -17,9 +17,9 @@ import numpy as np
 # Imported functions
 # ------------------------------------------------------------------------------
 
-import WindTunnelPostprocessing.aeroForces as aeroForces
-import WindTunnelPostprocessing.modelProp as modelProp
-import WindTunnelPostprocessing.scaling as scaling
+import cfdPostProcessing.WindTunnelPostprocessing.aeroForces as aeroForces
+import cfdPostProcessing.WindTunnelPostprocessing.modelProp as modelProp
+import cfdPostProcessing.WindTunnelPostprocessing.scaling as scaling
 
 import pyLEK.plotters.plot2D as plt
 
@@ -33,16 +33,17 @@ from pyLEK.helpers.filemanager import delFilesInFolder
 def main():
     # Get name of input file
     # fname = sys.argv [1]
-    fname = "C://Users//ac135564////bwSyncShare//MT Lais Windlastverteilung//21_Feb_Windkanaldaten//WindTunnelPostprocessing//T115_6_000.mat"
+    fname = "/media/dani/linuxHDD/visualStudio/cfdPostProcessing/WindTunnelPostprocessing/T115_6/T115_6_010.mat"
 
     # Clean up results folder
     # delFilesInFolder('T115_6/results')
 
     # Full scale building properties
-    uH_f    = 37             # m/s       // Wind speed at z = H (50yr)
+    uH_f    = 38             # m/s       // Wind speed at z = H (50yr)
     H_f     = 160               # m         // Building height
     B       = 32                # m         // Building width
     dns     = ['D', 'L']        #           // Directions (Drag/Lifts)
+ 
 
     # @DL: Folgende Variablen ignorieren, 
     # Diese wären nur wichtig für Strukturanalyse
@@ -81,7 +82,7 @@ def main():
         print("Min Base Force: " + '{:02.3f}'.format(np.min(buildAeroForces.BF_p)))
         print("Max Base Force: " + '{:02.3f}'.format(np.max(buildAeroForces.BF_p)))
         print("Std Base Force: " + '{:02.3f}'.format(np.std(buildAeroForces.BF_p)))
-
+        
         # Time series of base forces
         t = np.linspace(0, buildProp.nT*buildProp.dT, buildProp.nT)
         F = buildAeroForces.BF_p
