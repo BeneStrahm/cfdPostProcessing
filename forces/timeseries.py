@@ -19,10 +19,12 @@ import sys
 import os
 import re
 
+from numpy.lib.function_base import interp
+
 import pyLEK.plotters.plot2D as plt
 import pyLEK.helpers.txtEditor as txt
 
-from foamHelpers import readForces
+from cfdPostProcessing.foamHelpers import readForces
 
 # ------------------------------------------------------------------------------
 # Functions
@@ -111,94 +113,40 @@ def plotTimeseries(Ti, Fi):
                savePlt=True, showPlt=True)
 
 
-# def importForces():
-
-#     forceRegex = r"([0-9.Ee\-+]+)\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)+\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)+\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)"
-
-#     t = []
-#     ftotx = []
-#     ftoty = []
-#     ftotz = []  # Porous
-#     fpx = []
-#     fpy = []
-#     fpz = []  # Pressure
-#     fvx = []
-#     fvy = []
-#     fvz = []  # Viscous
-
-<<<<<<< HEAD
- #1_conv_ref0       || 148-197 || 4900
- #1_conv_ref1       || 168-250 || 8200
- #1_conv_ref2       || 131-250 || 11900
- #2_height8     
- #2_height12        || 0-84    || 8435
- #2_height15
-    casefile = "1_conv_ref1"
-    pipefile = open(
-        '/media/dani/linuxHDD/openfoam/simpleFoam/testing/{}/postProcessing/forces/168/force.dat'.format(casefile), 'r')
-
-=======
-#     pipefile = open(
-#  '/media/dani/linuxHDD/openfoam/simpleFoam/testing/17_v1Fine/postProcessing/forces/0/force.dat', 'r')
->>>>>>> 8d716cd22b8631e39cae4bad6b09d2ba9d88b552
-
-#     lines = pipefile.readlines()
-
-#     for line in lines:
-#         match = re.search(forceRegex, line)
-#         if match:
-#             t.append(float(match.group(1)))
-#             ftotx.append(float(match.group(2)))
-#             ftoty.append(float(match.group(3)))
-#             ftotz.append(float(match.group(4)))
-#             fpx.append(float(match.group(5)))
-#             fpy.append(float(match.group(6)))
-#             fpz.append(float(match.group(7)))
-#             fvx.append(float(match.group(8)))
-#             fvy.append(float(match.group(9)))
-#             fvz.append(float(match.group(10)))
-
-#     t = np.round(t,2)
-#     fpy = np.array(fpy)
-
-#     return fpy
-
 
 def main():
     # --- Input data ---#
     # List containing time series of forces
     # in the order Fi
-<<<<<<< HEAD
-    Fi = importForces()  / (10 **6)           # Convert to MN
-=======
-    fname = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/17_v1Fine/postProcessing/forces/0/force.dat'
-    Fi = readForces.importForces(fname) / (10 ** 6)              # Convert to MN
->>>>>>> 8d716cd22b8631e39cae4bad6b09d2ba9d88b552
+    fname = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref0/postProcessing/forces/0/force.dat'
+
+    interpForces = readForces.importForces(fname)
+
+    # [0] = t_interp, [1] = fpy_interp, [2] = fpx_interp
+    Fi = interpForces[2]/ (10 ** 6)              # Convert to MN
+
 
     # Time stepping
-    sT = 168    
-    eT = 250
-    nT = 8200
-    dT = 0.01
+    sT = min(interpForces[0])   
+    eT = max(interpForces[0])
+    dT = interpForces[0][1]-interpForces[0][0]
+    nT = len(interpForces[0]*dT)
     Ti = np.linspace(sT, eT, nT)
- #1_conv_ref0       || 148-197 || 4900
- #1_conv_ref1       || 168-250 || 8200
- #1_conv_ref2       || 131-250 || 11900
- #2_height8     
- #2_height12        || 0-84    || 8435
- #2_height15
+
+   
 
     # Specify Cut-Off time
-    # sT = int(input("Start Time: "))
-    # eT = int(input("End Time:   "))
+    # sT = int(input("Start Time: 100 "))
+    # eT = int(input("End Time: 150   "))
+    sT = 100
+    eT = 150
 
     # Cut the array to desired range
-    # Ti = Ti[int(sT/dT):int(eT/dT)]
-    # Fi = Fi[int(sT/dT):int(eT/dT)]
+    Ti = Ti[int(sT/dT):int(eT/dT)]
+    Fi = Fi[int(sT/dT):int(eT/dT)]
 
     plotTimeseries(Ti, Fi)
     writeTimeseries(Fi)
-
 
 if __name__ == '__main__':
     main()

@@ -53,15 +53,22 @@ def importForces(fname):
             fvy.append(float(match.group(9)))
             fvz.append(float(match.group(10)))
 
-    # t = np.round(t, 2)
-    fpy = np.array(fpy)
 
-    return fpy
+# interpoliert forces in x und y richtung für delta 0.01 
+    tmin = min(t)
+    tmax = max(t)
+    t_interp = np.round(np.linspace(tmin,tmax,tmax/0.01,endpoint=True),2)
+    fpylen = len(fpy)
+    fpy_interp = np.interp(t_interp, t, fpy)
+    fpx_interp = np.interp(t_interp, t, fpx)
 
 
-def sample():                                       # Sample of the function
-    pass
+    fpy = np.array(fpy_interp)
+    return t_interp, fpy_interp, fpx_interp
+
+
+
 
 
 if __name__ == "__main__":
-    sample()
+    importForces()
