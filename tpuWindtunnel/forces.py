@@ -85,12 +85,11 @@ def main():
         print("Std Base Force: " + '{:02.3f}'.format(np.std(buildAeroForces.BF_p)))
         
         # Time series of base forces
-        # t = np.linspace(0, buildProp.nT*buildProp.dT, buildProp.nT)
-        # F = buildAeroForces.BF_p
+        t = np.linspace(0, buildProp.nT*buildProp.dT, buildProp.nT)
+        F = buildAeroForces.BF_p
         # plt.plot2D(t, F, showPlt=True)
-        # plt.plot2D(t, F, "Time [s]", "Base Force " + dn + " [kN]", "Time series of base forces",
-        #     ["dn"], showPlt=True)            
-
+        plt.plot2D(t, F, xlabel="Time [s]", ylabel= "Base Force " + dn + " [kN]", title="Time series of base forces", showPlt=True)            
+        
             
 
 if __name__ == '__main__':
