@@ -20,7 +20,7 @@ import os
 import re
 import pyLEK.plotters.plot2D as plt
 
-from foamHelpers import readForces
+from cfdPostProcessing.foamHelpers import readForces
 
 # ------------------------------------------------------------------------------
 # Functions
@@ -105,60 +105,12 @@ def plotSpectra(f, Sa):         #comp
                style_dict=style_dict, colorScheme='UniS', variation='color',
                savePlt=True, showPlt=True)
 
-def importForces():
-
-    forceRegex = r"([0-9.Ee\-+]+)\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)+\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)+\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)"
-
-    t = []
-    ftotx = []
-    ftoty = []
-    ftotz = []  # Porous
-    fpx = []
-    fpy = []
-    fpz = []  # Pressure
-    fvx = []
-    fvy = []
-    fvz = []  # Viscous
-
- #1_conv_ref0       || 148-197 || 4900
- #1_conv_ref1       || 168-250 || 8200
- #1_conv_ref2       || 131-250 || 11900
- #2_height8     
- #2_height12        || 0-84    || 8435
- #2_height15
-    casefile = "1_conv_ref1"
-    pipefile = open(
-        '/media/dani/linuxHDD/openfoam/simpleFoam/testing/{}/postProcessing/forces/168/force.dat'.format(casefile), 'r')
-
-
-    lines = pipefile.readlines()
-
-    for line in lines:
-        match = re.search(forceRegex, line)
-        if match:
-            t.append(float(match.group(1)))
-            ftotx.append(float(match.group(2)))
-            ftoty.append(float(match.group(3)))
-            ftotz.append(float(match.group(4)))
-            fpx.append(float(match.group(5)))
-            fpy.append(float(match.group(6)))
-            fpz.append(float(match.group(7)))
-            fvx.append(float(match.group(8)))
-            fvy.append(float(match.group(9)))
-            fvz.append(float(match.group(10)))
-
-    y = np.array(fpy)
-    t = np.round(t,2)
-    
-#     return y
-
-
 def main():
     # --- Input data ---#
-    fname = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/17_v1Fine/postProcessing/forces/0/force.dat'
-    y = readForces.importForces(fname)              # Convert to MN
-    
-    dT =    0.01
+    fname = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref0/postProcessing/forces/0/force.dat'
+    interpForces = readForces.importForces(fname)
+    y = interpForces[1]             # Convert to MN
+    dT = interpForces[0][1]-interpForces[0][0]
 
     f, Sa = calculateSpectra(y,dT)
 
