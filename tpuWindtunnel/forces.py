@@ -33,7 +33,7 @@ from pyLEK.helpers.filemanager import delFilesInFolder
 def main():
     # Get name of input file
     # fname = sys.argv [1]
-    fname = "/media/dani/linuxHDD/visualStudio/cfdPostProcessing/WindTunnelPostprocessing/T115_6/T115_6_010.mat"
+    fname = "/media/dani/linuxHDD/visualStudio/cfdPostProcessing/WindTunnelPostprocessing/T114_6/T114_6_000.mat"
 
     # Clean up results folder
     # delFilesInFolder('T115_6/results')
@@ -85,10 +85,13 @@ def main():
         print("Std Base Force: " + '{:02.3f}'.format(np.std(buildAeroForces.BF_p)))
         
         # Time series of base forces
-        t = np.linspace(0, buildProp.nT*buildProp.dT, buildProp.nT)
-        F = buildAeroForces.BF_p
-        plt.plot2D(t, F, "Time [s]", "Base Force " + dn + " [kN]", "Time series of base forces",
-            ["dn"], showPlt=True)
+        # t = np.linspace(0, buildProp.nT*buildProp.dT, buildProp.nT)
+        # F = buildAeroForces.BF_p
+        # plt.plot2D(t, F, showPlt=True)
+        # plt.plot2D(t, F, "Time [s]", "Base Force " + dn + " [kN]", "Time series of base forces",
+        #     ["dn"], showPlt=True)            
+
+            
 
 if __name__ == '__main__':
     main()
