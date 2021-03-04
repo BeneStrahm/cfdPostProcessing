@@ -33,11 +33,11 @@ class convergenceVerification():
     # to Verification and Validation of CFD Simulations (2001)"
    
     def __init__(self): 
-        H = 180
+        H = 9.6
 
         # List of datapoints to be evaluated 
         self.convrgData     = [1,2,3]
-        self.inputParam     = [H/160, H/112, H/80]
+        self.inputParam     = [H/3, H/2, H]
         self.delta_star_k_1 = "-"
         self.S_C            = "-"
         self.relError       = ["-", "-", "-"]

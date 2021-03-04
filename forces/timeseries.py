@@ -123,7 +123,7 @@ def main():
     interpForces = readForces.importForces(fname)
 
     # [0] = t_interp, [1] = fpy_interp, [2] = fpx_interp
-    Fi = interpForces[2]/ (10 ** 6)              # Convert to MN
+    Fi = interpForces[1]/ (10 ** 6)              # Convert to MN
 
 
     # Time stepping

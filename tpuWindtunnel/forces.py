@@ -30,10 +30,20 @@ from pyLEK.helpers.filemanager import delFilesInFolder
 # Functions
 # ------------------------------------------------------------------------------     
 
+def calcStatistics(BF_p):
+    # --- Calculation --#
+    meanBF = np.mean(BF_p)
+    stdBF = np.std(BF_p)
+    rmsBF = np.sqrt(np.mean(np.square(BF_p)))
+    maxBF = np.max(BF_p)
+    minBF = np.min(BF_p)
+
+    return meanBF, stdBF, rmsBF, maxBF, minBF, 
+
 def main():
     # Get name of input file
     # fname = sys.argv [1]
-    fname = "/media/dani/linuxHDD/visualStudio/cfdPostProcessing/WindTunnelPostprocessing/T114_6/T114_6_000.mat"
+    fname = "/media/dani/linuxHDD/visualStudio/cfdPostProcessing/WindTunnelPostprocessing/T115_6/T115_6_000.mat"
 
     # Clean up results folder
     # delFilesInFolder('T115_6/results')
@@ -84,15 +94,23 @@ def main():
         print("Max Base Force: " + '{:02.3f}'.format(np.max(buildAeroForces.BF_p)))
         print("Std Base Force: " + '{:02.3f}'.format(np.std(buildAeroForces.BF_p)))
         
+        meanBF, stdBF, rmsBF, maxBF, minBF = calcStatistics(buildAeroForces.BF_p)
+        hLines = [meanBF, meanBF + stdBF, meanBF - stdBF]
+        hTexts = ["\$F_{x,mean}\$", "\$F_{x,mean+std}\$", "\$F_{x,mean-std}\$"]
+
+
+
+
         # Time series of base forces
         t = np.linspace(0, buildProp.nT*buildProp.dT, buildProp.nT)
-        F = buildAeroForces.BF_p
-        # plt.plot2D(t, F, showPlt=True)
-        plt.plot2D(t, F, xlabel="Time [s]", ylabel= "Base Force " + dn + " [kN]", title="Time series of base forces", showPlt=True)            
+        F = buildAeroForces.BF_p/1000
+        
+        style_dict = {"lines.linewidth": "0.75", "savefig.format": "svg"}
+        plt.plot2D(t, F, style_dict=style_dict, xlabel="Time [s]", ylabel= "Base Force " + dn + " [MN]", title="Time series of base forces", showPlt=True)            
         
             
 
 if __name__ == '__main__':
     main()
-    wait = input("Press Enter to continue.")
+    # wait = input("Press Enter to continue.")
 

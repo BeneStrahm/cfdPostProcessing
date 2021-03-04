@@ -107,7 +107,7 @@ def plotSpectra(f, Sa):         #comp
 
 def main():
     # --- Input data ---#
-    fname = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref0/postProcessing/forces/0/force.dat'
+    fname = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref2/postProcessing/forces/0/force.dat'
     interpForces = readForces.importForces(fname)
     y = interpForces[1]             # Convert to MN
     dT = interpForces[0][1]-interpForces[0][0]
