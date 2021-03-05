@@ -103,10 +103,10 @@ def main():
 
         # Time series of base forces
         t = np.linspace(0, buildProp.nT*buildProp.dT, buildProp.nT)
-        F = buildAeroForces.BF_p/1000
+        F = buildAeroForces.BF_p
         
-        style_dict = {"lines.linewidth": "0.75", "savefig.format": "svg"}
-        plt.plot2D(t, F, style_dict=style_dict, xlabel="Time [s]", ylabel= "Base Force " + dn + " [MN]", title="Time series of base forces", showPlt=True)            
+        style_dict = {"lines.linewidth": "0.5", "savefig.format": "svg"}
+        plt.plot2D(t, F, hLines=hLines,   style_dict=style_dict, xlabel="Time [s]", ylabel= "Base Force " + dn + " [kN]", title="Time series of base forces", showPlt=True)            
         
             
 

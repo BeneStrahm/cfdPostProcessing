@@ -37,7 +37,7 @@ class convergenceVerification():
 
         # List of datapoints to be evaluated 
         self.convrgData     = [1,2,3]
-        self.inputParam     = [H/3, H/2, H]
+        self.inputParam     = [H/4, H/2, H]
         self.delta_star_k_1 = "-"
         self.S_C            = "-"
         self.relError       = ["-", "-", "-"]
