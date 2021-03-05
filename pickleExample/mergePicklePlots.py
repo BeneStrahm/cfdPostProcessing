@@ -28,9 +28,9 @@ def main():
 
     # Specify the file name
     # fname = str(input("Specify File Name: "))
-    fname1 = "plot_as_pickle_example"
-    fname2 = "plot_as_pickle_example"
-    fname3 = "plot_as_pickle_example"
+    fname1 = "Timeseries_Baseshear_Fx_1_conv_ref0"
+    fname2 = "Timeseries_Baseshear_Fx_1_conv_ref1"
+    fname3 = "Timeseries_Baseshear_Fx_1_conv_ref2"
 
     # Change to current     
     # Change to current file location
