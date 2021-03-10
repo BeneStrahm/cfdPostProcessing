@@ -118,12 +118,13 @@ def main():
     # --- Input data ---#
     # List containing time series of forces
     # in the order Fi
-    fname = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref0/postProcessing/forces/0/force.dat'
+    fname = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref2/postProcessing/forces/0/force.dat'
     # In your script, import first
     interpForces = readForces.importForces(fname)
 
     # [0] = t_interp, [1] = fpy_interp, [2] = fpx_interp
     Fi = interpForces[2]/ (10 ** 6)              # Convert to MN
+
 
 
     # Time stepping
@@ -138,14 +139,14 @@ def main():
     # Specify Cut-Off time
     # sT = int(input("Start Time: 100 "))
     # eT = int(input("End Time: 150   "))
-    # sT = 100
-    # eT = 150
+    sT = 100
+    eT = 180
 
 
     # Cut the array to desired range
     Ti = Ti[int(sT/dT):int(eT/dT)]
     Fi = Fi[int(sT/dT):int(eT/dT)]
-
+    print(Ti)
     writeTimeseries(Fi)
     plotTimeseries(Ti, Fi)
     
