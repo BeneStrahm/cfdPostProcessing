@@ -20,22 +20,22 @@ import numpy as np
 # Functions
 
 
-def importForces(fname):
+def importMoments(mname):
 
     forceRegex = r"([0-9.Ee\-+]+)\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)+\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)+\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)"
 
     t = []
-    ftotx = []
-    ftoty = []
-    ftotz = []  # Porous
-    fpx = []
-    fpy = []
-    fpz = []  # Pressure
-    fvx = []
-    fvy = []
-    fvz = []  # Viscous
+    mtotx = []
+    mtoty = []
+    mtotz = []  # Porous
+    mpx = []
+    mpy = []
+    mpz = []  # Pressure
+    mvx = []
+    mvy = []
+    mvz = []  # Viscous
 
-    pipefile = open(fname, 'r')
+    pipefile = open(mname, 'r')
 
     lines = pipefile.readlines()
 
@@ -43,15 +43,15 @@ def importForces(fname):
         match = re.search(forceRegex, line)
         if match:
             t.append(float(match.group(1)))
-            ftotx.append(float(match.group(2)))
-            ftoty.append(float(match.group(3)))
-            ftotz.append(float(match.group(4)))
-            fpx.append(float(match.group(5)))
-            fpy.append(float(match.group(6)))
-            fpz.append(float(match.group(7)))
-            fvx.append(float(match.group(8)))
-            fvy.append(float(match.group(9)))
-            fvz.append(float(match.group(10)))
+            mtotx.append(float(match.group(2)))
+            mtoty.append(float(match.group(3)))
+            mtotz.append(float(match.group(4)))
+            mpx.append(float(match.group(5)))
+            mpy.append(float(match.group(6)))
+            mpz.append(float(match.group(7)))
+            mvx.append(float(match.group(8)))
+            mvy.append(float(match.group(9)))
+            mvz.append(float(match.group(10)))
 
 
 # interpoliert forces in x und y richtung für delta 0.01 
@@ -59,16 +59,16 @@ def importForces(fname):
     tmax = max(t)
 
     t_interp = np.round(np.linspace(tmin,tmax,int(tmax/0.01),endpoint=True),2)
-    Fy = np.interp(t_interp, t, fpy)
-    Fx = np.interp(t_interp, t, fpx)
-    Fz = np.interp(t_interp, t, fpz)
+    My = np.interp(t_interp, t, mpy)
+    Mx = np.interp(t_interp, t, mpx)
+    Mz = np.interp(t_interp, t, mpz)
 
 
-    return t_interp, Fy, Fx, Fz
+    return t_interp, My, Mx, Mz
 
 
 
 
 
 if __name__ == "__main__":
-    importForces()
+    importMoments()

@@ -25,6 +25,7 @@ import pyLEK.plotters.plot2D as plt
 import pyLEK.helpers.txtEditor as txt
 
 from cfdPostProcessing.foamHelpers import readForces
+from cfdPostProcessing.foamHelpers import readMoments
 
 # ------------------------------------------------------------------------------
 # Functions
@@ -118,13 +119,15 @@ def main():
     # --- Input data ---#
     # List containing time series of forces
     # in the order Fi
-    fname = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref2/postProcessing/forces/0/force.dat'
+    fname = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref0/postProcessing/forces/0/force.dat'
+    mname = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/2_height15/postProcessing/forces/0/moment.dat'
     # In your script, import first
     interpForces = readForces.importForces(fname)
+    interpMoments = readMoments.importMoments(mname)
 
     # [0] = t_interp, [1] = fpy_interp, [2] = fpx_interp
     Fi = interpForces[2]/ (10 ** 6)              # Convert to MN
-
+    Mi = interpMoments[2]/ (10 ** 6)              # Convert to MN
 
 
     # Time stepping
@@ -140,14 +143,15 @@ def main():
     # sT = int(input("Start Time: 100 "))
     # eT = int(input("End Time: 150   "))
     sT = 100
-    eT = 180
+    eT = 250
 
 
     # Cut the array to desired range
     Ti = Ti[int(sT/dT):int(eT/dT)]
     Fi = Fi[int(sT/dT):int(eT/dT)]
-    print(Ti)
-    writeTimeseries(Fi)
+    
+    
+    # writeTimeseries(Fi)
     plotTimeseries(Ti, Fi)
     
 

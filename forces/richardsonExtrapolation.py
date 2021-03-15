@@ -18,6 +18,9 @@
 import numpy as np
 
 import pyLEK.plotters.plot2D as plt
+import os,sys,csv,h5py
+from cfdPostProcessing.foamHelpers import readForces
+from cfdPostProcessing.foamHelpers import readMoments
 
 # ------------------------------------------------------------------------------
 # Functions
@@ -33,11 +36,11 @@ class convergenceVerification():
     # to Verification and Validation of CFD Simulations (2001)"
    
     def __init__(self): 
-        H = 9.6
+        
 
         # List of datapoints to be evaluated 
         self.convrgData     = [1,2,3]
-        self.inputParam     = [H/4, H/2, H]
+        self.inputParam     = [1, 0.5, 0.25]
         self.delta_star_k_1 = "-"
         self.S_C            = "-"
         self.relError       = ["-", "-", "-"]
@@ -48,7 +51,7 @@ class convergenceVerification():
 
     def appendData(self, datapoint, m):
         # Insert datapoint at location m
-        self.convrgData[m-1] = datapoint
+        self.convrgData[m] = datapoint
 
     def evaluateConvergence(self):
         # Get the simulation result S_k, not corrected for iterative errors    
@@ -192,13 +195,7 @@ class convergenceVerification():
                     '{: 10.3f}'.format(self.S_C),
                     '{: 6.1f}'.format(self.relError[2]*100),
                     '{: 6.1f}'.format(self.relError[1]*100),
-                    '{: 6.1f}'.format(self.relError[0]*100)
-                    ])
-            else:
-                # Write in results in row
-                # Characters per Tab: (['1___________14'])
-
-                txt_writer.writerow([str(comp),                             
+                    '{: 6.1f}'.format(self.relError[0]*100),
                     str(designation),                                       
                     '{: 10.3f}'.format(self.convrgData[2]),                 
                     '{: 10.3f}'.format(self.convrgData[1]),                 
@@ -212,18 +209,9 @@ class convergenceVerification():
                     self.relError[0]
                     ])
 
-    def plotConvergence(self, comp, designation, outDir, sT, eT):
-        if "F" in comp:
-            dir_fileName = outDir + "BaseShear_"+ comp + "_" + \
-                           str(int(sT)) + "_"  + str(int(eT)) + designation
+    def plotConvergence(self, outDir, sT, eT):
 
-        elif "M" in comp:
-            dir_fileName = outDir + "BaseShear_"+ comp + "_" + \
-                           str(int(sT)) + "_"  + str(int(eT)) + designation
-       
-        xlabel = r"\$h_{min} ~[m]\$"
-        legend = [r"\$Grid ~C\$", r"\$Grid ~B\$", r"\$Grid ~A\$"]
-
+        dir_fileName = outDir + "Baseshear"
         x = self.inputParam
         y = self.convrgData
 
@@ -234,63 +222,69 @@ class convergenceVerification():
             hLine = None
             hText = None
 
-        # 1) For Mean
-        if "Mean" in designation:
-            if "F" in comp:
-                ylabel  = r"\$\overbar{F_{" + r"{}".format(comp[1]) + r"}}~[MN]\$" 
-                title   = r"Convergence Mean F \textsubscript{" + r"{}".format(comp)[1] + r"}"
-            elif "M" in comp:
-                ylabel  = r"\$\overbar{M_{" + r"{}".format(comp[1]) + r"}}~[MNm]\$" 
-                title   = r"Convergence Mean M \textsubscript{" + r"{}".format(comp)[1] + r"}"
+        # # 1) For Mean
+        # if "Mean" in designation:
+        #     if "F" in comp:
+        #         ylabel  = r"\$\overbar{F_{" + r"{}".format(comp[1]) + r"}}~[MN]\$" 
+        #         title   = r"Convergence Mean F \textsubscript{" + r"{}".format(comp)[1] + r"}"
+        #     elif "M" in comp:
+        #         ylabel  = r"\$\overbar{M_{" + r"{}".format(comp[1]) + r"}}~[MNm]\$" 
+        #         title   = r"Convergence Mean M \textsubscript{" + r"{}".format(comp)[1] + r"}"
         
-        # 2) For RMS
-        elif "RMS" in designation:
-            if "F" in comp:
-                ylabel  = r"\$F_{" + r"{}".format(comp[1]) + r",rms}~[MN]\$" 
-                title   = r"Convergence RMS F \textsubscript{" + r"{}".format(comp)[1] + r"}"
-            elif "M" in comp:
-                ylabel  = r"\$M_{" + r"{}".format(comp[1]) + r",rms}~[MNm]\$" 
-                title   = r"Convergence RMS M \textsubscript{" + r"{}".format(comp)[1] + r"}"
+        # # 2) For RMS
+        # elif "RMS" in designation:
+        #     if "F" in comp:
+        #         ylabel  = r"\$F_{" + r"{}".format(comp[1]) + r",rms}~[MN]\$" 
+        #         title   = r"Convergence RMS F \textsubscript{" + r"{}".format(comp)[1] + r"}"
+        #     elif "M" in comp:
+        #         ylabel  = r"\$M_{" + r"{}".format(comp[1]) + r",rms}~[MNm]\$" 
+        #         title   = r"Convergence RMS M \textsubscript{" + r"{}".format(comp)[1] + r"}"
         
-        # 3) For Std
-        elif "Std" in designation:
-            if "F" in comp:
-                ylabel  = r"\$F_{" + r"{}".format(comp[1]) + r",std}~[MN]\$" 
-                title   = r"Convergence Std F \textsubscript{" + r"{}".format(comp)[1] + r"}"
-            elif "M" in comp:
-                ylabel  = r"\$M_{" + r"{}".format(comp[1]) + r",std}~[MNm]\$" 
-                title   = r"Convergence Std M \textsubscript{" + r"{}".format(comp)[1] + r"}"
+        # # 3) For Std
+        # elif "Std" in designation:
+        #     if "F" in comp:
+        #         ylabel  = r"\$F_{" + r"{}".format(comp[1]) + r",}~[MN]\$" 
+        #         title   = r"Convergence Std F \textsubscript{" + r"{}".format(comp)[1] + r"}"
+            # elif "M" in comp:
+            #     ylabel  = r"\$M_{" + r"{}".format(comp[1]) + r",std}~[MNm]\$" 
+            #     title   = r"Convergence Std M \textsubscript{" + r"{}".format(comp)[1] + r"}"
         
-        # 4) For Largest20Values
-        elif "Largest20" in designation:
-            if "F" in comp:
-                ylabel  = r"\$F_{" + r"{}".format(comp[1]) + r",max}~[MN]\$" 
-                title   = r"Convergence Max F \textsubscript{" + r"{}".format(comp)[1] + r"}"
-            elif "M" in comp:
-                ylabel  = r"\$M_{" + r"{}".format(comp[1]) + r",max}~[MNm]\$" 
-                title   = r"Convergence Max M \textsubscript{" + r"{}".format(comp)[1] + r"}"
+        # # 4) For Largest20Values
+        # elif "Largest20" in designation:
+        #     if "F" in comp:
+        #         ylabel  = r"\$F_{" + r"{}".format(comp[1]) + r",max}~[MN]\$" 
+        #         title   = r"Convergence Max F \textsubscript{" + r"{}".format(comp)[1] + r"}"
+        #     elif "M" in comp:
+        #         ylabel  = r"\$M_{" + r"{}".format(comp[1]) + r",max}~[MNm]\$" 
+        #         title   = r"Convergence Max M \textsubscript{" + r"{}".format(comp)[1] + r"}"
         
-        # 5) For Smallest20Values
-        elif "Smallest20" in designation:
-            if "F" in comp:
-                ylabel  = r"\$F_{" + r"{}".format(comp[1]) + r",min}~[MN]\$" 
-                title   = r"Convergence Min F \textsubscript{" + r"{}".format(comp)[1] + r"}"
-            elif "M" in comp:
-                ylabel  = r"\$M_{" + r"{}".format(comp[1]) + r",min}~[MNm]\$" 
-                title   = r"Convergence Min M \textsubscript{" + r"{}".format(comp)[1] + r"}"
+        # # 5) For Smallest20Values
+        # elif "Smallest20" in designation:
+        #     if "F" in comp:
+        #         ylabel  = r"\$F_{" + r"{}".format(comp[1]) + r",min}~[MN]\$" 
+        #         title   = r"Convergence Min F \textsubscript{" + r"{}".format(comp)[1] + r"}"
+        #     elif "M" in comp:
+        #         ylabel  = r"\$M_{" + r"{}".format(comp[1]) + r",min}~[MNm]\$" 
+        #         title   = r"Convergence Min M \textsubscript{" + r"{}".format(comp)[1] + r"}"
 
-        xlim = []
-        ylim = []
 
+
+        
+
+        xlim = [max(x)+0.1*max(x),min(x)-0.5*min(x)]
+        ylim = [0, 0.5]
         # Change to current file location
         os.chdir(os.path.dirname(sys.argv[0]))
 
-        style_dict = {"savefig.format": "svg", "lines.linewidth": 0}
+        style_dict = {"lines.markersize": 8,"savefig.format": "svg"}
+        xlabel = 'Zellgröße'
+        ylabel  = r"Fx Std [MN]" 
+        title   = r"Convergence Std"
 
-        plt.plot2D(x, y, xlabel=xlabel, ylabel=ylabel, title=title, legend=legend, 
+        plt.plot2D(x, y, xlabel=xlabel, ylabel=ylabel, title=title, 
                dir_fileName=dir_fileName, xlim=xlim, ylim=ylim,
-               hLines=hLine, hTexts=hText, style_dict=style_dict, 
-               colorScheme='UniS', variation='marker',
+               style_dict=style_dict,
+               variation='marker',
                savePlt=True, showPlt=True)
 
     
@@ -298,95 +292,83 @@ class convergenceVerification():
 # Functions
 # ------------------------------------------------------------------------------
 
-def main(dObjects):
+def main():
     # Get ouput directory
-    outDir = createOurDir.main("../Results/OpenFOAM/" + "Convergence"+ "/BaseForces")
+    outDir = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/'
 
     # Collect the components
-    compList = []
+    fname0 = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref0/postProcessing/forces/0/force.dat'
+    fname1 = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref1/postProcessing/forces/0/force.dat'
+    fname2 = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref2/postProcessing/forces/0/force.dat'
 
-    for dObject in dObjects:
-        inFile = dObject.Location + "/purified" + "/forces.h5"
-        
-        if fh5check.main(inFile, "baseforces", check_ow = False) in ("EX"): 
-            BF = fh5readGroup.main(inFile, "baseforces")
-            for comp in BF:  
-                if not comp in compList:
-                    compList.append(comp)
-
-        else:
-            print("ERROR: Firstly convert " + dObject.Name+ " with \
-                  \"Convert Forces & Moments to HDF5\"")
+    interpForces0 = readForces.importForces(fname0)
+    interpForces1 = readForces.importForces(fname1)
+    interpForces2 = readForces.importForces(fname2)
+    interp = [interpForces0, interpForces1, interpForces2]
 
     # Specify Cut-Off time
     print("Specify time range to plot")
-    sCutT = int(input("Start Time: "))
-    eCutT = int(input("End Time:   "))
+    sCutT = 200
+    eCutT = 250
 
     # Set-Up CSV-Table
     tableHeader = convergenceVerification()
     tableHeader.writeHeader(outDir)
     
     # Loop through components
-    for comp in compList:
+    # meanBF  = convergenceVerification()
+    # rmsBF   = convergenceVerification()
+    stdBF   = convergenceVerification()
+    # maxBF   = convergenceVerification()
+    # minBF   = convergenceVerification()
 
-        meanBF  = convergenceVerification()
-        rmsBF   = convergenceVerification()
-        stdBF   = convergenceVerification()
-
-        maxBF   = convergenceVerification()
-        minBF   = convergenceVerification()
-
-        for m, dObject in enumerate(reversed(dObjects), 1):
-            inFile = dObject.Location + "/purified" + "/forces.h5"
-
+    m = 0
+    while m <= 2:
             # Get data to plot
-            dT = fh5readKey.main(inFile, "dT") / 12     # Anpassen
-            BF = fh5readGroup.main(inFile, "baseforces")    
+            dT = interp[m][0][1]-interp[m][0][0]
+            BF = interp[m][2]/ (10 ** 6)    
             
             # Cut the array to desired range 
-            l = BF[comp][int(sCutT/dT):int(eCutT/dT)]
-
-            # Calculate statistics and add to the objects           
-            meanBF.appendData(np.mean(l), m)
-            rmsBF.appendData(np.sqrt(np.mean(np.square(l))), m)
+            l = BF[int(sCutT/dT):int(eCutT/dT)]
+            # meanBF.appendData(np.mean(l), m)
+            # rmsBF.appendData(np.sqrt(np.mean(np.square(l))), m)
             stdBF.appendData(np.std(l), m)  
+            print (np.std(l))
+            # maxBF.appendData(np.average(hq.nlargest(20, l)), m) 
+            # minBF.appendData(np.average(hq.nsmallest(20, l)), m) 
+            m +=1
 
-            maxBF.appendData(np.average(hq.nlargest(20, l)), m) 
-            minBF.appendData(np.average(hq.nsmallest(20, l)), m) 
 
+    # Evaluate convergence(s)
 
-        # Evaluate convergence(s)
-        meanBF.evaluateConvergence()
-        rmsBF.evaluateConvergence()
-        stdBF.evaluateConvergence()
-        
-        maxBF.evaluateConvergence()
-        minBF.evaluateConvergence()
+    # meanBF.evaluateConvergence()
+    # rmsBF.evaluateConvergence()
+    stdBF.evaluateConvergence()
+    # maxBF.evaluateConvergence()
+    # minBF.evaluateConvergence()
 
-        # Estimate the error(s)
-        meanBF.estimateError()
-        rmsBF.estimateError()
-        stdBF.estimateError()
+    # Estimate the error(s)
 
-        maxBF.estimateError()
-        minBF.estimateError()
+    # meanBF.estimateError()
+    # rmsBF.estimateError()
+    stdBF.estimateError()
+    # maxBF.estimateError()
+    # minBF.estimateError()
 
-        # Write convergence to txt-file
-        meanBF.writeConvergence(comp,"Mean", outDir, sCutT, eCutT)
-        rmsBF.writeConvergence(comp,"RMS", outDir, sCutT, eCutT)
-        stdBF.writeConvergence(comp,"Std", outDir, sCutT, eCutT)
+    # Write convergence to txt-file
 
-        maxBF.writeConvergence(comp,"Largest20", outDir, sCutT, eCutT)
-        minBF.writeConvergence(comp,"Smallest20", outDir, sCutT, eCutT)
+    # meanBF.writeConvergence(comp,"Mean", outDir, sCutT, eCutT)
+    # rmsBF.writeConvergence(comp,"RMS", outDir, sCutT, eCutT)
+    # stdBF.writeConvergence(comp,"Std", outDir, sCutT, eCutT)
+    # maxBF.writeConvergence(comp,"Largest20", outDir, sCutT, eCutT)
+    # minBF.writeConvergence(comp,"Smallest20", outDir, sCutT, eCutT)
 
-        # Plot convergence (+ estimated error)
-        meanBF.plotConvergence(comp, "Mean", outDir, sCutT, eCutT)
-        rmsBF.plotConvergence(comp, "RMS", outDir, sCutT, eCutT)
-        stdBF.plotConvergence(comp, "Std", outDir, sCutT, eCutT)
-
-        maxBF.plotConvergence(comp,"Largest20", outDir, sCutT, eCutT)
-        minBF.plotConvergence(comp,"Smallest20", outDir, sCutT, eCutT)
+    # Plot convergence (+ estimated error)
+    # meanBF.plotConvergence(comp, "Mean", outDir, sCutT, eCutT)
+    # rmsBF.plotConvergence(comp, "RMS", outDir, sCutT, eCutT)
+    stdBF.plotConvergence(outDir, sCutT, eCutT)
+    # maxBF.plotConvergence(comp,"Largest20", outDir, sCutT, eCutT)
+    # minBF.plotConvergence(comp,"Smallest20", outDir, sCutT, eCutT)
 
 if __name__ == '__main__':
     main()
