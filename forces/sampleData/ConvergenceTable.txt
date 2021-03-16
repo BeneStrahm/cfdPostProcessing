@@ -1,8 +1,13 @@
-Grid A: Smallest grid cell size:	Deltah3	4924000.000
-Grid B: Smallest grid cell size:	Deltah2	3207000.000
-Grid C: Smallest grid cell size:	Deltah1	1000000.000
+Grid A: Smallest grid cell size:	Deltah3	3.000
+Grid B: Smallest grid cell size:	Deltah2	2.000
+Grid C: Smallest grid cell size:	Deltah1	1.000
 
-Refinement Ratio Grid A - B:	rk32	1.535
-Refinement Ratio Grid B - C:	rk21	3.207
+Grid A: Smallest grid cell size:	Deltah3	18.068
+Grid B: Smallest grid cell size:	Deltah2	12.252
+Grid C: Smallest grid cell size:	Deltah1	10.620
+
+Refinement Ratio Grid A - B:	rk32	1.475
+Refinement Ratio Grid B - C:	rk21	1.154
 
 Force component	Parameter	Sk3: Result Grid A (Coarse)	Sk2: Result Grid B (Medium)	Sk1: Result Grid C (Fine)	Rk: Convergence Ratio	Convergence behaviour	deltak1: Estimated Error of Sk1	SC:Corrected Solution	Relative Error Grid A	Relative Error Grid B	Relative Error Grid C
+Fx	Std	     0.147	     0.020	     0.012	 0.087	Convergent	   0.000	     0.012	 1176.2	  74.8	   0.2	Std	     0.147	     0.020	     0.012	 0.087	Convergent	2.5164507291448603e-05	0.011544478561588467	11.762132589412186	0.7475827150241866	0.002179787259961381

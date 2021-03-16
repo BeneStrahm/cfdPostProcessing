@@ -126,7 +126,7 @@ def main():
     interpMoments = readMoments.importMoments(mname)
 
     # [0] = t_interp, [1] = fpy_interp, [2] = fpx_interp
-    Fi = interpForces[2]/ (10 ** 6)              # Convert to MN
+    Fi = interpForces[1]/ (10 ** 6)              # Convert to MN
     Mi = interpMoments[2]/ (10 ** 6)              # Convert to MN
 
 
@@ -137,7 +137,7 @@ def main():
     nT = len(interpForces[0]*dT)
     Ti = np.linspace(sT, eT, nT)
 
-   
+    
 
     # Specify Cut-Off time
     # sT = int(input("Start Time: 100 "))
@@ -152,8 +152,8 @@ def main():
     
     
     # writeTimeseries(Fi)
-    plotTimeseries(Ti, Fi)
-    
+    # plotTimeseries(Ti, Fi)
+    print (np.std(Fi))
 
 if __name__ == '__main__':
     main()
