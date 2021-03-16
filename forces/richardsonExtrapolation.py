@@ -40,7 +40,7 @@ class convergenceVerification():
 
         # List of datapoints to be evaluated 
         self.convrgData     = [1,2,3]
-        self.inputParam     = [1, 0.5, 0.25]
+        self.inputParam     = [1090368, 1692134, 5363944]
         self.delta_star_k_1 = "-"
         self.S_C            = "-"
         self.relError       = ["-", "-", "-"]
@@ -216,7 +216,7 @@ class convergenceVerification():
         y = self.convrgData
 
         if self.convrgFlag == "Convergent":
-            hLine = self.S_C
+            hLine = [self.S_C]
             hText = 'estimate'
         else:
             hLine = None
@@ -271,13 +271,13 @@ class convergenceVerification():
 
         
 
-        xlim = [max(x)+0.1*max(x),min(x)-0.5*min(x)]
-        ylim = [0, 0.5]
+        xlim = [min(x)-0.4*min(x),max(x)+0.2*max(x)]
+        ylim = [min(y)-0.05*min(y),max(y)+0.05*max(y)]
         # Change to current file location
         os.chdir(os.path.dirname(sys.argv[0]))
 
-        style_dict = {"lines.markersize": 8,"savefig.format": "svg"}
-        xlabel = 'Zellgröße'
+        style_dict = {"lines.linewidth": 0,"lines.markersize": 8,"savefig.format": "svg"}
+        xlabel = 'Zellanzahl'
         ylabel  = r"Fx Std [MN]" 
         title   = r"Convergence Std"
 
@@ -301,9 +301,9 @@ def main():
     fname1 = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref1/postProcessing/forces/0/force.dat'
     fname2 = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref2/postProcessing/forces/0/force.dat'
 
-    interpForces0 = readForces.importForces(fname0)
+    interpForces2 = readForces.importForces(fname0)
     interpForces1 = readForces.importForces(fname1)
-    interpForces2 = readForces.importForces(fname2)
+    interpForces0 = readForces.importForces(fname2)
     interp = [interpForces0, interpForces1, interpForces2]
 
     # Specify Cut-Off time
@@ -316,9 +316,9 @@ def main():
     tableHeader.writeHeader(outDir)
     
     # Loop through components
-    # meanBF  = convergenceVerification()
+    meanBF  = convergenceVerification()
     # rmsBF   = convergenceVerification()
-    stdBF   = convergenceVerification()
+    # stdBF   = convergenceVerification()
     # maxBF   = convergenceVerification()
     # minBF   = convergenceVerification()
 
@@ -330,10 +330,10 @@ def main():
             
             # Cut the array to desired range 
             l = BF[int(sCutT/dT):int(eCutT/dT)]
-            # meanBF.appendData(np.mean(l), m)
+            meanBF.appendData(np.mean(l), m)
             # rmsBF.appendData(np.sqrt(np.mean(np.square(l))), m)
-            stdBF.appendData(np.std(l), m)  
-            print (np.std(l))
+            # stdBF.appendData(np.std(l), m)  
+            # print (np.sqrt(np.mean(np.square(l))))
             # maxBF.appendData(np.average(hq.nlargest(20, l)), m) 
             # minBF.appendData(np.average(hq.nsmallest(20, l)), m) 
             m +=1
@@ -341,17 +341,17 @@ def main():
 
     # Evaluate convergence(s)
 
-    # meanBF.evaluateConvergence()
+    meanBF.evaluateConvergence()
     # rmsBF.evaluateConvergence()
-    stdBF.evaluateConvergence()
+    # stdBF.evaluateConvergence()
     # maxBF.evaluateConvergence()
     # minBF.evaluateConvergence()
 
     # Estimate the error(s)
 
-    # meanBF.estimateError()
+    meanBF.estimateError()
     # rmsBF.estimateError()
-    stdBF.estimateError()
+    # stdBF.estimateError()
     # maxBF.estimateError()
     # minBF.estimateError()
 
@@ -364,9 +364,9 @@ def main():
     # minBF.writeConvergence(comp,"Smallest20", outDir, sCutT, eCutT)
 
     # Plot convergence (+ estimated error)
-    # meanBF.plotConvergence(comp, "Mean", outDir, sCutT, eCutT)
-    # rmsBF.plotConvergence(comp, "RMS", outDir, sCutT, eCutT)
-    stdBF.plotConvergence(outDir, sCutT, eCutT)
+    meanBF.plotConvergence(outDir, sCutT, eCutT)
+    # rmsBF.plotConvergence(outDir, sCutT, eCutT)
+    # stdBF.plotConvergence(outDir, sCutT, eCutT)
     # maxBF.plotConvergence(comp,"Largest20", outDir, sCutT, eCutT)
     # minBF.plotConvergence(comp,"Smallest20", outDir, sCutT, eCutT)
 
