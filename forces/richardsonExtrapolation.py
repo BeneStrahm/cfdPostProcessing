@@ -41,9 +41,8 @@ class convergenceVerification():
    
     def __init__(self): 
         # List of datapoints to be evaluated 
-        Volume = 3840*1600*960
-        self.convrgData     = [1,2,3]
-        self.inputParam     = [1/5363944, 1/1692134, 1/1090368]
+        self.S_k_m          = [1,2,3]
+        self.delta_x_k_m    = [1,2,3]
         self.delta_star_k_1 = "-"
         self.S_C            = "-"
         self.relError       = ["-", "-", "-"]
@@ -231,7 +230,7 @@ class convergenceVerification():
 
         if self.convrgFlag == "Convergent":
             hLines = [self.S_C]
-            hTexts = 'estimate'
+            hTexts = ['estimate']
         else:
             hLines = None
             hTexts = None
@@ -328,9 +327,9 @@ def main():
     fname2 = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref2/postProcessing/forces/0/force.dat'
 
     # bs:
-    # fname2 = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/force_ref0.dat'
+    # fname0 = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/force_ref0.dat'
     # fname1 = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/force_ref1.dat'
-    # fname0 = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/force_ref2.dat'
+    # fname2 = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/force_ref2.dat'
 
     interpForces2 = readForces.importForces(fname0)
     interpForces1 = readForces.importForces(fname1)
@@ -359,7 +358,7 @@ def main():
             l = BF[int(sCutT/dT):int(eCutT/dT)]
             # meanBF.appendData(np.mean(l), m)
             # rmsBF.appendData(np.sqrt(np.mean(np.square(l))), m)
-            stdBF.appendData(np.std(l), m)  
+            stdBF.appendData(np.std(l), grid_size_h[m], m)   
             # print (np.sqrt(np.mean(np.square(l))))
             # maxBF.appendData(np.average(hq.nlargest(20, l)), m) 
             # minBF.appendData(np.average(hq.nsmallest(20, l)), m) 
