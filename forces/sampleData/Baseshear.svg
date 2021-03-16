@@ -1,0 +1,1640 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with matplotlib (https://matplotlib.org/) -->
+<svg height="236.16pt" version="1.1" viewBox="0 0 419.76 236.16" width="419.76pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <metadata>
+  <rdf:RDF xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2021-03-16T14:54:38.725613</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.3.4, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linecap:butt;stroke-linejoin:round;}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 236.16 
+L 419.76 236.16 
+L 419.76 0 
+L 0 0 
+z
+" style="fill:none;"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 52.47 210.1824 
+L 377.784 210.1824 
+L 377.784 28.3392 
+L 52.47 28.3392 
+z
+" style="fill:none;"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path clip-path="url(#p1c14acbae2)" d="M 344.699426 210.1824 
+L 344.699426 28.3392 
+" style="fill:none;stroke:#808080;stroke-dasharray:0.7,1.155;stroke-dashoffset:0;stroke-opacity:0.8;stroke-width:0.7;"/>
+     </g>
+     <g id="line2d_2">
+      <defs>
+       <path d="M 0 0 
+L 0 -3.5 
+" id="m5a1bcaf80f" style="stroke:#000000;stroke-width:0.8;"/>
+      </defs>
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="344.699426" xlink:href="#m5a1bcaf80f" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_3">
+      <defs>
+       <path d="M 0 0 
+L 0 3.5 
+" id="m79529590f9" style="stroke:#000000;stroke-width:0.8;"/>
+      </defs>
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="344.699426" xlink:href="#m79529590f9" y="28.3392"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <!-- 1 -->
+      <g transform="translate(342.475676 219.4499)scale(0.08 -0.08)">
+       <defs>
+        <path d="M 36.703125 69.203125 
+L 36.703125 0 
+L 27.09375 0 
+L 27.09375 58.296875 
+Q 24.40625 56 20.15625 53.296875 
+Q 15.90625 50.59375 11 48.296875 
+L 11 58.296875 
+Q 19.90625 62.90625 27.796875 69.203125 
+z
+" id="UniversforUniS55Rm-Regular-49"/>
+       </defs>
+       <use xlink:href="#UniversforUniS55Rm-Regular-49"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_4">
+      <path clip-path="url(#p1c14acbae2)" d="M 278.530278 210.1824 
+L 278.530278 28.3392 
+" style="fill:none;stroke:#808080;stroke-dasharray:0.7,1.155;stroke-dashoffset:0;stroke-opacity:0.8;stroke-width:0.7;"/>
+     </g>
+     <g id="line2d_5">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="278.530278" xlink:href="#m5a1bcaf80f" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_6">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="278.530278" xlink:href="#m79529590f9" y="28.3392"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <!-- 2 -->
+      <g transform="translate(276.306528 219.4499)scale(0.08 -0.08)">
+       <defs>
+        <path d="M 33.40625 24.40625 
+L 30.59375 21.59375 
+Q 27.796875 18.796875 23.890625 15.046875 
+Q 20 11.296875 16.40625 7.90625 
+L 49.296875 7.90625 
+L 49.296875 0 
+L 5.296875 0 
+L 5.296875 9.09375 
+L 23.40625 26.90625 
+Q 32.40625 35.90625 35.796875 41.25 
+Q 39.203125 46.59375 39.203125 51.09375 
+Q 39.203125 56.203125 36.34375 59.296875 
+Q 33.5 62.40625 28.09375 62.40625 
+Q 16.796875 62.40625 16.796875 50.296875 
+L 6.296875 50.296875 
+Q 6.296875 59.703125 12.1875 65.09375 
+Q 18.09375 70.5 27.703125 70.5 
+Q 37.40625 70.5 43.25 65 
+Q 49.09375 59.5 49.09375 50.09375 
+Q 49.09375 43.703125 44.6875 37.5 
+Q 40.296875 31.296875 33.40625 24.40625 
+z
+" id="UniversforUniS55Rm-Regular-50"/>
+       </defs>
+       <use xlink:href="#UniversforUniS55Rm-Regular-50"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_7">
+      <path clip-path="url(#p1c14acbae2)" d="M 212.36113 210.1824 
+L 212.36113 28.3392 
+" style="fill:none;stroke:#808080;stroke-dasharray:0.7,1.155;stroke-dashoffset:0;stroke-opacity:0.8;stroke-width:0.7;"/>
+     </g>
+     <g id="line2d_8">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="212.36113" xlink:href="#m5a1bcaf80f" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_9">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="212.36113" xlink:href="#m79529590f9" y="28.3392"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <!-- 3 -->
+      <g transform="translate(210.13738 219.4499)scale(0.08 -0.08)">
+       <defs>
+        <path d="M 49.90625 51.703125 
+Q 49.90625 46 46.296875 41.453125 
+Q 42.703125 36.90625 36.09375 35.5 
+Q 42.90625 34.703125 46.90625 30.046875 
+Q 50.90625 25.40625 50.90625 18.59375 
+Q 50.90625 10.09375 44.15625 4.1875 
+Q 37.40625 -1.703125 27.703125 -1.703125 
+Q 16.296875 -1.703125 10.046875 3.34375 
+Q 3.796875 8.40625 3.796875 17.796875 
+L 14.40625 17.796875 
+Q 14.40625 12.40625 17.75 9.453125 
+Q 21.09375 6.5 27.09375 6.5 
+Q 33.40625 6.5 37.15625 9.890625 
+Q 40.90625 13.296875 40.90625 18.796875 
+Q 40.90625 24.796875 36.796875 28.1875 
+Q 32.703125 31.59375 25 31.59375 
+L 21.296875 31.5 
+L 21.296875 39.59375 
+Q 22.40625 39.59375 23.40625 39.5 
+Q 31.5 39.5 35.640625 42.59375 
+Q 39.796875 45.703125 39.796875 51.59375 
+Q 39.796875 57 36.640625 59.75 
+Q 33.5 62.5 27.5 62.5 
+Q 22.09375 62.5 18.84375 59.640625 
+Q 15.59375 56.796875 15 51.59375 
+L 4.90625 51.59375 
+Q 5.09375 60.296875 11.09375 65.390625 
+Q 17.09375 70.5 27.296875 70.5 
+Q 37.40625 70.5 43.65625 65.203125 
+Q 49.90625 59.90625 49.90625 51.703125 
+z
+" id="UniversforUniS55Rm-Regular-51"/>
+       </defs>
+       <use xlink:href="#UniversforUniS55Rm-Regular-51"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_10">
+      <path clip-path="url(#p1c14acbae2)" d="M 146.191981 210.1824 
+L 146.191981 28.3392 
+" style="fill:none;stroke:#808080;stroke-dasharray:0.7,1.155;stroke-dashoffset:0;stroke-opacity:0.8;stroke-width:0.7;"/>
+     </g>
+     <g id="line2d_11">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="146.191981" xlink:href="#m5a1bcaf80f" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_12">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="146.191981" xlink:href="#m79529590f9" y="28.3392"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <!-- 4 -->
+      <g transform="translate(143.968231 219.4499)scale(0.08 -0.08)">
+       <defs>
+        <path d="M 43.59375 70.09375 
+L 43.59375 23.09375 
+L 53.703125 23.09375 
+L 53.703125 15 
+L 43.59375 15 
+L 43.59375 0 
+L 34 0 
+L 34 15 
+L 2.796875 15 
+L 2.796875 26.90625 
+L 32.796875 70.09375 
+z
+M 34.296875 59.59375 
+L 10.40625 23.09375 
+L 34.296875 23.09375 
+z
+" id="UniversforUniS55Rm-Regular-52"/>
+       </defs>
+       <use xlink:href="#UniversforUniS55Rm-Regular-52"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_13">
+      <path clip-path="url(#p1c14acbae2)" d="M 80.022833 210.1824 
+L 80.022833 28.3392 
+" style="fill:none;stroke:#808080;stroke-dasharray:0.7,1.155;stroke-dashoffset:0;stroke-opacity:0.8;stroke-width:0.7;"/>
+     </g>
+     <g id="line2d_14">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="80.022833" xlink:href="#m5a1bcaf80f" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_15">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="80.022833" xlink:href="#m79529590f9" y="28.3392"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <!-- 5 -->
+      <g transform="translate(77.799083 219.4499)scale(0.08 -0.08)">
+       <defs>
+        <path d="M 47.203125 69.203125 
+L 47.203125 61.09375 
+L 16.90625 61.09375 
+L 15.59375 38.703125 
+Q 21.59375 45.09375 30.203125 45.09375 
+Q 39.296875 45.09375 45.09375 38.84375 
+Q 50.90625 32.59375 50.90625 22.296875 
+Q 50.90625 11.796875 44.046875 5.140625 
+Q 37.203125 -1.5 26.203125 -1.59375 
+Q 17.203125 -1.59375 11.59375 3.203125 
+Q 6 8 5.59375 16.40625 
+L 16 16.40625 
+Q 16 11.90625 19.390625 9.25 
+Q 22.796875 6.59375 27.5 6.59375 
+Q 34.09375 6.59375 37.640625 11 
+Q 41.203125 15.40625 41.203125 22.59375 
+Q 41.203125 29.296875 37.703125 33.34375 
+Q 34.203125 37.40625 28.09375 37.40625 
+Q 23.90625 37.40625 20.40625 35.15625 
+Q 16.90625 32.90625 15.59375 28 
+L 6.5 28 
+L 8.296875 69.203125 
+z
+" id="UniversforUniS55Rm-Regular-53"/>
+       </defs>
+       <use xlink:href="#UniversforUniS55Rm-Regular-53"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_16">
+      <defs>
+       <path d="M 0 0 
+L 0 -2 
+" id="m2547321270" style="stroke:#000000;stroke-width:0.4;"/>
+      </defs>
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="371.167085" xlink:href="#m2547321270" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_17">
+      <defs>
+       <path d="M 0 0 
+L 0 2 
+" id="m547f94636d" style="stroke:#000000;stroke-width:0.4;"/>
+      </defs>
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="371.167085" xlink:href="#m547f94636d" y="28.3392"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_18">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="357.933256" xlink:href="#m2547321270" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_19">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="357.933256" xlink:href="#m547f94636d" y="28.3392"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_20">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="331.465596" xlink:href="#m2547321270" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_21">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="331.465596" xlink:href="#m547f94636d" y="28.3392"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_9">
+     <g id="line2d_22">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="318.231767" xlink:href="#m2547321270" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_23">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="318.231767" xlink:href="#m547f94636d" y="28.3392"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_10">
+     <g id="line2d_24">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="304.997937" xlink:href="#m2547321270" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_25">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="304.997937" xlink:href="#m547f94636d" y="28.3392"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_11">
+     <g id="line2d_26">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="291.764107" xlink:href="#m2547321270" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_27">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="291.764107" xlink:href="#m547f94636d" y="28.3392"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_12">
+     <g id="line2d_28">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="265.296448" xlink:href="#m2547321270" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_29">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="265.296448" xlink:href="#m547f94636d" y="28.3392"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_13">
+     <g id="line2d_30">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="252.062619" xlink:href="#m2547321270" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_31">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="252.062619" xlink:href="#m547f94636d" y="28.3392"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_14">
+     <g id="line2d_32">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="238.828789" xlink:href="#m2547321270" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_33">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="238.828789" xlink:href="#m547f94636d" y="28.3392"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_15">
+     <g id="line2d_34">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="225.594959" xlink:href="#m2547321270" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_35">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="225.594959" xlink:href="#m547f94636d" y="28.3392"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_16">
+     <g id="line2d_36">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="199.1273" xlink:href="#m2547321270" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_37">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="199.1273" xlink:href="#m547f94636d" y="28.3392"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_17">
+     <g id="line2d_38">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="185.89347" xlink:href="#m2547321270" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_39">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="185.89347" xlink:href="#m547f94636d" y="28.3392"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_18">
+     <g id="line2d_40">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="172.659641" xlink:href="#m2547321270" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_41">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="172.659641" xlink:href="#m547f94636d" y="28.3392"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_19">
+     <g id="line2d_42">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="159.425811" xlink:href="#m2547321270" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_43">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="159.425811" xlink:href="#m547f94636d" y="28.3392"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_20">
+     <g id="line2d_44">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="132.958152" xlink:href="#m2547321270" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_45">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="132.958152" xlink:href="#m547f94636d" y="28.3392"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_21">
+     <g id="line2d_46">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="119.724322" xlink:href="#m2547321270" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_47">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="119.724322" xlink:href="#m547f94636d" y="28.3392"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_22">
+     <g id="line2d_48">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="106.490493" xlink:href="#m2547321270" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_49">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="106.490493" xlink:href="#m547f94636d" y="28.3392"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_23">
+     <g id="line2d_50">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="93.256663" xlink:href="#m2547321270" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_51">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="93.256663" xlink:href="#m547f94636d" y="28.3392"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_24">
+     <g id="line2d_52">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="66.789004" xlink:href="#m2547321270" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_53">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="66.789004" xlink:href="#m547f94636d" y="28.3392"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_25">
+     <g id="line2d_54">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="53.555174" xlink:href="#m2547321270" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_55">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="53.555174" xlink:href="#m547f94636d" y="28.3392"/>
+      </g>
+     </g>
+    </g>
+    <g id="text_6">
+     <!-- Zellgröße -->
+     <g transform="translate(192.343406 232.34365)scale(0.1 -0.1)">
+      <defs>
+       <path d="M 57.09375 72.203125 
+L 57.09375 62.296875 
+L 15 8.796875 
+L 57.796875 8.796875 
+L 57.796875 0 
+L 3.5 0 
+L 3.5 10 
+L 45.203125 63.40625 
+L 4.59375 63.40625 
+L 4.59375 72.203125 
+z
+" id="UniversforUniS55Rm-Regular-90"/>
+       <path d="M 50.59375 23.40625 
+L 14.5 23.40625 
+L 14.5 22.59375 
+Q 14.5 14.5 18.25 9.890625 
+Q 22 5.296875 28.90625 5.296875 
+Q 34 5.296875 37.09375 7.9375 
+Q 40.203125 10.59375 40.703125 15.703125 
+L 50.09375 15.703125 
+Q 49.5 7.90625 43.703125 3.203125 
+Q 37.90625 -1.5 28.5 -1.5 
+Q 16.90625 -1.5 11.046875 5.203125 
+Q 5.203125 11.90625 5.203125 24.59375 
+Q 5.203125 37.703125 11.390625 44.59375 
+Q 17.59375 51.5 28.90625 51.5 
+Q 50.296875 51.5 50.59375 27.40625 
+z
+M 41 30 
+L 41 30.703125 
+Q 41 37.40625 37.953125 41.09375 
+Q 34.90625 44.796875 28.59375 44.796875 
+Q 22.59375 44.796875 18.84375 40.84375 
+Q 15.09375 36.90625 14.90625 30 
+z
+" id="UniversforUniS55Rm-Regular-101"/>
+       <path d="M 18.40625 72.09375 
+L 18.40625 0 
+L 9 0 
+L 9 72.09375 
+z
+" id="UniversforUniS55Rm-Regular-108"/>
+       <path d="M 52.5 50.203125 
+Q 52.40625 45 52.296875 39 
+L 52.203125 10.296875 
+Q 52.203125 -0.40625 51.453125 -6.296875 
+Q 50.703125 -12.203125 45.34375 -16.140625 
+Q 40 -20.09375 28.90625 -20.09375 
+Q 18.703125 -20.09375 13.5 -16.84375 
+Q 8.296875 -13.59375 7.796875 -3.90625 
+L 17.796875 -3.90625 
+Q 18.203125 -9.296875 21 -11.5 
+Q 23.796875 -13.703125 29.5 -13.703125 
+Q 34.703125 -13.703125 37.390625 -11.84375 
+Q 40.09375 -10 41.4375 -6.453125 
+Q 42.796875 -2.90625 42.796875 9.40625 
+Q 41.09375 5.5 36.84375 3.203125 
+Q 32.59375 0.90625 26.296875 0.90625 
+Q 15.59375 0.90625 10.390625 7.703125 
+Q 5.203125 14.5 5.203125 25.59375 
+Q 5.203125 37.296875 11.34375 44.09375 
+Q 17.5 50.90625 27.5 50.90625 
+Q 38 50.90625 43.296875 43.296875 
+L 43.40625 50.203125 
+z
+M 43.09375 27.203125 
+Q 43.09375 36.203125 38.796875 40.203125 
+Q 34.5 44.203125 28.296875 44.203125 
+Q 21.90625 44.203125 18.40625 39.390625 
+Q 14.90625 34.59375 14.90625 25.796875 
+Q 14.90625 17.09375 18.34375 12.5 
+Q 21.796875 7.90625 28.703125 7.90625 
+Q 35.09375 7.90625 39.09375 12 
+Q 43.09375 16.09375 43.09375 27.203125 
+z
+" id="UniversforUniS55Rm-Regular-103"/>
+       <path d="M 37 50.59375 
+L 37 41.40625 
+Q 35.59375 41.90625 32.796875 41.90625 
+Q 25.203125 41.90625 22 38.15625 
+Q 18.796875 34.40625 18.796875 27.09375 
+L 18.796875 0 
+L 9.296875 0 
+L 9.296875 40.703125 
+Q 9 47.40625 8.796875 50.203125 
+L 18.296875 50.203125 
+Q 18.5 44.203125 18.5 40.5 
+Q 19.796875 45.59375 24.046875 48.140625 
+Q 28.296875 50.703125 34.296875 50.703125 
+Q 35.90625 50.703125 37 50.59375 
+z
+" id="UniversforUniS55Rm-Regular-114"/>
+       <path d="M 29.796875 -1.703125 
+Q 18.40625 -1.703125 11.75 5.4375 
+Q 5.09375 12.59375 5.09375 24.5 
+Q 5.09375 37.09375 11.890625 44.296875 
+Q 18.703125 51.5 30.59375 51.5 
+Q 42.203125 51.5 48.703125 44.5 
+Q 55.203125 37.5 55.203125 25.09375 
+Q 55.203125 12.796875 48.203125 5.546875 
+Q 41.203125 -1.703125 29.796875 -1.703125 
+z
+M 45.203125 25.5 
+Q 45.203125 34.5 41.34375 39.546875 
+Q 37.5 44.59375 30.59375 44.59375 
+Q 23.703125 44.59375 19.296875 39.4375 
+Q 14.90625 34.296875 14.90625 25.296875 
+Q 14.90625 16.296875 18.84375 10.796875 
+Q 22.796875 5.296875 29.90625 5.296875 
+Q 36.796875 5.296875 41 10.546875 
+Q 45.203125 15.796875 45.203125 25.5 
+z
+M 25.65625 71.90625 
+L 25.65625 61.703125 
+L 16.453125 61.703125 
+L 16.453125 71.90625 
+z
+M 44.65625 71.90625 
+L 44.65625 61.703125 
+L 35.34375 61.703125 
+L 35.34375 71.90625 
+z
+" id="UniversforUniS55Rm-Regular-246"/>
+       <path d="M 40.796875 40.40625 
+Q 40.796875 37.09375 47.1875 33.5 
+Q 53.59375 29.90625 57.34375 26.296875 
+Q 61.09375 22.703125 61.09375 16.59375 
+Q 61.09375 8.796875 55.4375 3.9375 
+Q 49.796875 -0.90625 41.5 -0.90625 
+Q 33.09375 -0.90625 29.09375 3.09375 
+Q 25.09375 7.09375 25.09375 13.09375 
+L 25.09375 14.40625 
+L 34.296875 14.40625 
+Q 34.296875 10.40625 36.390625 8.25 
+Q 38.5 6.09375 42.40625 6.09375 
+Q 46.703125 6.09375 49.140625 8.640625 
+Q 51.59375 11.203125 51.59375 15.09375 
+Q 51.59375 20.5 45.90625 24.09375 
+L 38.796875 28.5 
+Q 35 30.90625 33.09375 33.34375 
+Q 31.203125 35.796875 31.203125 39.09375 
+Q 31.203125 42.203125 32.640625 44.5 
+Q 34.09375 46.796875 36.40625 48.59375 
+L 41.203125 52.296875 
+Q 43.90625 54.40625 43.90625 57.90625 
+Q 43.90625 62.203125 40.703125 64.640625 
+Q 37.5 67.09375 31.5 67.09375 
+Q 24.203125 67.09375 21.296875 63.59375 
+Q 18.40625 60.09375 18.40625 52.90625 
+L 18.40625 0 
+L 9 0 
+L 9 53.203125 
+Q 9 63.796875 14.59375 68.640625 
+Q 20.203125 73.5 31.796875 73.5 
+Q 41.703125 73.5 47.390625 69.640625 
+Q 53.09375 65.796875 53.09375 58.59375 
+Q 53.09375 52.09375 46.9375 47.9375 
+Q 40.796875 43.796875 40.796875 40.40625 
+z
+" id="UniversforUniS55Rm-Regular-223"/>
+      </defs>
+      <use xlink:href="#UniversforUniS55Rm-Regular-90"/>
+      <use x="61.099991" xlink:href="#UniversforUniS55Rm-Regular-101"/>
+      <use x="116.699982" xlink:href="#UniversforUniS55Rm-Regular-108"/>
+      <use x="144.499969" xlink:href="#UniversforUniS55Rm-Regular-108"/>
+      <use x="172.299957" xlink:href="#UniversforUniS55Rm-Regular-103"/>
+      <use x="233.399948" xlink:href="#UniversforUniS55Rm-Regular-114"/>
+      <use x="272.299942" xlink:href="#UniversforUniS55Rm-Regular-246"/>
+      <use x="333.399933" xlink:href="#UniversforUniS55Rm-Regular-223"/>
+      <use x="400.09993" xlink:href="#UniversforUniS55Rm-Regular-101"/>
+     </g>
+    </g>
+    <g id="text_7">
+     <!-- 1e6 -->
+     <g transform="translate(364.4415 229.76115)scale(0.08 -0.08)">
+      <defs>
+       <path d="M 50.796875 55.703125 
+L 51 54.296875 
+L 51 52.796875 
+L 40.703125 52.796875 
+Q 40.703125 57.59375 37.84375 60.34375 
+Q 35 63.09375 30.09375 63.09375 
+Q 22.90625 63.09375 19.203125 56.640625 
+Q 15.5 50.203125 14.90625 36.09375 
+Q 18.296875 41.09375 22.140625 43 
+Q 26 44.90625 31 44.90625 
+Q 40.296875 44.90625 46.09375 38.90625 
+Q 51.90625 32.90625 51.90625 22.703125 
+Q 51.90625 12 45.296875 5.25 
+Q 38.703125 -1.5 28.5 -1.5 
+Q 16.90625 -1.296875 11.15625 6.390625 
+Q 5.40625 14.09375 5.09375 30.203125 
+Q 5.09375 49.796875 11.59375 60.1875 
+Q 18.09375 70.59375 30.703125 70.59375 
+Q 38.90625 70.59375 44.5 66.546875 
+Q 50.09375 62.5 50.796875 55.703125 
+z
+M 28.90625 6.09375 
+Q 34.703125 6.09375 38.5 10.390625 
+Q 42.296875 14.703125 42.296875 21.703125 
+Q 42.296875 29.09375 38.9375 33.140625 
+Q 35.59375 37.203125 29.296875 37.203125 
+Q 23.203125 37.203125 19.390625 32.84375 
+Q 15.59375 28.5 15.59375 21.703125 
+Q 15.59375 15 19.390625 10.59375 
+Q 23.203125 6.203125 28.90625 6.09375 
+z
+" id="UniversforUniS55Rm-Regular-54"/>
+      </defs>
+      <use xlink:href="#UniversforUniS55Rm-Regular-49"/>
+      <use x="55.599991" xlink:href="#UniversforUniS55Rm-Regular-101"/>
+      <use x="111.199982" xlink:href="#UniversforUniS55Rm-Regular-54"/>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_56">
+      <path clip-path="url(#p1c14acbae2)" d="M 52.47 210.1824 
+L 377.784 210.1824 
+" style="fill:none;stroke:#808080;stroke-dasharray:0.7,1.155;stroke-dashoffset:0;stroke-opacity:0.8;stroke-width:0.7;"/>
+     </g>
+     <g id="line2d_57">
+      <defs>
+       <path d="M 0 0 
+L 3.5 0 
+" id="m4c24f89539" style="stroke:#000000;stroke-width:0.8;"/>
+      </defs>
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="52.47" xlink:href="#m4c24f89539" y="210.1824"/>
+      </g>
+     </g>
+     <g id="line2d_58">
+      <defs>
+       <path d="M 0 0 
+L -3.5 0 
+" id="m566ef9be32" style="stroke:#000000;stroke-width:0.8;"/>
+      </defs>
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="377.784" xlink:href="#m566ef9be32" y="210.1824"/>
+      </g>
+     </g>
+     <g id="text_8">
+      <!-- 0.0 -->
+      <g transform="translate(37.85125 213.06615)scale(0.08 -0.08)">
+       <defs>
+        <path d="M 27.296875 -1.40625 
+Q 16.40625 -1.40625 10.40625 7.6875 
+Q 4.40625 16.796875 4.40625 33.703125 
+Q 4.40625 52 10.296875 61.296875 
+Q 16.203125 70.59375 27.59375 70.59375 
+Q 39 70.59375 44.890625 61.6875 
+Q 50.796875 52.796875 50.796875 34.703125 
+Q 50.796875 16.796875 44.5 7.6875 
+Q 38.203125 -1.40625 27.296875 -1.40625 
+z
+M 41.09375 34.59375 
+Q 41.09375 49.5 37.796875 56.046875 
+Q 34.5 62.59375 27.59375 62.59375 
+Q 21 62.59375 17.5 55.890625 
+Q 14 49.203125 14 34.296875 
+Q 14 20.296875 17.34375 13.59375 
+Q 20.703125 6.90625 27.5 6.90625 
+Q 34.203125 6.90625 37.640625 13.59375 
+Q 41.09375 20.296875 41.09375 34.59375 
+z
+" id="UniversforUniS55Rm-Regular-48"/>
+        <path d="M 19.203125 12 
+L 19.203125 0 
+L 8.09375 0 
+L 8.09375 12 
+z
+" id="UniversforUniS55Rm-Regular-46"/>
+       </defs>
+       <use xlink:href="#UniversforUniS55Rm-Regular-48"/>
+       <use x="55.599991" xlink:href="#UniversforUniS55Rm-Regular-46"/>
+       <use x="83.399979" xlink:href="#UniversforUniS55Rm-Regular-48"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_59">
+      <path clip-path="url(#p1c14acbae2)" d="M 52.47 173.81376 
+L 377.784 173.81376 
+" style="fill:none;stroke:#808080;stroke-dasharray:0.7,1.155;stroke-dashoffset:0;stroke-opacity:0.8;stroke-width:0.7;"/>
+     </g>
+     <g id="line2d_60">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="52.47" xlink:href="#m4c24f89539" y="173.81376"/>
+      </g>
+     </g>
+     <g id="line2d_61">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="377.784" xlink:href="#m566ef9be32" y="173.81376"/>
+      </g>
+     </g>
+     <g id="text_9">
+      <!-- 0.1 -->
+      <g transform="translate(37.85125 176.69751)scale(0.08 -0.08)">
+       <use xlink:href="#UniversforUniS55Rm-Regular-48"/>
+       <use x="55.599991" xlink:href="#UniversforUniS55Rm-Regular-46"/>
+       <use x="83.399979" xlink:href="#UniversforUniS55Rm-Regular-49"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_62">
+      <path clip-path="url(#p1c14acbae2)" d="M 52.47 137.44512 
+L 377.784 137.44512 
+" style="fill:none;stroke:#808080;stroke-dasharray:0.7,1.155;stroke-dashoffset:0;stroke-opacity:0.8;stroke-width:0.7;"/>
+     </g>
+     <g id="line2d_63">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="52.47" xlink:href="#m4c24f89539" y="137.44512"/>
+      </g>
+     </g>
+     <g id="line2d_64">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="377.784" xlink:href="#m566ef9be32" y="137.44512"/>
+      </g>
+     </g>
+     <g id="text_10">
+      <!-- 0.2 -->
+      <g transform="translate(37.85125 140.32887)scale(0.08 -0.08)">
+       <use xlink:href="#UniversforUniS55Rm-Regular-48"/>
+       <use x="55.599991" xlink:href="#UniversforUniS55Rm-Regular-46"/>
+       <use x="83.399979" xlink:href="#UniversforUniS55Rm-Regular-50"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_65">
+      <path clip-path="url(#p1c14acbae2)" d="M 52.47 101.07648 
+L 377.784 101.07648 
+" style="fill:none;stroke:#808080;stroke-dasharray:0.7,1.155;stroke-dashoffset:0;stroke-opacity:0.8;stroke-width:0.7;"/>
+     </g>
+     <g id="line2d_66">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="52.47" xlink:href="#m4c24f89539" y="101.07648"/>
+      </g>
+     </g>
+     <g id="line2d_67">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="377.784" xlink:href="#m566ef9be32" y="101.07648"/>
+      </g>
+     </g>
+     <g id="text_11">
+      <!-- 0.3 -->
+      <g transform="translate(37.85125 103.96023)scale(0.08 -0.08)">
+       <use xlink:href="#UniversforUniS55Rm-Regular-48"/>
+       <use x="55.599991" xlink:href="#UniversforUniS55Rm-Regular-46"/>
+       <use x="83.399979" xlink:href="#UniversforUniS55Rm-Regular-51"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_68">
+      <path clip-path="url(#p1c14acbae2)" d="M 52.47 64.70784 
+L 377.784 64.70784 
+" style="fill:none;stroke:#808080;stroke-dasharray:0.7,1.155;stroke-dashoffset:0;stroke-opacity:0.8;stroke-width:0.7;"/>
+     </g>
+     <g id="line2d_69">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="52.47" xlink:href="#m4c24f89539" y="64.70784"/>
+      </g>
+     </g>
+     <g id="line2d_70">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="377.784" xlink:href="#m566ef9be32" y="64.70784"/>
+      </g>
+     </g>
+     <g id="text_12">
+      <!-- 0.4 -->
+      <g transform="translate(37.85125 67.59159)scale(0.08 -0.08)">
+       <use xlink:href="#UniversforUniS55Rm-Regular-48"/>
+       <use x="55.599991" xlink:href="#UniversforUniS55Rm-Regular-46"/>
+       <use x="83.399979" xlink:href="#UniversforUniS55Rm-Regular-52"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_71">
+      <path clip-path="url(#p1c14acbae2)" d="M 52.47 28.3392 
+L 377.784 28.3392 
+" style="fill:none;stroke:#808080;stroke-dasharray:0.7,1.155;stroke-dashoffset:0;stroke-opacity:0.8;stroke-width:0.7;"/>
+     </g>
+     <g id="line2d_72">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="52.47" xlink:href="#m4c24f89539" y="28.3392"/>
+      </g>
+     </g>
+     <g id="line2d_73">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="377.784" xlink:href="#m566ef9be32" y="28.3392"/>
+      </g>
+     </g>
+     <g id="text_13">
+      <!-- 0.5 -->
+      <g transform="translate(37.85125 31.22295)scale(0.08 -0.08)">
+       <use xlink:href="#UniversforUniS55Rm-Regular-48"/>
+       <use x="55.599991" xlink:href="#UniversforUniS55Rm-Regular-46"/>
+       <use x="83.399979" xlink:href="#UniversforUniS55Rm-Regular-53"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_74">
+      <defs>
+       <path d="M 0 0 
+L 2 0 
+" id="md6692bf48b" style="stroke:#000000;stroke-width:0.4;"/>
+      </defs>
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="52.47" xlink:href="#md6692bf48b" y="202.908672"/>
+      </g>
+     </g>
+     <g id="line2d_75">
+      <defs>
+       <path d="M 0 0 
+L -2 0 
+" id="m1739afebf1" style="stroke:#000000;stroke-width:0.4;"/>
+      </defs>
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="377.784" xlink:href="#m1739afebf1" y="202.908672"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_76">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="52.47" xlink:href="#md6692bf48b" y="195.634944"/>
+      </g>
+     </g>
+     <g id="line2d_77">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="377.784" xlink:href="#m1739afebf1" y="195.634944"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_9">
+     <g id="line2d_78">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="52.47" xlink:href="#md6692bf48b" y="188.361216"/>
+      </g>
+     </g>
+     <g id="line2d_79">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="377.784" xlink:href="#m1739afebf1" y="188.361216"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_10">
+     <g id="line2d_80">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="52.47" xlink:href="#md6692bf48b" y="181.087488"/>
+      </g>
+     </g>
+     <g id="line2d_81">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="377.784" xlink:href="#m1739afebf1" y="181.087488"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_11">
+     <g id="line2d_82">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="52.47" xlink:href="#md6692bf48b" y="166.540032"/>
+      </g>
+     </g>
+     <g id="line2d_83">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="377.784" xlink:href="#m1739afebf1" y="166.540032"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_12">
+     <g id="line2d_84">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="52.47" xlink:href="#md6692bf48b" y="159.266304"/>
+      </g>
+     </g>
+     <g id="line2d_85">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="377.784" xlink:href="#m1739afebf1" y="159.266304"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_13">
+     <g id="line2d_86">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="52.47" xlink:href="#md6692bf48b" y="151.992576"/>
+      </g>
+     </g>
+     <g id="line2d_87">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="377.784" xlink:href="#m1739afebf1" y="151.992576"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_14">
+     <g id="line2d_88">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="52.47" xlink:href="#md6692bf48b" y="144.718848"/>
+      </g>
+     </g>
+     <g id="line2d_89">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="377.784" xlink:href="#m1739afebf1" y="144.718848"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_15">
+     <g id="line2d_90">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="52.47" xlink:href="#md6692bf48b" y="130.171392"/>
+      </g>
+     </g>
+     <g id="line2d_91">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="377.784" xlink:href="#m1739afebf1" y="130.171392"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_16">
+     <g id="line2d_92">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="52.47" xlink:href="#md6692bf48b" y="122.897664"/>
+      </g>
+     </g>
+     <g id="line2d_93">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="377.784" xlink:href="#m1739afebf1" y="122.897664"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_17">
+     <g id="line2d_94">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="52.47" xlink:href="#md6692bf48b" y="115.623936"/>
+      </g>
+     </g>
+     <g id="line2d_95">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="377.784" xlink:href="#m1739afebf1" y="115.623936"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_18">
+     <g id="line2d_96">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="52.47" xlink:href="#md6692bf48b" y="108.350208"/>
+      </g>
+     </g>
+     <g id="line2d_97">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="377.784" xlink:href="#m1739afebf1" y="108.350208"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_19">
+     <g id="line2d_98">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="52.47" xlink:href="#md6692bf48b" y="93.802752"/>
+      </g>
+     </g>
+     <g id="line2d_99">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="377.784" xlink:href="#m1739afebf1" y="93.802752"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_20">
+     <g id="line2d_100">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="52.47" xlink:href="#md6692bf48b" y="86.529024"/>
+      </g>
+     </g>
+     <g id="line2d_101">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="377.784" xlink:href="#m1739afebf1" y="86.529024"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_21">
+     <g id="line2d_102">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="52.47" xlink:href="#md6692bf48b" y="79.255296"/>
+      </g>
+     </g>
+     <g id="line2d_103">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="377.784" xlink:href="#m1739afebf1" y="79.255296"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_22">
+     <g id="line2d_104">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="52.47" xlink:href="#md6692bf48b" y="71.981568"/>
+      </g>
+     </g>
+     <g id="line2d_105">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="377.784" xlink:href="#m1739afebf1" y="71.981568"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_23">
+     <g id="line2d_106">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="52.47" xlink:href="#md6692bf48b" y="57.434112"/>
+      </g>
+     </g>
+     <g id="line2d_107">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="377.784" xlink:href="#m1739afebf1" y="57.434112"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_24">
+     <g id="line2d_108">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="52.47" xlink:href="#md6692bf48b" y="50.160384"/>
+      </g>
+     </g>
+     <g id="line2d_109">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="377.784" xlink:href="#m1739afebf1" y="50.160384"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_25">
+     <g id="line2d_110">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="52.47" xlink:href="#md6692bf48b" y="42.886656"/>
+      </g>
+     </g>
+     <g id="line2d_111">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="377.784" xlink:href="#m1739afebf1" y="42.886656"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_26">
+     <g id="line2d_112">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="52.47" xlink:href="#md6692bf48b" y="35.612928"/>
+      </g>
+     </g>
+     <g id="line2d_113">
+      <g>
+       <use style="fill-opacity:0;stroke:#000000;stroke-width:0.4;" x="377.784" xlink:href="#m1739afebf1" y="35.612928"/>
+      </g>
+     </g>
+    </g>
+    <g id="text_14">
+     <!-- Fx Std [MN] -->
+     <g transform="translate(31.921563 147.594394)rotate(-90)scale(0.1 -0.1)">
+      <defs>
+       <path d="M 52.5 72.203125 
+L 52.5 63.703125 
+L 19.703125 63.703125 
+L 19.703125 41.203125 
+L 50.59375 41.203125 
+L 50.59375 32.796875 
+L 19.703125 32.796875 
+L 19.703125 0 
+L 9.5 0 
+L 9.5 72.203125 
+z
+" id="UniversforUniS55Rm-Regular-70"/>
+       <path d="M 14.59375 50.203125 
+L 28 31.296875 
+L 42 50.203125 
+L 53.09375 50.203125 
+L 33.5 25.703125 
+L 53.09375 0 
+L 40.703125 0 
+L 26.40625 20.09375 
+L 12.203125 0 
+L 1.203125 0 
+L 21.09375 26.296875 
+L 2.296875 50.203125 
+z
+" id="UniversforUniS55Rm-Regular-120"/>
+       <path id="UniversforUniS55Rm-Regular-32"/>
+       <path d="M 48.40625 54.203125 
+Q 47.796875 65.203125 33.296875 65.203125 
+Q 25.703125 65.203125 21.453125 62.046875 
+Q 17.203125 58.90625 17.203125 53.5 
+Q 17.203125 49.703125 19.5 47.296875 
+Q 21.796875 44.90625 29.703125 42.90625 
+L 41.59375 40 
+Q 52.40625 37.296875 56.546875 32.6875 
+Q 60.703125 28.09375 60.703125 20.796875 
+Q 60.703125 10.5 52.890625 4.390625 
+Q 45.09375 -1.703125 32.296875 -1.703125 
+Q 18.59375 -1.703125 12.09375 4.140625 
+Q 5.59375 10 5.59375 19.90625 
+L 5.59375 21.09375 
+L 16 21.09375 
+Q 16 13.5 20.34375 10.140625 
+Q 24.703125 6.796875 33.40625 6.796875 
+Q 41.90625 6.796875 46.09375 10.546875 
+Q 50.296875 14.296875 50.296875 19.703125 
+Q 50.296875 25.59375 45.390625 28.09375 
+Q 40.5 30.59375 27.953125 33.296875 
+Q 15.40625 36 11 40.84375 
+Q 6.59375 45.703125 6.59375 52.5 
+Q 6.59375 62.09375 14.34375 67.84375 
+Q 22.09375 73.59375 34.09375 73.59375 
+Q 45.703125 73.59375 52.140625 68.546875 
+Q 58.59375 63.5 58.796875 54.203125 
+z
+" id="UniversforUniS55Rm-Regular-83"/>
+       <path d="M 19.296875 50.40625 
+L 30.5 50.40625 
+L 30.5 43.5 
+L 19.296875 43.5 
+L 19.296875 12.796875 
+Q 19.296875 9.40625 21.046875 8.046875 
+Q 22.796875 6.703125 26 6.703125 
+Q 28.5 6.703125 30.5 7.203125 
+L 30.5 -0.09375 
+Q 29.296875 -0.296875 27.25 -0.5 
+Q 25.203125 -0.703125 22.796875 -0.703125 
+Q 15.5 -0.703125 12.75 1.890625 
+Q 10 4.5 10 9.703125 
+L 10 43.5 
+L 1.09375 43.5 
+L 1.09375 50.40625 
+L 10 50.40625 
+L 10 60.90625 
+L 19.296875 63.90625 
+z
+" id="UniversforUniS55Rm-Regular-116"/>
+       <path d="M 53 72.09375 
+L 53 7.796875 
+Q 53.09375 5.09375 53.40625 0 
+L 44 0 
+Q 44 3.09375 43.796875 8 
+Q 41.703125 3.796875 37.140625 1.390625 
+Q 32.59375 -1 27 -1 
+Q 17.40625 -1 11.34375 5.703125 
+Q 5.296875 12.40625 5.296875 24.5 
+Q 5.296875 37.296875 11.546875 44.59375 
+Q 17.796875 51.90625 28 51.90625 
+Q 33.203125 51.90625 37.203125 49.90625 
+Q 41.203125 47.90625 43.59375 43.40625 
+L 43.59375 72.09375 
+z
+M 43.90625 25.90625 
+Q 43.796875 35.59375 39.6875 40.25 
+Q 35.59375 44.90625 29 44.90625 
+Q 22.40625 44.90625 18.84375 39.84375 
+Q 15.296875 34.796875 15.296875 24.796875 
+Q 15.296875 5.59375 29.09375 5.59375 
+Q 36.296875 5.59375 40.09375 10.640625 
+Q 43.90625 15.703125 43.90625 25.90625 
+z
+" id="UniversforUniS55Rm-Regular-100"/>
+       <path d="M 27.5 75 
+L 27.5 69.703125 
+L 18.09375 69.703125 
+L 18.09375 -7.203125 
+L 27.5 -7.203125 
+L 27.5 -12.5 
+L 10.203125 -12.5 
+L 10.203125 75 
+z
+" id="UniversforUniS55Rm-Regular-91"/>
+       <path d="M 26.703125 72.203125 
+L 47.09375 12.703125 
+L 68 72.203125 
+L 84.5 72.203125 
+L 84.5 0 
+L 74.703125 0 
+L 74.703125 65 
+L 51 0 
+L 41.5 0 
+L 18.703125 64.59375 
+L 18.703125 0 
+L 9 0 
+L 9 72.203125 
+z
+" id="UniversforUniS55Rm-Regular-77"/>
+       <path d="M 23.40625 72.203125 
+L 58.90625 12.5 
+L 58.90625 72.203125 
+L 68.09375 72.203125 
+L 68.09375 0 
+L 55.296875 0 
+L 18.59375 61.296875 
+L 18.59375 0 
+L 9.5 0 
+L 9.5 72.203125 
+z
+" id="UniversforUniS55Rm-Regular-78"/>
+       <path d="M 23.40625 75 
+L 23.40625 -12.5 
+L 6 -12.5 
+L 6 -7.203125 
+L 15.5 -7.203125 
+L 15.5 69.703125 
+L 6 69.703125 
+L 6 75 
+z
+" id="UniversforUniS55Rm-Regular-93"/>
+      </defs>
+      <use xlink:href="#UniversforUniS55Rm-Regular-70"/>
+      <use x="55.599991" xlink:href="#UniversforUniS55Rm-Regular-120"/>
+      <use x="111.199982" xlink:href="#UniversforUniS55Rm-Regular-32"/>
+      <use x="138.999969" xlink:href="#UniversforUniS55Rm-Regular-83"/>
+      <use x="205.699966" xlink:href="#UniversforUniS55Rm-Regular-116"/>
+      <use x="238.999954" xlink:href="#UniversforUniS55Rm-Regular-100"/>
+      <use x="300.099945" xlink:href="#UniversforUniS55Rm-Regular-32"/>
+      <use x="327.899933" xlink:href="#UniversforUniS55Rm-Regular-91"/>
+      <use x="361.199921" xlink:href="#UniversforUniS55Rm-Regular-77"/>
+      <use x="455.599915" xlink:href="#UniversforUniS55Rm-Regular-78"/>
+      <use x="533.399902" xlink:href="#UniversforUniS55Rm-Regular-93"/>
+     </g>
+    </g>
+   </g>
+   <g id="line2d_114">
+    <path clip-path="url(#p1c14acbae2)" d="M 344.699426 205.974678 
+L 198.664116 202.845052 
+L 85.051689 156.599695 
+" style="fill:none;"/>
+    <defs>
+     <path d="M -4 4 
+L 4 -4 
+M -4 -4 
+L 4 4 
+" id="m111419fe2b" style="stroke:#000000;stroke-width:0.8;"/>
+    </defs>
+    <g clip-path="url(#p1c14acbae2)">
+     <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="344.699426" xlink:href="#m111419fe2b" y="205.974678"/>
+     <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="198.664116" xlink:href="#m111419fe2b" y="202.845052"/>
+     <use style="fill-opacity:0;stroke:#000000;stroke-width:0.8;" x="85.051689" xlink:href="#m111419fe2b" y="156.599695"/>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 52.47 210.1824 
+L 52.47 28.3392 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 377.784 210.1824 
+L 377.784 28.3392 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 52.47 210.1824 
+L 377.784 210.1824 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 52.47 28.3392 
+L 377.784 28.3392 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"/>
+   </g>
+   <g id="text_15">
+    <!-- estimate -->
+    <g transform="translate(58.97628 210.0209)scale(0.0694 -0.0694)">
+     <defs>
+      <path d="M 44.296875 36.296875 
+L 34.703125 36.296875 
+L 34.703125 36.90625 
+Q 34.703125 44.5 25 44.5 
+Q 20.203125 44.5 17.5 42.640625 
+Q 14.796875 40.796875 14.796875 37.296875 
+Q 14.796875 32.703125 20.90625 31.203125 
+L 32.5 28.296875 
+Q 39.09375 26.703125 42.34375 23.453125 
+Q 45.59375 20.203125 45.59375 14.703125 
+Q 45.59375 7.296875 40 2.9375 
+Q 34.40625 -1.40625 24.203125 -1.40625 
+Q 14.59375 -1.40625 9.4375 2.84375 
+Q 4.296875 7.09375 4.296875 14.90625 
+L 14.203125 14.90625 
+Q 14.203125 10.59375 17.046875 8.1875 
+Q 19.90625 5.796875 25.296875 5.796875 
+Q 30.40625 5.796875 33 8 
+Q 35.59375 10.203125 35.59375 13.703125 
+Q 35.59375 18.203125 30.890625 19.546875 
+Q 26.203125 20.90625 19.90625 22.296875 
+Q 13.5 23.703125 9.390625 26.796875 
+Q 5.296875 29.90625 5.296875 36.203125 
+Q 5.296875 43 10.75 47.203125 
+Q 16.203125 51.40625 24.90625 51.40625 
+Q 33.09375 51.40625 38.6875 48.046875 
+Q 44.296875 44.703125 44.296875 37.703125 
+z
+" id="UniversforUniS55Rm-Regular-115"/>
+      <path d="M 19.203125 72 
+L 19.203125 61.703125 
+L 7.90625 61.703125 
+L 7.90625 72 
+z
+M 18.296875 50.203125 
+L 18.296875 0 
+L 8.90625 0 
+L 8.90625 50.203125 
+z
+" id="UniversforUniS55Rm-Regular-105"/>
+      <path d="M 50.296875 42.09375 
+Q 55.703125 51.5 67.09375 51.5 
+Q 75.59375 51.5 80.59375 46.953125 
+Q 85.59375 42.40625 85.59375 33.90625 
+L 85.59375 0 
+L 76.09375 0 
+L 76.09375 33.203125 
+Q 76.09375 38.703125 73 41.453125 
+Q 69.90625 44.203125 64.796875 44.203125 
+Q 59.796875 44.203125 55.84375 40.84375 
+Q 51.90625 37.5 51.90625 29.796875 
+L 51.90625 0 
+L 42.40625 0 
+L 42.40625 33.296875 
+Q 42.40625 38.09375 39.59375 41.140625 
+Q 36.796875 44.203125 31.40625 44.203125 
+Q 26.09375 44.203125 22.140625 40.703125 
+Q 18.203125 37.203125 18.203125 30.203125 
+L 18.203125 0 
+L 8.703125 0 
+L 8.703125 43.5 
+L 8.5 50.203125 
+L 18 50.203125 
+L 18 42.90625 
+Q 20.40625 46.796875 24.15625 49.140625 
+Q 27.90625 51.5 33.90625 51.5 
+Q 39.40625 51.5 43.59375 49.5 
+Q 47.796875 47.5 50.296875 42.09375 
+z
+" id="UniversforUniS55Rm-Regular-109"/>
+      <path d="M 47.09375 12.5 
+Q 47.203125 7.90625 47.390625 5.546875 
+Q 47.59375 3.203125 47.90625 0 
+L 39.40625 0 
+Q 38.90625 1.703125 38.703125 3.390625 
+Q 38.5 5.09375 38.5 7.5 
+Q 36.203125 3.203125 32.5 0.796875 
+Q 28.796875 -1.59375 22.90625 -1.59375 
+Q 14.796875 -1.59375 10.046875 2.5 
+Q 5.296875 6.59375 5.296875 13.203125 
+Q 5.296875 21.09375 11.5 26.140625 
+Q 17.703125 31.203125 30.703125 31.203125 
+Q 35.90625 31.203125 38.296875 30.90625 
+L 38.296875 35.09375 
+Q 38.296875 41.203125 35.296875 43.25 
+Q 32.296875 45.296875 27.40625 45.296875 
+Q 23 45.296875 20.453125 43.140625 
+Q 17.90625 41 17.703125 36.796875 
+L 8.296875 36.796875 
+Q 8.796875 44.5 13.890625 48.09375 
+Q 19 51.703125 28 51.703125 
+Q 36.296875 51.703125 41.890625 48.25 
+Q 47.5 44.796875 47.5 37 
+z
+M 38.09375 19.203125 
+L 38.296875 24.40625 
+Q 37.5 24.5 36.140625 24.59375 
+Q 34.796875 24.703125 32.90625 24.703125 
+Q 14.796875 24.703125 14.796875 14.59375 
+Q 14.796875 10.796875 17.4375 8.296875 
+Q 20.09375 5.796875 25.203125 5.796875 
+Q 31.203125 5.796875 34.546875 9.390625 
+Q 37.90625 13 38.09375 19.203125 
+z
+" id="UniversforUniS55Rm-Regular-97"/>
+     </defs>
+     <use xlink:href="#UniversforUniS55Rm-Regular-101"/>
+     <use x="55.599991" xlink:href="#UniversforUniS55Rm-Regular-115"/>
+     <use x="105.599976" xlink:href="#UniversforUniS55Rm-Regular-116"/>
+     <use x="138.899963" xlink:href="#UniversforUniS55Rm-Regular-105"/>
+     <use x="166.699951" xlink:href="#UniversforUniS55Rm-Regular-109"/>
+     <use x="261.099945" xlink:href="#UniversforUniS55Rm-Regular-97"/>
+     <use x="316.699936" xlink:href="#UniversforUniS55Rm-Regular-116"/>
+     <use x="349.999924" xlink:href="#UniversforUniS55Rm-Regular-101"/>
+    </g>
+   </g>
+   <g id="text_16">
+    <!-- Convergence Std -->
+    <g transform="translate(174.5645 22.3392)scale(0.1 -0.1)">
+     <defs>
+      <path d="M 52.296875 52.703125 
+Q 51.5 59 47.453125 62.09375 
+Q 43.40625 65.203125 36.703125 65.203125 
+Q 26.5 65.203125 21.34375 57.390625 
+Q 16.203125 49.59375 16.203125 35.40625 
+Q 16.203125 21.40625 21.390625 14.25 
+Q 26.59375 7.09375 36.59375 7.09375 
+Q 43 7.09375 46.953125 10.140625 
+Q 50.90625 13.203125 51.796875 19 
+L 62.796875 19 
+Q 61.796875 9.90625 54.5 4.40625 
+Q 47.203125 -1.09375 35.703125 -1.09375 
+Q 21.40625 -1.09375 13.453125 8.546875 
+Q 5.5 18.203125 5.5 35.296875 
+Q 5.5 52.703125 13.796875 62.953125 
+Q 22.09375 73.203125 37.09375 73.203125 
+Q 47.703125 73.203125 54.890625 68.09375 
+Q 62.09375 63 63 52.703125 
+z
+" id="UniversforUniS55Rm-Regular-67"/>
+      <path d="M 29.796875 -1.703125 
+Q 18.40625 -1.703125 11.75 5.4375 
+Q 5.09375 12.59375 5.09375 24.5 
+Q 5.09375 37.09375 11.890625 44.296875 
+Q 18.703125 51.5 30.59375 51.5 
+Q 42.203125 51.5 48.703125 44.5 
+Q 55.203125 37.5 55.203125 25.09375 
+Q 55.203125 12.796875 48.203125 5.546875 
+Q 41.203125 -1.703125 29.796875 -1.703125 
+z
+M 45.203125 25.5 
+Q 45.203125 34.5 41.34375 39.546875 
+Q 37.5 44.59375 30.59375 44.59375 
+Q 23.703125 44.59375 19.296875 39.4375 
+Q 14.90625 34.296875 14.90625 25.296875 
+Q 14.90625 16.296875 18.84375 10.796875 
+Q 22.796875 5.296875 29.90625 5.296875 
+Q 36.796875 5.296875 41 10.546875 
+Q 45.203125 15.796875 45.203125 25.5 
+z
+" id="UniversforUniS55Rm-Regular-111"/>
+      <path d="M 52.796875 0 
+L 43.203125 0 
+L 43.203125 32.90625 
+Q 43.203125 38.296875 39.84375 41.09375 
+Q 36.5 43.90625 31.59375 43.90625 
+Q 25.59375 43.90625 22.046875 39.65625 
+Q 18.5 35.40625 18.5 29.203125 
+L 18.5 0 
+L 9.09375 0 
+L 9.09375 46.59375 
+Q 9.09375 48 9 50.203125 
+L 18.40625 50.203125 
+Q 18.40625 47.09375 18.5 45.09375 
+L 18.5 42.09375 
+Q 23.09375 51.203125 34.59375 51.203125 
+Q 42.703125 51.203125 47.75 46.640625 
+Q 52.796875 42.09375 52.796875 34.203125 
+z
+" id="UniversforUniS55Rm-Regular-110"/>
+      <path d="M 11.703125 50.203125 
+L 27.703125 10.40625 
+L 43.296875 50.203125 
+L 53.703125 50.203125 
+L 31.703125 0 
+L 22.203125 0 
+L 1.203125 50.203125 
+z
+" id="UniversforUniS55Rm-Regular-118"/>
+      <path d="M 37.40625 34.09375 
+Q 37.09375 39.296875 34.5 41.9375 
+Q 31.90625 44.59375 27.40625 44.59375 
+Q 21.296875 44.59375 17.84375 40.046875 
+Q 14.40625 35.5 14.40625 25.59375 
+Q 14.40625 5.796875 26.90625 5.796875 
+Q 31.703125 5.796875 34.59375 8.640625 
+Q 37.5 11.5 37.796875 16.703125 
+L 47.296875 16.703125 
+Q 46.703125 8.796875 41.203125 3.75 
+Q 35.703125 -1.296875 27.09375 -1.296875 
+Q 16.59375 -1.296875 10.546875 5.09375 
+Q 4.5 11.5 4.5 24.40625 
+Q 4.5 37.203125 10.84375 44.34375 
+Q 17.203125 51.5 27.203125 51.5 
+Q 35.90625 51.5 41.25 46.84375 
+Q 46.59375 42.203125 46.90625 34.09375 
+z
+" id="UniversforUniS55Rm-Regular-99"/>
+     </defs>
+     <use xlink:href="#UniversforUniS55Rm-Regular-67"/>
+     <use x="66.699997" xlink:href="#UniversforUniS55Rm-Regular-111"/>
+     <use x="127.799988" xlink:href="#UniversforUniS55Rm-Regular-110"/>
+     <use x="188.899979" xlink:href="#UniversforUniS55Rm-Regular-118"/>
+     <use x="244.499969" xlink:href="#UniversforUniS55Rm-Regular-101"/>
+     <use x="300.09996" xlink:href="#UniversforUniS55Rm-Regular-114"/>
+     <use x="338.999954" xlink:href="#UniversforUniS55Rm-Regular-103"/>
+     <use x="400.099945" xlink:href="#UniversforUniS55Rm-Regular-101"/>
+     <use x="455.699936" xlink:href="#UniversforUniS55Rm-Regular-110"/>
+     <use x="516.799927" xlink:href="#UniversforUniS55Rm-Regular-99"/>
+     <use x="566.799911" xlink:href="#UniversforUniS55Rm-Regular-101"/>
+     <use x="622.399902" xlink:href="#UniversforUniS55Rm-Regular-32"/>
+     <use x="650.19989" xlink:href="#UniversforUniS55Rm-Regular-83"/>
+     <use x="716.899887" xlink:href="#UniversforUniS55Rm-Regular-116"/>
+     <use x="750.199875" xlink:href="#UniversforUniS55Rm-Regular-100"/>
+    </g>
+   </g>
+   <g id="line2d_115">
+    <path clip-path="url(#p1c14acbae2)" d="M 52.47 211.360104 
+L 377.784 211.360104 
+" style="fill:none;stroke:#000000;stroke-dasharray:3.7,1.6;stroke-dashoffset:0;"/>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p1c14acbae2">
+   <rect height="181.8432" width="325.314" x="52.47" y="28.3392"/>
+  </clipPath>
+ </defs>
+</svg>

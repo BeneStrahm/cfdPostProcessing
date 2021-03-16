@@ -15,6 +15,7 @@
 # ------------------------------------------------------------------------------
 # Libraries
 # ------------------------------------------------------------------------------
+from matplotlib.pyplot import hlines
 import numpy as np
 
 import pyLEK.plotters.plot2D as plt
@@ -39,8 +40,10 @@ class convergenceVerification():
         
 
         # List of datapoints to be evaluated 
+        Volume = 3840*1600*960
         self.convrgData     = [1,2,3]
-        self.inputParam     = [1, 0.5, 0.25]
+        self.inputParam     = [1000000, 3207000, 4924000]
+        # self.inputParam     = [Volume/4924000, Volume/3207000, Volume/1000000]
         self.delta_star_k_1 = "-"
         self.S_C            = "-"
         self.relError       = ["-", "-", "-"]
@@ -62,6 +65,10 @@ class convergenceVerification():
         # Calculate the solution changes epsilon_k
         self.epsilon_k_21 = S_k_2 - S_k_1
         self.epsilon_k_32 = S_k_3 - S_k_2
+
+        # Relative errors
+        self.e_a_21 = abs((self.epsilon_k_21) / S_k_1)
+        self.e_a_32 = abs((self.epsilon_k_32) / S_k_2)
 
         # Solution change ratio
         self.R_k = (self.epsilon_k_21 / self.epsilon_k_32) / (self.r_k_21 / self.r_k_32)
@@ -106,14 +113,19 @@ class convergenceVerification():
             # Assign to instance
             self.rho_k = rho_k
             
-            # Estimated error
+            # Estimated error 
             self.delta_star_k_1 = self.epsilon_k_21 / (self.r_k_32 ** rho_k -1)
+
+            # Grid Convergence Index (GCI)
+            F_S = 1.25      # Safety Factor (Fs=1.25 for comparisons over three or more grids)
+
+            self.GCI_21 = F_S * self.e_a_21 / (self.r_k_21 ** rho_k -1)
 
             # Corrected Solution results
             S_k_1 = self.convrgData[0]
             self.S_C = S_k_1 - self.delta_star_k_1
 
-            # Relative Errors
+            # Extrapolated relative errors
             for key, S_k in enumerate(self.convrgData):
                 S_C = self.S_C
                 self.relError[key] = abs((S_C - S_k) / S_C)
@@ -216,11 +228,11 @@ class convergenceVerification():
         y = self.convrgData
 
         if self.convrgFlag == "Convergent":
-            hLine = self.S_C
-            hText = 'estimate'
+            hLines = [self.S_C]
+            hTexts = ['estimate']
         else:
-            hLine = None
-            hText = None
+            hLines = None
+            hTexts = None
 
         # # 1) For Mean
         # if "Mean" in designation:
@@ -276,15 +288,16 @@ class convergenceVerification():
         # Change to current file location
         os.chdir(os.path.dirname(sys.argv[0]))
 
-        style_dict = {"lines.markersize": 8,"savefig.format": "svg"}
+        style_dict = {"lines.markersize": 8,"savefig.format": "svg", "lines.linewidth":0, "lines.marker":"x"}
         xlabel = 'Zellgröße'
         ylabel  = r"Fx Std [MN]" 
         title   = r"Convergence Std"
 
         plt.plot2D(x, y, xlabel=xlabel, ylabel=ylabel, title=title, 
                dir_fileName=dir_fileName, xlim=xlim, ylim=ylim,
+               hLines=hLines, hTexts=hTexts,
                style_dict=style_dict,
-               variation='marker',
+               variation='color',
                savePlt=True, showPlt=True)
 
     
@@ -295,11 +308,19 @@ class convergenceVerification():
 def main():
     # Get ouput directory
     outDir = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/'
+    
+    #bs
+    outDir = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/'
 
     # Collect the components
-    fname0 = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref0/postProcessing/forces/0/force.dat'
-    fname1 = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref1/postProcessing/forces/0/force.dat'
-    fname2 = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref2/postProcessing/forces/0/force.dat'
+    # fname0 = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref0/postProcessing/forces/0/force.dat'
+    # fname1 = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref1/postProcessing/forces/0/force.dat'
+    # fname2 = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref2/postProcessing/forces/0/force.dat'
+
+    # bs:
+    fname2 = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/force_ref0.dat'
+    fname1 = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/force_ref1.dat'
+    fname0 = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/force_ref2.dat'
 
     interpForces0 = readForces.importForces(fname0)
     interpForces1 = readForces.importForces(fname1)
