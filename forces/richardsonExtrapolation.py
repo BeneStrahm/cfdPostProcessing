@@ -98,26 +98,38 @@ class convergenceVerification():
             # Iterative procedure 
             # rho_k_next = rho_k(i+1)
             # rho_k   = rho_k(i)
-            # Stoping criteria: Relative Residual <= Value
+            # Stoping criteria:
+            # - Relative Residual <= Value
+            # - Max Iter
             stopFlag = False
+            maxItera = 20
+            i = 0
 
             while stopFlag == False:
                 # Estimate next step (Improved meth., see Celik)
-                rho_k_next = 1 / np.log(self.r_k_21) * \
-                             np.abs(np.log(
-                                    np.abs(self.epsilon_k_32/self.epsilon_k_21)
-                                )) \
-                            + np.log(
-                                (self.r_k_21**rho_k - s) / (self.r_k_32**rho_k - s)  
+                rho_k_next = 1 / np.log(self.r_k_21) * np.abs(
+                                np.log(np.abs(self.epsilon_k_32/self.epsilon_k_21)) + \
+                                + np.log((self.r_k_32**rho_k - s) / (self.r_k_21**rho_k - s))  
                             )
-                            
 
                 # Check criteria
                 if abs((rho_k_next - rho_k) / rho_k_next) <= 0.001:
                     stopFlag = True
+                
+                # If either epsilon_k_32 or epsilon_k_21 are close “very close” to zero, the 
+                # above procedure does not work. This might be an indication of oscillatory 
+                # convergence or, in rare situations, it may indicate that the “exact” solution 
+                # has been attained. In such cases, if possible, calculations with additional grid 
+                # refinement may be performed.
+                if i >= maxItera:
+                    stopFlag = True
+                    print("Warning: rho_k did not converge")
+                    rho_k_next = None
+
 
                 # Update value with new iteration
                 rho_k = rho_k_next
+                i += 1
 
             # Assign to instance
             self.rho_k = rho_k
