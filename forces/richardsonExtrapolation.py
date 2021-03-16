@@ -11,6 +11,8 @@
 # ------------------------------------------------------------------------------
 # Stern, Wilson, Coleman, Paterson - Comprehensive Approach to Verification and 
 # Validation of CFD Simulations (2001), J. Fluids Eng. 
+# Celik - Procedure for Estimation and Reporting of  Discretization Error in 
+# CFD Applications (2008), J. Fluids Eng. 
 
 # ------------------------------------------------------------------------------
 # Libraries
@@ -22,6 +24,7 @@ import pyLEK.plotters.plot2D as plt
 import os,sys,csv,h5py
 from cfdPostProcessing.foamHelpers import readForces
 from cfdPostProcessing.foamHelpers import readMoments
+import scipy.optimize as optimize
 
 # ------------------------------------------------------------------------------
 # Functions
@@ -37,38 +40,40 @@ class convergenceVerification():
     # to Verification and Validation of CFD Simulations (2001)"
    
     def __init__(self): 
-        
-
         # List of datapoints to be evaluated 
-        Volume = 3840*1600*960
-        self.convrgData     = [1,2,3]
-        self.inputParam     = [1000000, 3207000, 4924000]
-        # self.inputParam     = [Volume/4924000, Volume/3207000, Volume/1000000]
+        self.S_k_m          = [1,2,3]
+        self.delta_x_k_m    = [1,2,3]
         self.delta_star_k_1 = "-"
         self.S_C            = "-"
         self.relError       = ["-", "-", "-"]
 
-        # Calculate the refinement ratio Delta_x_k_n_+_1 / Delta_x_k_n
-        self.r_k_21 = self.inputParam[1] / self.inputParam[0]
-        self.r_k_32 = self.inputParam[2] / self.inputParam[1]
-
-    def appendData(self, datapoint, m):
+    def appendData(self, S_k_m, delta_x_k_m, m):
         # Insert datapoint at location m
-        self.convrgData[m] = datapoint
+        self.S_k_m[m] = S_k_m
+        self.delta_x_k_m[m] = delta_x_k_m
 
     def evaluateConvergence(self):
+        # Get the simulation result S_k, not corrected for iterative errors 
+        self.delta_x_k_1 = self.delta_x_k_m[0]
+        self.delta_x_k_2 = self.delta_x_k_m[1]
+        self.delta_x_k_3 = self.delta_x_k_m[2]
+
+        # Calculate the refinement ratio Delta_x_k_n_+_1 / Delta_x_k_n
+        self.r_k_21 = self.delta_x_k_2 / self.delta_x_k_1
+        self.r_k_32 = self.delta_x_k_3 / self.delta_x_k_2
+
         # Get the simulation result S_k, not corrected for iterative errors    
-        S_k_1 = self.convrgData[0]
-        S_k_2 = self.convrgData[1]
-        S_k_3 = self.convrgData[2]
+        self.S_k_1 = self.S_k_m[0]
+        self.S_k_2 = self.S_k_m[1]
+        self.S_k_3 = self.S_k_m[2]
 
         # Calculate the solution changes epsilon_k
-        self.epsilon_k_21 = S_k_2 - S_k_1
-        self.epsilon_k_32 = S_k_3 - S_k_2
+        self.epsilon_k_21 = self.S_k_2 - self.S_k_1
+        self.epsilon_k_32 = self.S_k_3 - self.S_k_2
 
         # Relative errors
-        self.e_a_21 = abs((self.epsilon_k_21) / S_k_1)
-        self.e_a_32 = abs((self.epsilon_k_32) / S_k_2)
+        self.e_a_21 = abs((self.epsilon_k_21) / self.S_k_1)
+        self.e_a_32 = abs((self.epsilon_k_32) / self.S_k_2)
 
         # Solution change ratio
         self.R_k = (self.epsilon_k_21 / self.epsilon_k_32) / (self.r_k_21 / self.r_k_32)
@@ -87,21 +92,22 @@ class convergenceVerification():
             # Estimate order of accuracy rho_k
             # Initial guess 
             rho_k = np.log(self.epsilon_k_32 / self.epsilon_k_21 ) / \
-                    np.log(np.mean([self.r_k_21, self.r_k_32]))
+                    np.log(self.r_k_21)
+            s     = np.sign(self.epsilon_k_32/self.epsilon_k_21)
 
             # Iterative procedure 
             # rho_k_next = rho_k(i+1)
             # rho_k   = rho_k(i)
             # Stoping criteria: Relative Residual <= Value
-
             stopFlag = False
 
             while stopFlag == False:
-                # Estimate next step
+                # Estimate next step (Improved meth., see Celik)
                 rho_k_next = np.log(self.epsilon_k_32 / self.epsilon_k_21 ) /   \
-                            np.log(self.r_k_21) + 1 / (np.log(self.r_k_21)) *     \
-                            ( np.log(self.r_k_32 ** rho_k - 1) -                  \
-                            np.log(self.r_k_21 ** rho_k - 1) )
+                            np.log(self.r_k_21) + np.log(
+                                (self.r_k_21 ** rho_k - s)  /
+                                (self.r_k_32 ** rho_k - s)  
+                            )
 
                 # Check criteria
                 if abs((rho_k_next - rho_k) / rho_k_next) <= 0.001:
@@ -117,40 +123,38 @@ class convergenceVerification():
             self.delta_star_k_1 = self.epsilon_k_21 / (self.r_k_32 ** rho_k -1)
 
             # Grid Convergence Index (GCI)
-            F_S = 1.25      # Safety Factor (Fs=1.25 for comparisons over three or more grids)
-
-            self.GCI_21 = F_S * self.e_a_21 / (self.r_k_21 ** rho_k -1)
+            self.F_S = 1.25      # Safety Factor (Fs=1.25 for comparisons over three or more grids)
+            self.GCI_21 = self.F_S * self.e_a_21 / (self.r_k_21 ** rho_k -1)
 
             # Corrected Solution results
-            S_k_1 = self.convrgData[0]
-            self.S_C = S_k_1 - self.delta_star_k_1
+            self.S_k_1 = self.S_k_m[0]
+            self.S_C = self.S_k_1 - self.delta_star_k_1
 
             # Extrapolated relative errors
-            for key, S_k in enumerate(self.convrgData):
+            for key, S_k in enumerate(self.S_k_m):
                 S_C = self.S_C
                 self.relError[key] = abs((S_C - S_k) / S_C)
-    
-    def writeHeader(self, outDir):
-        # Open CSV-File in write mode
+
+    def writeConvergence(self, comp, designation, outDir):
+        # Open CSV-File in append mode
         outFile = outDir + "/ConvergenceTable.txt"
-        
-        with open(outFile, 'w') as txt:            
+        with open(outFile, 'a') as txt:            
             txt_writer = csv.writer(txt, delimiter='\t', quotechar='"', quoting=csv.QUOTE_NONE)
             # Write refinement parameters
             txt_writer.writerow([
                 "Grid A: Smallest grid cell size:",
                 "Deltah3", 
-                '{:4.3f}'.format(self.inputParam[2])
+                '{:4.3f}'.format(self.delta_x_k_m[2])
                 ])
             txt_writer.writerow([
                 "Grid B: Smallest grid cell size:",
                 "Deltah2", 
-                '{:4.3f}'.format(self.inputParam[1])
+                '{:4.3f}'.format(self.delta_x_k_m[1])
                 ])
             txt_writer.writerow([
                 "Grid C: Smallest grid cell size:",
                 "Deltah1", 
-                '{:4.3f}'.format(self.inputParam[0])
+                '{:4.3f}'.format(self.delta_x_k_m[0])
                 ])
             txt_writer.writerow([
                 ])
@@ -184,12 +188,6 @@ class convergenceVerification():
                 "Relative Error Grid C"
                 ])
 
-    def writeConvergence(self, comp, designation, outDir, sT, eT):
-        # Open CSV-File in append mode
-        outFile = outDir + "/ConvergenceTable_" + str(int(sT)) + "_" + str(int(eT)) + ".txt"
-        with open(outFile, 'a') as txt:            
-            txt_writer = csv.writer(txt, delimiter='\t', quotechar='"', quoting=csv.QUOTE_NONE)
-
             # Check convergence
             # if True:
             if self.convrgFlag == "Convergent":
@@ -198,9 +196,9 @@ class convergenceVerification():
 
                 txt_writer.writerow([str(comp),                             
                     str(designation),                                       
-                    '{: 10.3f}'.format(self.convrgData[2]),                 
-                    '{: 10.3f}'.format(self.convrgData[1]),                 
-                    '{: 10.3f}'.format(self.convrgData[0]),                 
+                    '{: 10.3f}'.format(self.S_k_m[2]),                 
+                    '{: 10.3f}'.format(self.S_k_m[1]),                 
+                    '{: 10.3f}'.format(self.S_k_m[0]),                 
                     '{: 6.3f}'.format(self.R_k),
                     str(self.convrgFlag),
                     '{: 8.3f}'.format(self.delta_star_k_1),
@@ -209,9 +207,9 @@ class convergenceVerification():
                     '{: 6.1f}'.format(self.relError[1]*100),
                     '{: 6.1f}'.format(self.relError[0]*100),
                     str(designation),                                       
-                    '{: 10.3f}'.format(self.convrgData[2]),                 
-                    '{: 10.3f}'.format(self.convrgData[1]),                 
-                    '{: 10.3f}'.format(self.convrgData[0]),                 
+                    '{: 10.3f}'.format(self.S_k_m[2]),                 
+                    '{: 10.3f}'.format(self.S_k_m[1]),                 
+                    '{: 10.3f}'.format(self.S_k_m[0]),                 
                     '{: 6.3f}'.format(self.R_k),
                     str(self.convrgFlag),
                     self.delta_star_k_1,
@@ -224,8 +222,8 @@ class convergenceVerification():
     def plotConvergence(self, outDir, sT, eT):
 
         dir_fileName = outDir + "Baseshear"
-        x = self.inputParam
-        y = self.convrgData
+        x = self.delta_x_k_m
+        y = self.S_k_m
 
         if self.convrgFlag == "Convergent":
             hLines = [self.S_C]
@@ -284,7 +282,7 @@ class convergenceVerification():
         
 
         xlim = [max(x)+0.1*max(x),min(x)-0.5*min(x)]
-        ylim = [0, 0.5]
+        # ylim = [0, 0.5]
         # Change to current file location
         os.chdir(os.path.dirname(sys.argv[0]))
 
@@ -294,7 +292,7 @@ class convergenceVerification():
         title   = r"Convergence Std"
 
         plt.plot2D(x, y, xlabel=xlabel, ylabel=ylabel, title=title, 
-               dir_fileName=dir_fileName, xlim=xlim, ylim=ylim,
+               dir_fileName=dir_fileName, xlim=xlim,# ylim=ylim,
                hLines=hLines, hTexts=hTexts,
                style_dict=style_dict,
                variation='color',
@@ -312,30 +310,37 @@ def main():
     #bs
     outDir = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/'
 
+    # Step 1: Define a representative grid size h
+    # -------
+    # Where m = 1  most fine parameters and m = 3 on the most coarse 
+    no_of_cells     = [4924000, 3207000, 1000000]
+    refinement_vol  = 3840 * 1600 * 960
+    grid_size_h     = [(refinement_vol / x) ** (1/3) for x in no_of_cells]
+
     # Collect the components
     # fname0 = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref0/postProcessing/forces/0/force.dat'
     # fname1 = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref1/postProcessing/forces/0/force.dat'
     # fname2 = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref2/postProcessing/forces/0/force.dat'
 
-    # bs:
-    fname2 = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/force_ref0.dat'
-    fname1 = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/force_ref1.dat'
-    fname0 = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/force_ref2.dat'
+    # Step 2: Select the key variable to examine convergence
+    # -------
+    # Where m = 1  most fine parameters and m = 3 on the most coarse 
 
-    interpForces0 = readForces.importForces(fname0)
+    fname1 = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/force_ref2.dat'
+    fname2 = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/force_ref1.dat'
+    fname3 = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/force_ref0.dat'
+
     interpForces1 = readForces.importForces(fname1)
     interpForces2 = readForces.importForces(fname2)
-    interp = [interpForces0, interpForces1, interpForces2]
+    interpForces3 = readForces.importForces(fname3) 
+
+    interp = [interpForces1, interpForces2, interpForces3]
 
     # Specify Cut-Off time
-    print("Specify time range to plot")
+    # print("Specify time range to plot")
     sCutT = 200
     eCutT = 250
-
-    # Set-Up CSV-Table
-    tableHeader = convergenceVerification()
-    tableHeader.writeHeader(outDir)
-    
+ 
     # Loop through components
     # meanBF  = convergenceVerification()
     # rmsBF   = convergenceVerification()
@@ -347,18 +352,15 @@ def main():
     while m <= 2:
             # Get data to plot
             dT = interp[m][0][1]-interp[m][0][0]
-            BF = interp[m][2]/ (10 ** 6)    
-            
+            BF = interp[m][2]/ (10 ** 6)            
             # Cut the array to desired range 
             l = BF[int(sCutT/dT):int(eCutT/dT)]
             # meanBF.appendData(np.mean(l), m)
             # rmsBF.appendData(np.sqrt(np.mean(np.square(l))), m)
-            stdBF.appendData(np.std(l), m)  
-            print (np.std(l))
+            stdBF.appendData(np.std(l), grid_size_h[m], m)  
             # maxBF.appendData(np.average(hq.nlargest(20, l)), m) 
             # minBF.appendData(np.average(hq.nsmallest(20, l)), m) 
             m +=1
-
 
     # Evaluate convergence(s)
 
@@ -380,7 +382,7 @@ def main():
 
     # meanBF.writeConvergence(comp,"Mean", outDir, sCutT, eCutT)
     # rmsBF.writeConvergence(comp,"RMS", outDir, sCutT, eCutT)
-    # stdBF.writeConvergence(comp,"Std", outDir, sCutT, eCutT)
+    stdBF.writeConvergence("Fx","Std", outDir)
     # maxBF.writeConvergence(comp,"Largest20", outDir, sCutT, eCutT)
     # minBF.writeConvergence(comp,"Smallest20", outDir, sCutT, eCutT)
 
