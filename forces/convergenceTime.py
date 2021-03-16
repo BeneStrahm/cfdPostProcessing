@@ -43,168 +43,128 @@ def statisticsOverTimeSeries(data):
 
 def main(dObject):
     # Get ouput directory
-    outDir = createOurDir.main("../Results/OpenFOAM/" + dObject.Name + "/BaseForces_StatDevelop")
-    inFile = dObject.Location + "/purified" + "/forces.h5"
-
-    if fh5check.main(inFile, "baseforces", check_ow = False) in ("EX"): 
+    outDir = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/'
+    fname0 = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref0/postProcessing/forces/0/force.dat'
+    interpForces = readForces.importForces(fname0)
+    
 
         # Get data to plot
-        sT = fh5readKey.main(inFile, "sT")
-        eT = fh5readKey.main(inFile, "eT")
-        nT = fh5readKey.main(inFile, "nT") * 1     # Anpassen
-        dT = fh5readKey.main(inFile, "dT") / 1     # Anpassen
-
-        T = np.linspace(sT, eT, nT)
-
-        BF = fh5readGroup.main(inFile, "baseforces")
-
-        # Specify Cut-Off time
-        print("Specify time range to plot")
-        sT = int(input("Start Time: "))
-        eT = int(input("End Time:   "))
-        print("Specify time to start evaluation")
-        sT_S = int(input("Start Time: "))
-
-        for comp in BF:  
-            
-            # Cut the array to desired range 
-            x = T[int(sT_S/dT):int(eT/dT)]
-            y = BF[comp][int(sT_S/dT):int(eT/dT)]
-
-            # Filter anomalies if desired
-            # flagFilter = input("Shall data for " + comp + " be filtered? (Y/N): ")
+    sT = min(interpForces[0])   
+    eT = max(interpForces[0])
+    dT = interpForces[0][1]-interpForces[0][0]
+    nT = len(interpForces[0]*dT)
         
-            # if flagFilter == "Y":
-            #     y = filterDataWithStd(y, comp, dT, sT)
+    T = np.linspace(sT, eT, nT)
 
-            # Calculate statistic properties     
-            meanBF, rmsBF, stdBF  = statisticsOverTimeSeries(y)
+    BF = interpForces[2]/ (10 ** 6) 
 
-            x = [x]
+    # Specify Cut-Off time
+    print("Specify time range to plot")
+    sT = int(input("Start Time: "))
+    eT = int(input("End Time:   "))
+    print("Specify time to start evaluation")
+    sT_S = int(input("Start Time: "))
 
-            # Plot the mean / time  
-            y = [meanBF]
+    for comp in BF:  
+        
+        # Cut the array to desired range 
+        x = T[int(sT_S/dT):int(eT/dT)]
+        y = BF[comp][int(sT_S/dT):int(eT/dT)]
 
-            xlabel = r"$Time [s]$"
-            if "F" in comp:
-                ylabel = r"$Mean F_{} [MN]$".format(comp[1])
-                legend = [r"$Mean F_{}$".format(comp[1])]
-                title = "Mean Base Shear"
-                app = comp + "_" + str(int(round(np.min(x)))) + "_" + str(int(round(np.max(x))))
-                dir_fileName = outDir + "Mean_BaseShear_" + app
+        # Filter anomalies if desired
+        # flagFilter = input("Shall data for " + comp + " be filtered? (Y/N): ")
+    
+        # if flagFilter == "Y":
+        #     y = filterDataWithStd(y, comp, dT, sT)
 
-            elif "M" in comp:
-                ylabel = r"$Mean M_{} [MNm]$".format(comp[1])
-                legend = [r"$Mean M_{}$".format(comp[1])]
-                title = "Mean Base Moment"
-                app = comp + "_" + str(int(round(np.min(x)))) + "_" + str(int(round(np.max(x))))
-                dir_fileName = outDir + "Mean_BaseMoment_" + app
+        # Calculate statistic properties     
+        meanBF, rmsBF, stdBF  = statisticsOverTimeSeries(y)
 
-            xlim = []
-            ylim = []
+        x = [x]
 
-            style_dict = {"lines.linewidth":1.0, "figure.figsize" : "11.0, 4.8"}
+        # Plot the mean / time  
+        y = [meanBF]
 
-            plt.plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName, 
-                        xlim=xlim, ylim=ylim, xscale='linear', yscale='linear',
-                        style_dict=style_dict, colorScheme='TUM', variation='color')
+        xlabel = r"$Time [s]$"
+        if "F" in comp:
+            ylabel = r"$Mean F_{} [MN]$".format(comp[1])
+            legend = [r"$Mean F_{}$".format(comp[1])]
+            title = "Mean Base Shear"
+            app = comp + "_" + str(int(round(np.min(x)))) + "_" + str(int(round(np.max(x))))
+            dir_fileName = outDir + "Mean_BaseShear_" + app
 
-            # Plot the root-mean-square / time 
-            y = [rmsBF]
+        elif "M" in comp:
+            ylabel = r"$Mean M_{} [MNm]$".format(comp[1])
+            legend = [r"$Mean M_{}$".format(comp[1])]
+            title = "Mean Base Moment"
+            app = comp + "_" + str(int(round(np.min(x)))) + "_" + str(int(round(np.max(x))))
+            dir_fileName = outDir + "Mean_BaseMoment_" + app
 
-            xlabel = r"$Time [s]$"
-            if "F" in comp:
-                ylabel = r"$RMS F_{} [MN]$".format(comp[1])
-                legend = [r"$RMS F_{}$".format(comp[1])]
-                title = "Root-Mean-Square Base Shear"
-                app = comp + "_" + str(int(round(np.min(x)))) + "_" + str(int(round(np.max(x))))
-                dir_fileName = outDir + "RMS_BaseShear_" + app
+        xlim = []
+        ylim = []
 
-            elif "M" in comp:
-                ylabel = r"$RMS M_{} [MNm]$".format(comp[1])
-                legend = [r"$RMS M_{}$".format(comp[1])]
-                title = "Root-Mean-Square Base Moment"
-                app = comp + "_" + str(int(round(np.min(x)))) + "_" + str(int(round(np.max(x))))
-                dir_fileName = outDir + "RMS_BaseMoment_" + app
+        style_dict = {"lines.linewidth":1.0, "figure.figsize" : "11.0, 4.8"}
 
-            xlim = []
-            ylim = []
+        plt.plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName, 
+                    xlim=xlim, ylim=ylim, xscale='linear', yscale='linear',
+                    style_dict=style_dict, colorScheme='TUM', variation='color')
 
-            style_dict = {"lines.linewidth":1.0, "figure.figsize" : "11.0, 4.8"}
+        # Plot the root-mean-square / time 
+        y = [rmsBF]
 
-            plt.plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName, 
-                        xlim=xlim, ylim=ylim, xscale='linear', yscale='linear',
-                        style_dict=style_dict, colorScheme='TUM', variation='color')
+        xlabel = r"$Time [s]$"
+        if "F" in comp:
+            ylabel = r"$RMS F_{} [MN]$".format(comp[1])
+            legend = [r"$RMS F_{}$".format(comp[1])]
+            title = "Root-Mean-Square Base Shear"
+            app = comp + "_" + str(int(round(np.min(x)))) + "_" + str(int(round(np.max(x))))
+            dir_fileName = outDir + "RMS_BaseShear_" + app
 
-            # Plot the standart deviation / time 
-            y = [stdBF]
+        elif "M" in comp:
+            ylabel = r"$RMS M_{} [MNm]$".format(comp[1])
+            legend = [r"$RMS M_{}$".format(comp[1])]
+            title = "Root-Mean-Square Base Moment"
+            app = comp + "_" + str(int(round(np.min(x)))) + "_" + str(int(round(np.max(x))))
+            dir_fileName = outDir + "RMS_BaseMoment_" + app
 
-            xlabel = r"$Time [s]$"
-            if "F" in comp:
-                ylabel = r"$STD F_{} [MN]$".format(comp[1])
-                legend = [r"$STD F_{}$".format(comp[1])]
-                title = "Standard Deviation Base Shear"
-                app = comp + "_" + str(int(round(np.min(x)))) + "_" + str(int(round(np.max(x))))
-                dir_fileName = outDir + "STD_BaseShear_" + app
+        xlim = []
+        ylim = []
 
-            elif "M" in comp:
-                ylabel = r"$STD M_{} [MNm]$".format(comp[1])
-                legend = [r"$STD M_{}$".format(comp[1])]
-                title = "Standard Deviation Base Moment"
-                app = comp + "_" + str(int(round(np.min(x)))) + "_" + str(int(round(np.max(x))))
-                dir_fileName = outDir + "STD_BaseMoment_" + app
+        style_dict = {"lines.linewidth":1.0, "figure.figsize" : "11.0, 4.8"}
 
-            xlim = []
-            ylim = []
+        plt.plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName, 
+                    xlim=xlim, ylim=ylim, xscale='linear', yscale='linear',
+                    style_dict=style_dict, colorScheme='TUM', variation='color')
 
-            style_dict = {"lines.linewidth":1.0, "figure.figsize" : "11.0, 4.8"}
+        # Plot the standart deviation / time 
+        y = [stdBF]
 
-            plt.plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName, 
-                        xlim=xlim, ylim=ylim, xscale='linear', yscale='linear',
-                        style_dict=style_dict, colorScheme='TUM', variation='color')
+        xlabel = r"$Time [s]$"
+        if "F" in comp:
+            ylabel = r"$STD F_{} [MN]$".format(comp[1])
+            legend = [r"$STD F_{}$".format(comp[1])]
+            title = "Standard Deviation Base Shear"
+            app = comp + "_" + str(int(round(np.min(x)))) + "_" + str(int(round(np.max(x))))
+            dir_fileName = outDir + "STD_BaseShear_" + app
 
-        print("\n")
+        elif "M" in comp:
+            ylabel = r"$STD M_{} [MNm]$".format(comp[1])
+            legend = [r"$STD M_{}$".format(comp[1])]
+            title = "Standard Deviation Base Moment"
+            app = comp + "_" + str(int(round(np.min(x)))) + "_" + str(int(round(np.max(x))))
+            dir_fileName = outDir + "STD_BaseMoment_" + app
 
-    else:
-        print("ERROR: Firstly convert with \"Convert Forces & Moments to HDF5\"")
+        xlim = []
+        ylim = []
 
-# def importForces():
+        style_dict = {"lines.linewidth":1.0, "figure.figsize" : "11.0, 4.8"}
 
-#     forceRegex = r"([0-9.Ee\-+]+)\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)+\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)+\s+\(+([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)\s([0-9.Ee\-+]+)+\)"
+        plt.plot2D(x, y, xlabel, ylabel, title, legend, dir_fileName, 
+                    xlim=xlim, ylim=ylim, xscale='linear', yscale='linear',
+                    style_dict=style_dict, colorScheme='TUM', variation='color')
 
-#     t = []
-#     ftotx = []
-#     ftoty = []
-#     ftotz = []  # Porous
-#     fpx = []
-#     fpy = []
-#     fpz = []  # Pressure
-#     fvx = []
-#     fvy = []
-#     fvz = []  # Viscous
+    print("\n")
 
-#     pipefile = open(
-#  '/media/dani/linuxHDD/openfoam/simpleFoam/testing/13_v1Fine/postProcessing/forces/0/force.dat', 'r')
-
-#     lines = pipefile.readlines()
-
-#     for line in lines:
-#         match = re.search(forceRegex, line)
-#         if match:
-#             t.append(float(match.group(1)))
-#             ftotx.append(float(match.group(2)))
-#             ftoty.append(float(match.group(3)))
-#             ftotz.append(float(match.group(4)))
-#             fpx.append(float(match.group(5)))
-#             fpy.append(float(match.group(6)))
-#             fpz.append(float(match.group(7)))
-#             fvx.append(float(match.group(8)))
-#             fvy.append(float(match.group(9)))
-#             fvz.append(float(match.group(10)))
-
-#     fpy = np.array(fpy)
-
-#     return fpy  
 
 
 def main():

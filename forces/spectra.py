@@ -83,11 +83,19 @@ def plotSpectra(f, Sa):         #comp
     x = [f]
     y = [Sa]
 
+    #maximum peak frequency
+
+
+
+
+    max_fq = f[np.argmax(Sa)]
+
     # ---- Plotting ----#
     xlabel = "f"
     ylabel = "PSD " #(" + comp + ")
     title = "Power Spectral Density"
-
+    vLines = [max_fq]
+    vTexts = [r"\$f_{peak}" + '{:03.2f}'.format(max_fq) +r"\$"]
     legend = ["measured"]
 
     # Change to current file location
@@ -99,11 +107,11 @@ def plotSpectra(f, Sa):         #comp
 
     style_dict = {"savefig.format": "svg"}
 
-    plt.plot2D(x, y, xlabel=xlabel, ylabel=ylabel, title=title, legend=legend,
+    plt.plot2D(x, y, xlabel=xlabel, ylabel=ylabel, title=title, legend=legend, vLines=vLines, vTexts=vTexts,
                dir_fileName=dir_fileName, xlim=xlim, ylim=ylim,
                xscale='log', yscale='log',
                style_dict=style_dict, colorScheme='UniS', variation='color',
-               savePlt=True, showPlt=True)
+               savePlt=True, showPlt=True, saveTex=True)
 
 def main():
     # --- Input data ---#
@@ -113,7 +121,7 @@ def main():
     dT = interpForces[0][1]-interpForces[0][0]
 
     f, Sa = calculateSpectra(y,dT)
-    # plotSpectra(f, Sa)
+    plotSpectra(f, Sa)
     print(f[np.argmax(Sa)])
 
 

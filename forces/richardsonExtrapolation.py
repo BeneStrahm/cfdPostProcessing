@@ -41,8 +41,9 @@ class convergenceVerification():
    
     def __init__(self): 
         # List of datapoints to be evaluated 
-        self.S_k_m          = [1,2,3]
-        self.delta_x_k_m    = [1,2,3]
+        Volume = 3840*1600*960
+        self.convrgData     = [1,2,3]
+        self.inputParam     = [1/5363944, 1/1692134, 1/1090368]
         self.delta_star_k_1 = "-"
         self.S_C            = "-"
         self.relError       = ["-", "-", "-"]
@@ -230,7 +231,7 @@ class convergenceVerification():
 
         if self.convrgFlag == "Convergent":
             hLines = [self.S_C]
-            hTexts = ['estimate']
+            hTexts = 'estimate'
         else:
             hLines = None
             hTexts = None
@@ -284,15 +285,16 @@ class convergenceVerification():
 
         
 
-        xlim = [max(x)+0.1*max(x),min(x)-0.5*min(x)]
-        # ylim = [0, 0.5]
+        xlim = [max(x)+max(x)*0.2,0]
+        ylim = [-0.2,max(y)+max(y)*0.5]
         # Change to current file location
         os.chdir(os.path.dirname(sys.argv[0]))
 
-        style_dict = {"lines.markersize": 8,"savefig.format": "svg", "lines.linewidth":0, "lines.marker":"x"}
-        xlabel = 'Zellgröße'
+        style_dict = {"lines.linewidth": 0,"lines.markersize": 8,"savefig.format": "svg","lines.marker":"x"}
+        xlabel = 'Zellanzahl'
         ylabel  = r"Fx Std [MN]" 
         title   = r"Convergence Std"
+        
 
         plt.plot2D(x, y, xlabel=xlabel, ylabel=ylabel, title=title, 
                dir_fileName=dir_fileName, xlim=xlim,# ylim=ylim,
@@ -311,7 +313,7 @@ def main():
     outDir = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/'
     
     #bs
-    outDir = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/'
+    # outDir = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/'
 
     # Step 1: Define a representative grid size h
     # -------
@@ -321,23 +323,19 @@ def main():
     grid_size_h     = [(refinement_vol / x) ** (1/3) for x in no_of_cells]
 
     # Collect the components
-    # fname0 = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref0/postProcessing/forces/0/force.dat'
-    # fname1 = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref1/postProcessing/forces/0/force.dat'
-    # fname2 = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref2/postProcessing/forces/0/force.dat'
+    fname0 = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref0/postProcessing/forces/0/force.dat'
+    fname1 = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref1/postProcessing/forces/0/force.dat'
+    fname2 = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref2/postProcessing/forces/0/force.dat'
 
-    # Step 2: Select the key variable to examine convergence
-    # -------
-    # Where m = 1  most fine parameters and m = 3 on the most coarse 
+    # bs:
+    # fname2 = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/force_ref0.dat'
+    # fname1 = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/force_ref1.dat'
+    # fname0 = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/force_ref2.dat'
 
-    fname1 = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/force_ref2.dat'
-    fname2 = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/force_ref1.dat'
-    fname3 = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/force_ref0.dat'
-
+    interpForces2 = readForces.importForces(fname0)
     interpForces1 = readForces.importForces(fname1)
-    interpForces2 = readForces.importForces(fname2)
-    interpForces3 = readForces.importForces(fname3) 
-
-    interp = [interpForces1, interpForces2, interpForces3]
+    interpForces0 = readForces.importForces(fname2)
+    interp = [interpForces0, interpForces1, interpForces2]
 
     # Specify Cut-Off time
     # print("Specify time range to plot")
@@ -355,12 +353,14 @@ def main():
     while m <= 2:
             # Get data to plot
             dT = interp[m][0][1]-interp[m][0][0]
-            BF = interp[m][2]/ (10 ** 6)            
+            BF = interp[m][1]/ (10 ** 6)    
+            
             # Cut the array to desired range 
             l = BF[int(sCutT/dT):int(eCutT/dT)]
             # meanBF.appendData(np.mean(l), m)
             # rmsBF.appendData(np.sqrt(np.mean(np.square(l))), m)
-            stdBF.appendData(np.std(l), grid_size_h[m], m)  
+            stdBF.appendData(np.std(l), m)  
+            # print (np.sqrt(np.mean(np.square(l))))
             # maxBF.appendData(np.average(hq.nlargest(20, l)), m) 
             # minBF.appendData(np.average(hq.nsmallest(20, l)), m) 
             m +=1
@@ -390,8 +390,8 @@ def main():
     # minBF.writeConvergence(comp,"Smallest20", outDir, sCutT, eCutT)
 
     # Plot convergence (+ estimated error)
-    # meanBF.plotConvergence(comp, "Mean", outDir, sCutT, eCutT)
-    # rmsBF.plotConvergence(comp, "RMS", outDir, sCutT, eCutT)
+    # meanBF.plotConvergence(outDir, sCutT, eCutT)
+    # rmsBF.plotConvergence(outDir, sCutT, eCutT)
     stdBF.plotConvergence(outDir, sCutT, eCutT)
     # maxBF.plotConvergence(comp,"Largest20", outDir, sCutT, eCutT)
     # minBF.plotConvergence(comp,"Smallest20", outDir, sCutT, eCutT)
