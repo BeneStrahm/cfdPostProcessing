@@ -109,7 +109,7 @@ class convergenceVerification():
                                     np.abs(self.epsilon_k_32/self.epsilon_k_21)
                                 )) \
                             + np.log(
-                                (self.r_k_21 ** rho_k - s) / (self.r_k_32 ** rho_k - s)  
+                                (self.r_k_21**rho_k - s) / (self.r_k_32**rho_k - s)  
                             )
                             
 
