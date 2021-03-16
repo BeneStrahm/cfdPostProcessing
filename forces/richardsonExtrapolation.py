@@ -103,11 +103,14 @@ class convergenceVerification():
 
             while stopFlag == False:
                 # Estimate next step (Improved meth., see Celik)
-                rho_k_next = np.log(self.epsilon_k_32 / self.epsilon_k_21 ) /   \
-                            np.log(self.r_k_21) + np.log(
-                                (self.r_k_21 ** rho_k - s)  /
-                                (self.r_k_32 ** rho_k - s)  
+                rho_k_next = 1 / np.log(self.r_k_21) * \
+                             np.abs(np.log(
+                                    np.abs(self.epsilon_k_32/self.epsilon_k_21)
+                                )) \
+                            + np.log(
+                                (self.r_k_21 ** rho_k - s) / (self.r_k_32 ** rho_k - s)  
                             )
+                            
 
                 # Check criteria
                 if abs((rho_k_next - rho_k) / rho_k_next) <= 0.001:
