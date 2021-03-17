@@ -234,7 +234,7 @@ class convergenceVerification():
                     self.relError[0]
                     ])
 
-    def plotConvergence(self, outDir, sT, eT):
+    def plotConvergence(self, outDir, sT, eT,stat):
 
         dir_fileName = outDir + "Baseshear"
         x = self.delta_x_k_m
@@ -296,19 +296,19 @@ class convergenceVerification():
 
         
 
-        xlim = [max(x)+max(x)*0.2,0]
-        ylim = [-0.2,max(y)+max(y)*0.5]
+        xlim = [0,max(x)+max(x)*0.2]
+        ylim = [0,max(y)+max(y)*0.5]
         # Change to current file location
         os.chdir(os.path.dirname(sys.argv[0]))
 
         style_dict = {"lines.linewidth": 0,"lines.markersize": 8,"savefig.format": "svg","lines.marker":"x"}
-        xlabel = 'Zellanzahl'
-        ylabel  = r"Fx Std [MN]" 
-        title   = r"Convergence Std"
+        xlabel = 'Zellanzahl Refinement Zone [10⁶]'
+        ylabel  = str(stat[3]) 
+        title   = str(stat[4])
         
 
         plt.plot2D(x, y, xlabel=xlabel, ylabel=ylabel, title=title, 
-               dir_fileName=dir_fileName, xlim=xlim,# ylim=ylim,
+               dir_fileName=dir_fileName, xlim=xlim, ylim=ylim,
                hLines=hLines, hTexts=hTexts,
                style_dict=style_dict,
                variation='color',
@@ -329,9 +329,10 @@ def main():
     # Step 1: Define a representative grid size h
     # -------
     # Where m = 1  most fine parameters and m = 3 on the most coarse 
-    no_of_cells     = [4924000, 3207000, 1000000]
+    no_of_cells     = [5363944/ (10 ** 6), 1692134/ (10 ** 6), 1090369/ (10 ** 6)] 
     refinement_vol  = 3840 * 1600 * 960
-    grid_size_h     = [(refinement_vol / x) ** (1/3) for x in no_of_cells]
+    # grid_size_h     = [(refinement_vol / x) ** (1/3) for x in no_of_cells]
+    grid_size_h = no_of_cells
 
     # Collect the components
     fname0 = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref0/postProcessing/forces/0/force.dat'
@@ -343,20 +344,30 @@ def main():
     # fname1 = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/force_ref1.dat'
     # fname2 = 'C:/Users/bstra/GitHub/cfdPostProcessing/forces/sampleData/force_ref2.dat'
 
-    interpForces2 = readForces.importForces(fname0)
+    interpForces0 = readForces.importForces(fname0)
     interpForces1 = readForces.importForces(fname1)
-    interpForces0 = readForces.importForces(fname2)
-    interp = [interpForces0, interpForces1, interpForces2]
+    interpForces2 = readForces.importForces(fname2)
+    interp = [interpForces2, interpForces1, interpForces0]
 
     # Specify Cut-Off time
     # print("Specify time range to plot")
-    sCutT = 200
+    sCutT = 100
     eCutT = 250
  
+
+    #Art der Rechnung bestimmen. [0] = Berechnung der Standardabweichung in y-dir, [1] = Berechnung des Mean in x-dir
+    stat = [['stdBF', np.std, 1, 'Std Fy','Convergence Std'] ,['meanBF', np.mean, 2, 'Mean Fx','Convergence Mean']  ]
+
+    
+    stat = stat[1]                                     # hier 0 oder 1
+    stat[0]   = convergenceVerification()
+
+
+
     # Loop through components
     # meanBF  = convergenceVerification()
     # rmsBF   = convergenceVerification()
-    stdBF   = convergenceVerification()
+    # stdBF   = convergenceVerification()
     # maxBF   = convergenceVerification()
     # minBF   = convergenceVerification()
 
@@ -364,48 +375,25 @@ def main():
     while m <= 2:
             # Get data to plot
             dT = interp[m][0][1]-interp[m][0][0]
-            BF = interp[m][1]/ (10 ** 6)    
+            BF = interp[m][stat[2]]/ (10 ** 6)    
             
             # Cut the array to desired range 
             l = BF[int(sCutT/dT):int(eCutT/dT)]
             # meanBF.appendData(np.mean(l), m)
             # rmsBF.appendData(np.sqrt(np.mean(np.square(l))), m)
-            stdBF.appendData(np.std(l), grid_size_h[m], m)   
+            stat[0].appendData(stat[1](l), grid_size_h[m], m)   
             # print (np.sqrt(np.mean(np.square(l))))
             # maxBF.appendData(np.average(hq.nlargest(20, l)), m) 
             # minBF.appendData(np.average(hq.nsmallest(20, l)), m) 
             m +=1
 
-    # Evaluate convergence(s)
+    stat[0].evaluateConvergence()
+    stat[0].estimateError()
+    stat[0].writeConvergence(stat[3],stat[3], outDir)
+    stat[0].plotConvergence(outDir, sCutT, eCutT,stat)
 
-    # meanBF.evaluateConvergence()
-    # rmsBF.evaluateConvergence()
-    stdBF.evaluateConvergence()
-    # maxBF.evaluateConvergence()
-    # minBF.evaluateConvergence()
 
-    # Estimate the error(s)
 
-    # meanBF.estimateError()
-    # rmsBF.estimateError()
-    stdBF.estimateError()
-    # maxBF.estimateError()
-    # minBF.estimateError()
-
-    # Write convergence to txt-file
-
-    # meanBF.writeConvergence(comp,"Mean", outDir, sCutT, eCutT)
-    # rmsBF.writeConvergence(comp,"RMS", outDir, sCutT, eCutT)
-    stdBF.writeConvergence("Fx","Std", outDir)
-    # maxBF.writeConvergence(comp,"Largest20", outDir, sCutT, eCutT)
-    # minBF.writeConvergence(comp,"Smallest20", outDir, sCutT, eCutT)
-
-    # Plot convergence (+ estimated error)
-    # meanBF.plotConvergence(outDir, sCutT, eCutT)
-    # rmsBF.plotConvergence(outDir, sCutT, eCutT)
-    stdBF.plotConvergence(outDir, sCutT, eCutT)
-    # maxBF.plotConvergence(comp,"Largest20", outDir, sCutT, eCutT)
-    # minBF.plotConvergence(comp,"Smallest20", outDir, sCutT, eCutT)
 
 if __name__ == '__main__':
     main()
