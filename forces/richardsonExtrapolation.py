@@ -305,14 +305,18 @@ class convergenceVerification():
         xlabel = 'Zellanzahl Refinement Zone [10⁶]'
         ylabel  = str(stat[3]) 
         title   = str(stat[4])
-        
+
+        # Punkte mit Text
+        annotate = [['coarse ' + str('{:03.2f}'.format(y[2])),(x[2],y[2])],
+                    ['fine ' + str('{:03.2f}'.format(y[1])), (x[1],y[1])],
+                    ['finest ' + str('{:03.2f}'.format(y[0])), (x[0],y[0])]]
 
         plt.plot2D(x, y, xlabel=xlabel, ylabel=ylabel, title=title, 
                dir_fileName=dir_fileName, xlim=xlim, ylim=ylim,
                hLines=hLines, hTexts=hTexts,
                style_dict=style_dict,
                variation='color',
-               savePlt=True, showPlt=True)
+               savePlt=True, showPlt=True, annotate=annotate)
 
     
 # ------------------------------------------------------------------------------
@@ -358,7 +362,7 @@ def main():
     #Art der Rechnung bestimmen. [0] = Berechnung der Standardabweichung in y-dir, [1] = Berechnung des Mean in x-dir
     stat = [['stdBF', np.std, 1, 'Std Fy','Convergence Std'] ,['meanBF', np.mean, 2, 'Mean Fx','Convergence Mean']  ]
 
-    
+
     stat = stat[1]                                     # hier 0 oder 1
     stat[0]   = convergenceVerification()
 
