@@ -116,12 +116,12 @@ def loadData(filename,fieldScalar,ofDisc=False)    :
     [xs,ys,zs] = np.meshgrid(np.array(nx*[x0]),ys1D,zs1D)
     piFront=interpolate.griddata((x,y,z),p,(xs,ys,zs),method='nearest')[:,0,:]
     [xs,ys,zs] = np.meshgrid(np.array(nx*[x1]),ys1D,zs1D)
-    piBack=interpolate.griddata((x,y,z),p,(xs,ys,zs),method='nearest')[:,0,:]
+    piBack=-1*interpolate.griddata((x,y,z),p,(xs,ys,zs),method='nearest')[:,0,:]
     [xs,ys,zs] = np.meshgrid(xs1D,np.array(ny*[y0]),zs1D)
     piSide1=interpolate.griddata((x,y,z),p,(xs,ys,zs),method='nearest')[0,:,:]
-    #piSide1=np.flip(piSide1,axis=0)
+    # piSide1=np.flip(piSide1,axis=0)
     [xs,ys,zs] = np.meshgrid(xs1D,np.array(ny*[y1]),zs1D)
-    piSide2=interpolate.griddata((x,y,z),p,(xs,ys,zs),method='nearest')[0,:,:]
+    piSide2=-1*interpolate.griddata((x,y,z),p,(xs,ys,zs),method='nearest')[0,:,:]
     
     pFB=np.concatenate((piFront,piBack))
     pSS=np.concatenate((piSide1,piSide2))
@@ -281,15 +281,13 @@ def calculateSpectra(y, dT):
 ###############################################################################
 
 #Control
-interpolateData=False
+interpolateData=True
 loadinterpolatedData=True
-createInstantAnimation=False          
-       
+createInstantAnimation=False
 #Data Input
-rootPath='./1_FFT/'
-filename='building_wall.vtp'
-caseName='caseName.pkl'                             #name of data file after inpolating data
-h=160                                               #height
+caseName='1_conv_ref1' 
+rootPath='/media/dani/linuxHDD/openfoam/simpleFoam/testing/postProcessing/raw/' + caseName
+filename='building_wall.vtp'                        #name of data file after inpolating data=160                                               #height
 d=32                                                #length
 
 #Global time data
@@ -335,9 +333,10 @@ z=      df[4][0]
 pFB=    df[5]*rho_inf
 pSS=    df[6]*rho_inf
 pALL=   df[7]*rho_inf
-
+p = pALL
+x = xAll
 #%%Plotting contour data and saving
-animationPath='./results/instantField/'
+animationPath='./instantField/'
 if not os.path.exists(animationPath):
     os.makedirs(animationPath)
 
@@ -410,7 +409,7 @@ ax1.fill_betweenx(zFloors, FxFloorsMin/1000, FxFloorsMax/1000, facecolor='grey',
 ax1.set_xlabel(r'$F_{x_i}\,[kN]$')
 ax1.set_ylabel(r'$Floors\,[-]$')
 plt.legend()
-savefig('fx_z_floors')
+savefig(rootPath + 'fx_z_floors')
 
 #%% #%%Plot fy over floors
 
@@ -429,39 +428,39 @@ ax1.fill_betweenx(zFloors, FyFloorsMin/1000, FyFloorsMax/1000, facecolor='grey',
 ax1.set_xlabel(r'$F_{y_i}\,[kN]$')
 ax1.set_ylabel(r'$Floors\,[-]$')
 plt.legend()
-savefig('fy_z_floors')
+savefig(rootPath + 'fy_z_floors')
 
 
 #%%Calculate Spectra Fx
-fftX=[]
-for i in range(0,nFloors):
-    dT=np.diff(time)[0]
-    f,S= calculateSpectra(FxFloor[i,:], dT)
-    fftX.append(np.transpose(np.array([f,S])))
-
-
-
- 
-f=np.array([fftX[i][:,0] for i in range(0,len(fftX))]).T
-S=np.array([fftX[i][:,1] for i in range(0,len(fftX))]).T
-
-maxIndex=np.array(np.where(S==np.max(S)))
-fmax=f[maxIndex[0],maxIndex[1]]
-Smax=S[maxIndex[0],maxIndex[1]]
-
-latexify()
-fig1, (ax1) =  plt.subplots(1)
-axlist=[ax1]
-for i in range(0,nFloors):   
-    ax1.plot(f[:,i],S[:,i],color='grey',alpha=0.25)
-
-ax1.plot(f[:,maxIndex[1]],S[:,maxIndex[1]],color=new_colors[0],label=r'$max\{f,S,floor\}=\{'+str(fmax)+','+str(Smax)+','+str(maxIndex[1])+'\}$')
-ax1.set_xlabel(r'$f_{x_i}\,[Hz]$')
-ax1.set_ylabel(r'$S\,[-]$')
-ax1.set_xscale('log')
-ax1.set_yscale('log')
-plt.legend()
-savefig('fftx_Ampl')
+#fftX=[]
+#for i in range(0,nFloors):
+#    dT=np.diff(time)[0]
+#    f,S= calculateSpectra(FxFloor[i,:], dT)
+#    fftX.append(np.transpose(np.array([f,S])))
+#
+#
+#
+# 
+#f=np.array([fftX[i][:,0] for i in range(0,len(fftX))]).T
+#S=np.array([fftX[i][:,1] for i in range(0,len(fftX))]).T
+#
+#maxIndex=np.array(np.where(S==np.max(S)))
+#fmax=f[maxIndex[0],maxIndex[1]]
+#Smax=S[maxIndex[0],maxIndex[1]]
+#
+#latexify()
+#fig1, (ax1) =  plt.subplots(1)
+#axlist=[ax1]
+#for i in range(0,nFloors):   
+#    ax1.plot(f[:,i],S[:,i],color='grey',alpha=0.25)
+#
+#ax1.plot(f[:,maxIndex[1]],S[:,maxIndex[1]],color=new_colors[0],label=r'$max\{f,S,floor\}=\{'+str(fmax)+','+str(Smax)+','+str(maxIndex[1])+'\}$')
+#ax1.set_xlabel(r'$f_{x_i}\,[Hz]$')
+#ax1.set_ylabel(r'$S\,[-]$')
+#ax1.set_xscale('log')
+#ax1.set_yscale('log')
+#plt.legend()
+#savefig('fftx_Ampl')
 
 
 
@@ -493,4 +492,4 @@ ax1.set_ylabel(r'$S\,[-]$')
 ax1.set_xscale('log')
 ax1.set_yscale('log')
 plt.legend()
-savefig('ffty_Ampl')
+savefig(rootPath + 'ffty_Ampl')

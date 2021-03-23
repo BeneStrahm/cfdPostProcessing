@@ -95,7 +95,7 @@ def plotSpectra(f, Sa):         #comp
     ylabel = "PSD " #(" + comp + ")
     title = "Power Spectral Density"
     vLines = [max_fq]
-    vTexts = [r"\$f_{peak}" + '{:03.2f}'.format(max_fq) +r"\$"]
+    vTexts = [r"\$f_{peak}" + '{:03.4f}'.format(max_fq) +r"\$"]
     legend = ["measured"]
 
     # Change to current file location
@@ -111,15 +111,23 @@ def plotSpectra(f, Sa):         #comp
                dir_fileName=dir_fileName, xlim=xlim, ylim=ylim,
                xscale='log', yscale='log',
                style_dict=style_dict, colorScheme='UniS', variation='color',
-               savePlt=True, showPlt=True, saveTex=True)
+               savePlt=True, showPlt=True, savePkl=True,)
 
 def main():
     # --- Input data ---#
-    fname = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/2_height8/postProcessing/forces/0/force.dat'
+    fname = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref2/postProcessing/forces/0/force.dat'
     interpForces = readForces.importForces(fname)
     y = interpForces[1]             # Convert to MN
     dT = interpForces[0][1]-interpForces[0][0]
+        # Specify Cut-Off time
+    # sT = int(input("Start Time: 100 "))
+    # eT = int(input("End Time: 150   "))
+    sT = 100
+    eT = 200
 
+
+    # Cut the array to desired range
+    y = y[int(sT/dT):int(eT/dT)]
     f, Sa = calculateSpectra(y,dT)
     plotSpectra(f, Sa)
     print(f[np.argmax(Sa)])
