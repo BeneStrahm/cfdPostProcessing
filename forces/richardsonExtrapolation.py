@@ -241,8 +241,9 @@ class convergenceVerification():
         y = self.S_k_m
 
         if self.convrgFlag == "Convergent":
-            hLines = [self.S_C]
-            hTexts = ['estimate']
+            hLines = [self.S_C,1.551]
+            hTexts = ['estimate', 'Windtunnel']
+            print(self.S_C)
         else:
             hLines = None
             hTexts = None
@@ -300,8 +301,10 @@ class convergenceVerification():
         ylim = [0,max(y)+max(y)*0.5]
         # Change to current file location
         os.chdir(os.path.dirname(sys.argv[0]))
+        
+        
 
-        style_dict = {"lines.linewidth": 0,"lines.markersize": 8,"savefig.format": "svg","lines.marker":"x"}
+        style_dict = {"lines.linewidth": 0,"lines.markersize": 8,"savefig.format": "pdf","lines.marker":"x"}
         xlabel = 'Zellanzahl Refinement Zone [10⁶]'
         ylabel  = str(stat[3]) 
         title   = str(stat[4])
@@ -395,8 +398,7 @@ def main():
     stat[0].estimateError()
     stat[0].writeConvergence(stat[3],stat[3], outDir)
     stat[0].plotConvergence(outDir, sCutT, eCutT,stat)
-
-
+    
 
 
 if __name__ == '__main__':

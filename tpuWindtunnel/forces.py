@@ -11,7 +11,9 @@
 # ------------------------------------------------------------------------------  
 
 import sys           
-import numpy as np                                             
+import numpy as np      
+import heapq as hq       
+import os                                
 
 # ------------------------------------------------------------------------------
 # Imported functions
@@ -20,7 +22,7 @@ import numpy as np
 import cfdPostProcessing.WindTunnelPostprocessing.aeroForces as aeroForces
 import cfdPostProcessing.WindTunnelPostprocessing.modelProp as modelProp
 import cfdPostProcessing.WindTunnelPostprocessing.scaling as scaling
-
+import pyLEK.helpers.txtEditor as txt
 import pyLEK.plotters.plot2D as plt
 
 from pyLEK.helpers.pyExtras import getKeyList
@@ -38,7 +40,49 @@ def calcStatistics(BF_p):
     maxBF = np.max(BF_p)
     minBF = np.min(BF_p)
 
-    return meanBF, stdBF, rmsBF, maxBF, minBF, 
+    nAvMax = [10, 20, 50, 100]
+    maxAvBF = {}
+    minAvBF = {}
+
+    for n in nAvMax:
+        maxAvBF[n] = np.average(hq.nlargest(n, BF_p))
+        minAvBF[n] = np.average(hq.nsmallest(n, BF_p))
+
+    return meanBF, stdBF, rmsBF, maxBF, minBF, nAvMax, maxAvBF, minAvBF
+
+def writeTimeseries(BF_p):
+    # --- Calculation --#
+    meanBF, stdBF, rmsBF, maxBF, minBF, nAvMax, maxAvBF, minAvBF = calcStatistics(
+        BF_p)
+
+    units = "MN"
+    dir_fileName = "WindTunnel.txt"
+
+    # Change to current file location
+    os.chdir(os.path.dirname(sys.argv[0]))
+
+    # ---- Write to file ----#
+    txt.writeToTxt(dir_fileName, "--------------------------")
+    txt.writeToTxt(dir_fileName, "Baseforce "" (" + units + ")")
+    txt.writeToTxt(dir_fileName, "--------------------------")
+    txt.writeToTxt(dir_fileName, "Mean: " + '{: 10.3f}'.format(meanBF))
+    txt.writeToTxt(dir_fileName, "RMS:  " + '{: 10.3f}'.format(rmsBF))
+    txt.writeToTxt(dir_fileName, "--------------------------")
+    txt.writeToTxt(dir_fileName, "Max:  " + '{: 10.3f}'.format(maxBF))
+    txt.writeToTxt(dir_fileName, "Min:  " + '{: 10.3f}'.format(minBF))
+    txt.writeToTxt(dir_fileName, "Std:  " + '{: 10.3f}'.format(stdBF))
+    txt.writeToTxt(dir_fileName, "--------------------------")
+
+    for n in nAvMax:
+        maxAv = maxAvBF[n]
+        txt.writeToTxt(dir_fileName, "Max" + str(n) +
+                       "Avg:" + '{: 10.3f}'.format(maxAv))
+        minAv = minAvBF[n]
+        txt.writeToTxt(dir_fileName, "Min" + str(n) +
+                       "Avg:" + '{: 10.3f}'.format(minAv))
+
+    txt.writeToTxt(dir_fileName, "--------------------------")
+
 
 def main():
     # Get name of input file
@@ -49,7 +93,7 @@ def main():
     # delFilesInFolder('T115_6/results')
 
     # Full scale building properties
-    uH_f    = 38             # m/s       // Wind speed at z = H (50yr)
+    uH_f    = 36             # m/s       // Wind speed at z = H (50yr)
     H_f     = 160               # m         // Building height
     B       = 32                # m         // Building width
     dns     = ['D', 'L']        #           // Directions (Drag/Lifts)
@@ -94,7 +138,7 @@ def main():
         print("Max Base Force: " + '{:02.3f}'.format(np.max(buildAeroForces.BF_p)))
         print("Std Base Force: " + '{:02.3f}'.format(np.std(buildAeroForces.BF_p)))
         
-        meanBF, stdBF, rmsBF, maxBF, minBF = calcStatistics(buildAeroForces.BF_p)
+        meanBF, stdBF, rmsBF, maxBF, minBF, nAvMax, maxAvBF, minAvBF = calcStatistics(buildAeroForces.BF_p)
         hLines = [meanBF, meanBF + stdBF, meanBF - stdBF]
         hTexts = ["\$F_{x,mean}\$", "\$F_{x,mean+std}\$", "\$F_{x,mean-std}\$"]
 
@@ -104,10 +148,11 @@ def main():
         # Time series of base forces
         t = np.linspace(0, buildProp.nT*buildProp.dT, buildProp.nT)
         F = buildAeroForces.BF_p
+        writeTimeseries(F)
         
         style_dict = {"lines.linewidth": "0.5", "savefig.format": "svg"}
         plt.plot2D(t, F, hLines=hLines,   style_dict=style_dict, xlabel="Time [s]", ylabel= "Base Force " + dn + " [kN]", title="Time series of base forces", showPlt=True)            
-        
+        print(stdBF)
             
 
 if __name__ == '__main__':

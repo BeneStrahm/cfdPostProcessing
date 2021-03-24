@@ -65,22 +65,22 @@ def writeTimeseries(Fi):
 
     # ---- Write to file ----#
     txt.writeToTxt(dir_fileName, "--------------------------")
-    txt.writeToTxt(dir_fileName, "Baseforce " + comp + " (" + units + ")")
+    txt.writeToTxt(dir_fileName, "Baseforce "" (" + units + ")")
     txt.writeToTxt(dir_fileName, "--------------------------")
-    txt.writeToTxt(dir_fileName, comp + "Mean: " + '{: 10.3f}'.format(meanFi))
-    txt.writeToTxt(dir_fileName, comp + "RMS:  " + '{: 10.3f}'.format(rmsFi))
+    txt.writeToTxt(dir_fileName, "Mean: " + '{: 10.3f}'.format(meanFi))
+    txt.writeToTxt(dir_fileName, "RMS:  " + '{: 10.3f}'.format(rmsFi))
     txt.writeToTxt(dir_fileName, "--------------------------")
-    txt.writeToTxt(dir_fileName, comp + "Max:  " + '{: 10.3f}'.format(maxFi))
-    txt.writeToTxt(dir_fileName, comp + "Min:  " + '{: 10.3f}'.format(minFi))
-    txt.writeToTxt(dir_fileName, comp + "Std:  " + '{: 10.3f}'.format(stdFi))
+    txt.writeToTxt(dir_fileName, "Max:  " + '{: 10.3f}'.format(maxFi))
+    txt.writeToTxt(dir_fileName, "Min:  " + '{: 10.3f}'.format(minFi))
+    txt.writeToTxt(dir_fileName, "Std:  " + '{: 10.3f}'.format(stdFi))
     txt.writeToTxt(dir_fileName, "--------------------------")
 
     for n in nAvMax:
         maxAv = maxAvFi[n]
-        txt.writeToTxt(dir_fileName, comp + "Max" + str(n) +
+        txt.writeToTxt(dir_fileName, "Max" + str(n) +
                        "Avg:" + '{: 10.3f}'.format(maxAv))
         minAv = minAvFi[n]
-        txt.writeToTxt(dir_fileName, comp + "Min" + str(n) +
+        txt.writeToTxt(dir_fileName, "Min" + str(n) +
                        "Avg:" + '{: 10.3f}'.format(minAv))
 
     txt.writeToTxt(dir_fileName, "--------------------------")
@@ -119,7 +119,7 @@ def main():
     # --- Input data ---#
     # List containing time series of forces
     # in the order Fi
-    fname = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref0/postProcessing/forces/0/force.dat'
+    fname = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/1_conv_ref2/postProcessing/forces/0/force.dat'
     mname = '/media/dani/linuxHDD/openfoam/simpleFoam/testing/2_height15/postProcessing/forces/0/moment.dat'
     # In your script, import first
     interpForces = readForces.importForces(fname)
@@ -151,9 +151,9 @@ def main():
     Fi = Fi[int(sT/dT):int(eT/dT)]
     
     
-    # writeTimeseries(Fi)
-    # plotTimeseries(Ti, Fi)
-    print (np.std(Fi))
+    writeTimeseries(Fi)
+    plotTimeseries(Ti, Fi)
+    print (np.mean(Fi))
 
 if __name__ == '__main__':
     main()

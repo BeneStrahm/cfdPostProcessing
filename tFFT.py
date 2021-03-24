@@ -116,16 +116,17 @@ def loadData(filename,fieldScalar,ofDisc=False)    :
     [xs,ys,zs] = np.meshgrid(np.array(nx*[x0]),ys1D,zs1D)
     piFront=interpolate.griddata((x,y,z),p,(xs,ys,zs),method='nearest')[:,0,:]
     [xs,ys,zs] = np.meshgrid(np.array(nx*[x1]),ys1D,zs1D)
-    piBack=-1*interpolate.griddata((x,y,z),p,(xs,ys,zs),method='nearest')[:,0,:]
+    piBack=interpolate.griddata((x,y,z),p,(xs,ys,zs),method='nearest')[:,0,:]
     [xs,ys,zs] = np.meshgrid(xs1D,np.array(ny*[y0]),zs1D)
     piSide1=interpolate.griddata((x,y,z),p,(xs,ys,zs),method='nearest')[0,:,:]
     # piSide1=np.flip(piSide1,axis=0)
     [xs,ys,zs] = np.meshgrid(xs1D,np.array(ny*[y1]),zs1D)
-    piSide2=-1*interpolate.griddata((x,y,z),p,(xs,ys,zs),method='nearest')[0,:,:]
+    piSide2=interpolate.griddata((x,y,z),p,(xs,ys,zs),method='nearest')[0,:,:]
     
     pFB=np.concatenate((piFront,piBack))
     pSS=np.concatenate((piSide1,piSide2))
     pAll=np.concatenate((piSide1,piFront,piSide2,piBack))
+  
     
     xFB=np.linspace(0.5*y0,y1+0.5*y1,pFB.shape[0])
     xSS=np.linspace(y0,y1,pSS.shape[0])
@@ -172,13 +173,11 @@ def FFT(write):
     A = pyfftw.interfaces.numpy_fft.fft(fftAmp[:,:,:,0:Kfft+1], axis=0, threads=nthread)
     AmpTfftAmp = np.abs(A[0:int(fftAmp.shape[0]/2),:,:,:])
     AmpTfftReal = np.real(A[0:int(fftAmp.shape[0]/2),:,:,:])
-    
-    A = pyfftw.interfaces.numpy_fft.fft(fftReal[:,:,:,0:Kfft+1], axis=0, threads=nthread)
-    RealTfftAmp = np.abs(A[0:int(fftReal.shape[0]/2),:,:,:])
-    RealTfftReal = np.real(A[0:int(fftReal.shape[0]/2),:,:,:])
-   
-    end = time()
-    print("Time for FFT ("+str(Kfft+1)+" wave numbers) "+ str(end - start))
+    Sa = np.zeros(N)
+
+    # For explanation see https://www.cbcity.de/die-fft-mit-python-einfach-erklaert
+    # Determine frequencies resulting from FFT
+    # https://github.com/pyNFFT/pyNFFT for non uniform samp
     
     ###################################################
      #Saving the results of the FFT to OD
@@ -281,17 +280,18 @@ def calculateSpectra(y, dT):
 ###############################################################################
 
 #Control
-interpolateData=True
+interpolateData=False
 loadinterpolatedData=True
-createInstantAnimation=False
+createInstantAnimation=True
 #Data Input
-caseName='1_conv_ref1' 
+caseName='1_conv_ref2' 
 rootPath='/media/dani/linuxHDD/openfoam/simpleFoam/testing/postProcessing/raw/' + caseName
-filename='building_wall.vtp'                        #name of data file after inpolating data=160                                               #height
+filename='building_wall.vtp'                        #name of data file after inpolating data
+h=160                                               #height
 d=32                                                #length
 
 #Global time data
-t0,t1,dt=60,250,1
+t0,t1,dt=245,250,1
 time=np.arange(t0,t1+dt,dt)
 timeZeroed=time-t0                                  #Zero time
 
@@ -312,8 +312,8 @@ fields=[]
 
 if (interpolateData==True):
 #Create FileList Dictionary
-    for i in range(0,len(fileList)):
-        print('Preprocessing file: ' + str(i) + '/' + str(len(fileList)) + '\t time: ' + str(time[i]))
+    for i in range(0,t1-t0):
+        print('Preprocessing file: ' + str(i) + '/' + str(t1-t0) + '\t time: ' + str(time[i]))
         xFB,xSS,xAll,zAll,pFB,pSS,pAll=loadData(fileList[i],'p',ofDisc=False)
         fields.append([timeZeroed[i],xFB,xSS,xAll,zAll,pFB,pSS,pAll])
         del xFB,xSS,xAll,zAll,pFB,pSS,pAll
@@ -321,10 +321,10 @@ if (interpolateData==True):
     print('Converting and saving all field data as pickle file:')        
     import pandas as pd
     df = pd.DataFrame(fields)
-    df.to_pickle(caseName)
+    df.to_pickle(rootPath + '_pickle')
     
 if (loadinterpolatedData==True): 
-    df=pd.read_pickle(caseName)
+    df=pd.read_pickle(rootPath + '_pickle')
 
 xFB=    df[1][0]
 xSS=    df[2][0]
@@ -332,27 +332,26 @@ xAll=   df[3][0]
 z=      df[4][0]
 pFB=    df[5]*rho_inf
 pSS=    df[6]*rho_inf
-pALL=   df[7]*rho_inf
-p = pALL
-x = xAll
+pALL=   df[7]
+
 #%%Plotting contour data and saving
-animationPath='./instantField/'
+animationPath= rootPath + '_instantfield'
 if not os.path.exists(animationPath):
     os.makedirs(animationPath)
 
 if (createInstantAnimation==True):   
-    levels_p=np.linspace(-1000,1000,64)
-    for i in range(0,len(p)):
-        print('Creating Animation of instant field ' + str(i) + '/' + str(len(fileList)))
+    levels_p=np.linspace(-700,1000,50)
+    for i in range(0,len(pALL)):
+        print('Creating Animation of instant field ' + str(i+1) + '/' + str(t1-t0))
         latexify()
         fig1, (ax1) =  plt.subplots(1)
         axlist=[ax1]
-        surf=ax1.contourf(x,z,p[i]-p_inf,levels=levels_p,extend='both',cmap='coolwarm')
+        surf=ax1.contourf(xAll,z,pALL[i]-p_inf,levels=levels_p,extend='both',cmap='coolwarm')
         ax1.set_xlabel(r'x\,[m]')
         ax1.set_ylabel(r'z\,[m]')
         ax1.set_ylim(0,z.max())
         plt.colorbar(surf,ax=axlist,format='%.0f',label=r'$p_{rel}\,[Pa]$',orientation='horizontal',pad=0.2)
-        savefigPNG(animationPath + 'instantFields_' + str(i))
+        savefigPNG(animationPath + '/_instantField' + str(i))
 
 
 #%%
@@ -392,6 +391,10 @@ zFloors=np.arange(0,nFloors,1)
 
 
 #%%Plot fx over floors
+floorPath= rootPath + '_floorPlots'
+if not os.path.exists(floorPath):
+    os.makedirs(floorPath)
+
 
 zFloors,FxFloor=createFloorData(heightFloor,z,pFB)
 
@@ -409,7 +412,7 @@ ax1.fill_betweenx(zFloors, FxFloorsMin/1000, FxFloorsMax/1000, facecolor='grey',
 ax1.set_xlabel(r'$F_{x_i}\,[kN]$')
 ax1.set_ylabel(r'$Floors\,[-]$')
 plt.legend()
-savefig(rootPath + 'fx_z_floors')
+savefig(floorPath + '/_floorPlots' +'fx_z_floors')
 
 #%% #%%Plot fy over floors
 
@@ -428,39 +431,39 @@ ax1.fill_betweenx(zFloors, FyFloorsMin/1000, FyFloorsMax/1000, facecolor='grey',
 ax1.set_xlabel(r'$F_{y_i}\,[kN]$')
 ax1.set_ylabel(r'$Floors\,[-]$')
 plt.legend()
-savefig(rootPath + 'fy_z_floors')
+savefig(floorPath + '/_floorPlots' +'fy_z_floors')
 
 
 #%%Calculate Spectra Fx
-#fftX=[]
-#for i in range(0,nFloors):
-#    dT=np.diff(time)[0]
-#    f,S= calculateSpectra(FxFloor[i,:], dT)
-#    fftX.append(np.transpose(np.array([f,S])))
-#
-#
-#
-# 
-#f=np.array([fftX[i][:,0] for i in range(0,len(fftX))]).T
-#S=np.array([fftX[i][:,1] for i in range(0,len(fftX))]).T
-#
-#maxIndex=np.array(np.where(S==np.max(S)))
-#fmax=f[maxIndex[0],maxIndex[1]]
-#Smax=S[maxIndex[0],maxIndex[1]]
-#
-#latexify()
-#fig1, (ax1) =  plt.subplots(1)
-#axlist=[ax1]
-#for i in range(0,nFloors):   
-#    ax1.plot(f[:,i],S[:,i],color='grey',alpha=0.25)
-#
-#ax1.plot(f[:,maxIndex[1]],S[:,maxIndex[1]],color=new_colors[0],label=r'$max\{f,S,floor\}=\{'+str(fmax)+','+str(Smax)+','+str(maxIndex[1])+'\}$')
-#ax1.set_xlabel(r'$f_{x_i}\,[Hz]$')
-#ax1.set_ylabel(r'$S\,[-]$')
-#ax1.set_xscale('log')
-#ax1.set_yscale('log')
-#plt.legend()
-#savefig('fftx_Ampl')
+fftX=[]
+for i in range(0,nFloors):
+   dT=np.diff(time)[0]
+   f,S= calculateSpectra(FxFloor[i,:], dT)
+   fftX.append(np.transpose(np.array([f,S])))
+
+
+
+
+f=np.array([fftX[i][:,0] for i in range(0,len(fftX))]).T
+S=np.array([fftX[i][:,1] for i in range(0,len(fftX))]).T
+
+maxIndex=np.array(np.where(S==np.max(S)))
+fmax=f[maxIndex[0],maxIndex[1]]
+Smax=S[maxIndex[0],maxIndex[1]]
+
+latexify()
+fig1, (ax1) =  plt.subplots(1)
+axlist=[ax1]
+for i in range(0,nFloors):   
+   ax1.plot(f[:,i],S[:,i],color='grey',alpha=0.25)
+
+ax1.plot(f[:,maxIndex[1]],S[:,maxIndex[1]],color=new_colors[0],label=r'$max\{f,S,floor\}=\{'+str(fmax)+','+str(Smax)+','+str(maxIndex[1])+'\}$')
+ax1.set_xlabel(r'$f_{x_i}\,[Hz]$')
+ax1.set_ylabel(r'$S\,[-]$')
+ax1.set_xscale('log')
+ax1.set_yscale('log')
+plt.legend()
+savefig(floorPath + '/_floorPlots' +'fftx_Ampl')
 
 
 
@@ -492,4 +495,4 @@ ax1.set_ylabel(r'$S\,[-]$')
 ax1.set_xscale('log')
 ax1.set_yscale('log')
 plt.legend()
-savefig(rootPath + 'ffty_Ampl')
+savefig(floorPath + '/_floorPlots' +'ffty_Ampl')
