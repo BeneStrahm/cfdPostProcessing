@@ -116,9 +116,9 @@ def loadData(filename,fieldScalar,ofDisc=False)    :
     [xs,ys,zs] = np.meshgrid(np.array(nx*[x0]),ys1D,zs1D)
     piFront=interpolate.griddata((x,y,z),p,(xs,ys,zs),method='nearest')[:,0,:]
     [xs,ys,zs] = np.meshgrid(np.array(nx*[x1]),ys1D,zs1D)
-    piBack=interpolate.griddata((x,y,z),p,(xs,ys,zs),method='nearest')[:,0,:]
+    piBack=-1*interpolate.griddata((x,y,z),p,(xs,ys,zs),method='nearest')[:,0,:]
     [xs,ys,zs] = np.meshgrid(xs1D,np.array(ny*[y0]),zs1D)
-    piSide1=interpolate.griddata((x,y,z),p,(xs,ys,zs),method='nearest')[0,:,:]
+    piSide1=-1*interpolate.griddata((x,y,z),p,(xs,ys,zs),method='nearest')[0,:,:]
     # piSide1=np.flip(piSide1,axis=0)
     [xs,ys,zs] = np.meshgrid(xs1D,np.array(ny*[y1]),zs1D)
     piSide2=interpolate.griddata((x,y,z),p,(xs,ys,zs),method='nearest')[0,:,:]
@@ -282,16 +282,16 @@ def calculateSpectra(y, dT):
 #Control
 interpolateData=False
 loadinterpolatedData=True
-createInstantAnimation=True
+createInstantAnimation=False
 #Data Input
-caseName='1_conv_ref2' 
+caseName='1_conv_ref1' 
 rootPath='/media/dani/linuxHDD/openfoam/simpleFoam/testing/postProcessing/raw/' + caseName
 filename='building_wall.vtp'                        #name of data file after inpolating data
 h=160                                               #height
 d=32                                                #length
 
 #Global time data
-t0,t1,dt=245,250,1
+t0,t1,dt=240,250,1
 time=np.arange(t0,t1+dt,dt)
 timeZeroed=time-t0                                  #Zero time
 
@@ -299,7 +299,7 @@ timeZeroed=time-t0                                  #Zero time
 rho_inf=1.18                                        #rho_inf
 p_inf=101325                                        #pressure inf
 
-heightFloor=4                                        #height floor [m]
+heightFloor=4                                       #height floor [m]
 
 
 #%%
@@ -402,17 +402,17 @@ FxFloorsMax=np.array([np.max(FxFloor[i,:]) for i in range(0,FxFloor.shape[0])])
 FxFloorsMin=np.array([np.min(FxFloor[i,:]) for i in range(0,FxFloor.shape[0])])
 FxFloorsMean=np.array([np.mean(FxFloor[i,:]) for i in range(0,FxFloor.shape[0])])
 
-latexify()
-fig1, (ax1) =  plt.subplots(1)
-axlist=[ax1]   
-ax1.plot(FxFloorsMax/1000,zFloors,label=r'$F_{x_{max}}$')
-ax1.plot(FxFloorsMean/1000,zFloors,label=r'$F_{x_{mean}}$')
-ax1.plot(FxFloorsMin/1000,zFloors,label=r'$F_{x_{min}}$')
-ax1.fill_betweenx(zFloors, FxFloorsMin/1000, FxFloorsMax/1000, facecolor='grey',alpha=0.2,interpolate=True)
-ax1.set_xlabel(r'$F_{x_i}\,[kN]$')
-ax1.set_ylabel(r'$Floors\,[-]$')
-plt.legend()
-savefig(floorPath + '/_floorPlots' +'fx_z_floors')
+# latexify()
+# fig1, (ax1) =  plt.subplots(1)
+# axlist=[ax1]   
+# ax1.plot(FxFloorsMax/1000,zFloors,label=r'$F_{x_{max}}$')
+# ax1.plot(FxFloorsMean/1000,zFloors,label=r'$F_{x_{mean}}$')
+# ax1.plot(FxFloorsMin/1000,zFloors,label=r'$F_{x_{min}}$')
+# ax1.fill_betweenx(zFloors, FxFloorsMin/1000, FxFloorsMax/1000, facecolor='grey',alpha=0.2,interpolate=True)
+# ax1.set_xlabel(r'$F_{x_i}\,[kN]$')
+# ax1.set_ylabel(r'$Floors\,[-]$')
+# plt.legend()
+# savefig(floorPath + '/_floorPlots' +'fx_z_floors')
 
 #%% #%%Plot fy over floors
 
@@ -421,24 +421,26 @@ FyFloorsMax=np.array([np.max(FyFloor[i,:]) for i in range(0,FyFloor.shape[0])])
 FyFloorsMin=np.array([np.min(FyFloor[i,:]) for i in range(0,FyFloor.shape[0])])
 FyFloorsMean=np.array([np.mean(FyFloor[i,:]) for i in range(0,FyFloor.shape[0])])
 
-latexify()
-fig1, (ax1) =  plt.subplots(1)
-axlist=[ax1]   
-ax1.plot(FyFloorsMax/1000,zFloors,label=r'$F_{y_{max}}$')
-ax1.plot(FyFloorsMean/1000,zFloors,label=r'$F_{y_{mean}}$')
-ax1.plot(FyFloorsMin/1000,zFloors,label=r'$F_{y_{min}}$')
-ax1.fill_betweenx(zFloors, FyFloorsMin/1000, FyFloorsMax/1000, facecolor='grey',alpha=0.2,interpolate=True)
-ax1.set_xlabel(r'$F_{y_i}\,[kN]$')
-ax1.set_ylabel(r'$Floors\,[-]$')
-plt.legend()
-savefig(floorPath + '/_floorPlots' +'fy_z_floors')
+# latexify()
+# fig1, (ax1) =  plt.subplots(1)
+# axlist=[ax1]   
+# ax1.plot(FyFloorsMax/1000,zFloors,label=r'$F_{y_{max}}$')
+# ax1.plot(FyFloorsMean/1000,zFloors,label=r'$F_{y_{mean}}$')
+# ax1.plot(FyFloorsMin/1000,zFloors,label=r'$F_{y_{min}}$')
+# ax1.fill_betweenx(zFloors, FyFloorsMin/1000, FyFloorsMax/1000, facecolor='grey',alpha=0.2,interpolate=True)
+# ax1.set_xlabel(r'$F_{y_i}\,[kN]$')
+# ax1.set_ylabel(r'$Floors\,[-]$')
+# plt.legend()
+# savefig(floorPath + '/_floorPlots' +'fy_z_floors')
 
 
 #%%Calculate Spectra Fx
 fftX=[]
+max_f_over_heightX = []
 for i in range(0,nFloors):
    dT=np.diff(time)[0]
    f,S= calculateSpectra(FxFloor[i,:], dT)
+   max_f_over_heightX.append(f[np.argmax(S)])
    fftX.append(np.transpose(np.array([f,S])))
 
 
@@ -463,18 +465,20 @@ ax1.set_ylabel(r'$S\,[-]$')
 ax1.set_xscale('log')
 ax1.set_yscale('log')
 plt.legend()
-savefig(floorPath + '/_floorPlots' +'fftx_Ampl')
+# savefig(floorPath + '/_floorPlots' +'fftx_Ampl')
 
 
 
 
 #%%Calculate Spectra Fy
 fftY=[]
+
+max_f_over_heightY = []
 for i in range(0,nFloors):
     dT=np.diff(time)[0]
     f,S= calculateSpectra(FyFloor[i,:], dT)
+    max_f_over_heightY.append(f[np.argmax(S)])
     fftY.append(np.transpose(np.array([f,S])))
-
 
 f=np.array([fftY[i][:,0] for i in range(0,len(fftY))]).T
 S=np.array([fftY[i][:,1] for i in range(0,len(fftY))]).T
@@ -482,6 +486,10 @@ S=np.array([fftY[i][:,1] for i in range(0,len(fftY))]).T
 maxIndex=np.array(np.where(S==np.max(S)))
 fmax=f[maxIndex[0],maxIndex[1]]
 Smax=S[maxIndex[0],maxIndex[1]]
+
+max_f_floor = []
+for i in range (1,41):
+    max_f_floor.append(i)
 
 latexify()
 fig1, (ax1) =  plt.subplots(1)
@@ -495,4 +503,14 @@ ax1.set_ylabel(r'$S\,[-]$')
 ax1.set_xscale('log')
 ax1.set_yscale('log')
 plt.legend()
-savefig(floorPath + '/_floorPlots' +'ffty_Ampl')
+# savefig(floorPath + '/_floorPlots' +'ffty_Ampl')
+
+
+
+
+
+latexify()
+fig1, (ax1) =  plt.subplots(1)
+ax1.plot(max_f_over_heightX,max_f_floor,color='grey',alpha=0.25)
+savefig(floorPath + '/_floorPlots' +'floor_maxf')
+

@@ -93,7 +93,7 @@ def main():
     # delFilesInFolder('T115_6/results')
 
     # Full scale building properties
-    uH_f    = 36             # m/s       // Wind speed at z = H (50yr)
+    uH_f    = 38             # m/s       // Wind speed at z = H (50yr)
     H_f     = 160               # m         // Building height
     B       = 32                # m         // Building width
     dns     = ['D', 'L']        #           // Directions (Drag/Lifts)
@@ -152,7 +152,7 @@ def main():
         
         style_dict = {"lines.linewidth": "0.5", "savefig.format": "svg"}
         plt.plot2D(t, F, hLines=hLines,   style_dict=style_dict, xlabel="Time [s]", ylabel= "Base Force " + dn + " [kN]", title="Time series of base forces", showPlt=True)            
-        print(stdBF)
+        
             
 
 if __name__ == '__main__':

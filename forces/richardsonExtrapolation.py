@@ -241,7 +241,7 @@ class convergenceVerification():
         y = self.S_k_m
 
         if self.convrgFlag == "Convergent":
-            hLines = [self.S_C,1.551]
+            hLines = [self.S_C,1.728]            #1.551058 4.970328
             hTexts = ['estimate', 'Windtunnel']
             print(self.S_C)
         else:
@@ -363,10 +363,10 @@ def main():
  
 
     #Art der Rechnung bestimmen. [0] = Berechnung der Standardabweichung in y-dir, [1] = Berechnung des Mean in x-dir
-    stat = [['stdBF', np.std, 1, 'Std Fy','Convergence Std'] ,['meanBF', np.mean, 2, 'Mean Fx','Convergence Mean']  ]
+    stat = [['stdBF', np.std, 1, 'Std Fy [MN]','Convergence Std'] ,['meanBF', np.mean, 2, 'Mean Fx [MN]' ,'Convergence Mean']  ]
 
 
-    stat = stat[1]                                     # hier 0 oder 1
+    stat = stat[0]                                     # hier 0 oder 1
     stat[0]   = convergenceVerification()
 
 
